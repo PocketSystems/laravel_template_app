@@ -1,4 +1,4 @@
-<script src="{{asset('assets/lib/jquery/jquery.min.js')}}"></script>
+<script type="text/javascript" src="../../js/app.js"></script>
 <script src="{{asset('assets/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/lib/feather-icons/feather.min.js')}}"></script>
 <script src="{{asset('assets/lib/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
@@ -10,7 +10,9 @@
 <script src="{{asset('assets/lib/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('assets/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/lib/select2/js/select2.min.js')}}"></script>
+<script src="{{asset('assets/lib/jqueryui/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/js/dashforge.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+@stack('scripts')
 

@@ -16,11 +16,11 @@ class CategoriesController extends ModuleController
     public function index()
     {
         $this->injectDatatable();
-        return view('modules.categories.index');
+        return $this->view('index');
     }
     public function add()
     {
-        return view('modules.categories.add');
+        return $this->view('add');
     }
 
     public function create(Request $request)
@@ -41,9 +41,9 @@ class CategoriesController extends ModuleController
         }
         $categories->save();
         if (!empty($request->input('saveClose'))) {
-            return redirect()->route('module.categories.home')->with('success', 'Category Created Successfully!');
+            return redirect()->route($this->mRoute('home'))->with('success', 'Category Created Successfully!');
         } else {
-            return redirect()->route('module.categories.add')->with('success', 'Category Created Successfully!');
+            return redirect()->route($this->mRoute('add'))->with('success', 'Category Created Successfully!');
 
         }
 
@@ -54,7 +54,7 @@ class CategoriesController extends ModuleController
     {
 
         $data = Categories::where('id', $id)->first();
-        return view('modules.categories.edit', ['data' => $data]);
+        return $this->view('edit', ['data' => $data]);
     }
     public function update(Request $request)
     {
@@ -77,7 +77,7 @@ class CategoriesController extends ModuleController
             $cdata['image'] = Helper::file_upload($request,'image','categories');
         }
         Categories::where('id', $cdata['id'])->update($cdata);
-        return redirect()->route('module.categories.home')->with('success', 'Category Updated Successfully!');
+        return redirect()->route($this->mRoute('home'))->with('success', 'Category Updated Successfully!');
 
     }
     protected function getDataTableRows(): array
@@ -91,15 +91,15 @@ class CategoriesController extends ModuleController
             ["data" => "name"],
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 //delete_row('.$row["id"].','.route('module.categories.delete',[$row["id"]]).')
-                $statusFun = "change_status(" . $row["id"] . ",'" . route('module.categories.status', [$row["id"],'status']) . "','" . csrf_token() . "',this)";
+                $statusFun = "change_status(" . $row["id"] . ",'" . route($this->mRoute('status'), [$row["id"],'status']) . "','" . csrf_token() . "',this)";
                 $checkStatus = "" . ($row['status'] == 1 ? 'checked' : '') . "";
                 $btn = '<input switch-button onchange="' . $statusFun . '" ' . $checkStatus . ' type="checkbox" >';
                 return $btn;
             }],
             ["data" => "action1", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 //delete_row('.$row["id"].','.route('module.categories.delete',[$row["id"]]).')
-                $deleteFun = "delete_row(" . $row["id"] . ",'" . route('module.categories.delete', [$row["id"]]) . "','" . csrf_token() . "',this)";
-                $btn = '<a href=' . route('module.categories.edit', [$row['id']]) . '><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:" onclick="' . $deleteFun . '" style="color: red!important;"><i class="fas fa-trash"></i></a>';
+                $deleteFun = "delete_row(" . $row["id"] . ",'" . route($this->mRoute('delete'), [$row["id"]]) . "','" . csrf_token() . "',this)";
+                $btn = '<a href=' . route($this->mRoute('edit'), [$row['id']]) . '><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:" onclick="' . $deleteFun . '" style="color: red!important;"><i class="fas fa-trash"></i></a>';
                 return $btn;
             }],
         ];

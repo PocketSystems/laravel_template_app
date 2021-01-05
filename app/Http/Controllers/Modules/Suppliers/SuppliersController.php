@@ -9,19 +9,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 
 class SuppliersController extends ModuleController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        View::share('moduleName', \request()->segment(2));
+    }
 
     public function index()
     {
         $this->injectDatatable();
-        return view('modules.suppliers.index');
+        return $this->view('index');
     }
 
     public function add()
     {
-        return view('modules.suppliers.add');
+        return $this->view('add');
     }
 
     public function create(Request $request)
@@ -45,9 +51,9 @@ class SuppliersController extends ModuleController
         }
         $suppliers->save();
         if (!empty($request->input('saveClose'))) {
-            return redirect()->route('module.suppliers.home')->with('success', 'Supplier Created Successfully!');
+            return redirect()->route($this->mRoute('home'))->with('success', 'Supplier Created Successfully!');
         } else {
-            return redirect()->route('module.suppliers.add')->with('success', 'Supplier Created Successfully!');
+            return redirect()->route($this->mRoute('add'))->with('success', 'Supplier Created Successfully!');
 
         }
 
@@ -57,7 +63,7 @@ class SuppliersController extends ModuleController
     {
 
         $data = Suppliers::where('id', $id)->first();
-        return view('modules.suppliers.edit', ['data' => $data]);
+        return $this->view('edit', ['data' => $data]);
     }
 
     public function update(Request $request)
@@ -82,7 +88,7 @@ class SuppliersController extends ModuleController
         }
         Suppliers::where('id', $cdata['id'])->update($cdata);
 
-        return redirect()->route('module.suppliers.home')->with('success', 'Supplier Updated Successfully!');
+        return redirect()->route($this->mRoute('home'))->with('success', 'Supplier Updated Successfully!');
 
     }
 
@@ -102,15 +108,15 @@ class SuppliersController extends ModuleController
             ["data" => "email"],
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 //delete_row('.$row["id"].','.route('module.suppliers.delete',[$row["id"]]).')
-                $statusFun = "change_status(" . $row["id"] . ",'" . route('module.suppliers.status', [$row["id"],'status']) . "','" . csrf_token() . "',this)";
+                $statusFun = "change_status(" . $row["id"] . ",'" . route($this->mRoute('status'), [$row["id"],'status']) . "','" . csrf_token() . "',this)";
                 $checkStatus = "" . ($row['status'] == 1 ? 'checked' : '') . "";
                 $btn = '<input switch-button onchange="' . $statusFun . '" ' . $checkStatus . ' type="checkbox" >';
                 return $btn;
             }],
             ["data" => "action1", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 //delete_row('.$row["id"].','.route('module.suppliers.delete',[$row["id"]]).')
-                $deleteFun = "delete_row(" . $row["id"] . ",'" . route('module.suppliers.delete', [$row["id"]]) . "','" . csrf_token() . "',this)";
-                $btn = '<a href=' . route('module.suppliers.edit', [$row['id']]) . '><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:" onclick="' . $deleteFun . '" style="color: red!important;"><i class="fas fa-trash"></i></a>';
+                $deleteFun = "delete_row(" . $row["id"] . ",'" . route($this->mRoute('delete'), [$row["id"]]) . "','" . csrf_token() . "',this)";
+                $btn = '<a href=' . route($this->mRoute('edit'), [$row['id']]) . '><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:" onclick="' . $deleteFun . '" style="color: red!important;"><i class="fas fa-trash"></i></a>';
                 return $btn;
             }],
         ];

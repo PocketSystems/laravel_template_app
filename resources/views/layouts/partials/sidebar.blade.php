@@ -37,7 +37,16 @@
             <li class="nav-label">Dashboard</li>
             <li class="nav-item active"><a href="{{route('module.suppliers.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Suppliers</span></a></li>
             <li class="nav-item active"><a href="{{route('module.categories.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Categories</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.expenseCategories.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Expense Categories</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.expenses.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Expenses</span></a></li>
             <li class="nav-item active"><a href="{{route('module.items.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Items</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.purchaseOrders.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Order List</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.saleOrders.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Sale Order List</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.purchaseOrders.add')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Add Purchase Order</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.saleOrders.add')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Add Sale Order</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.customers.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Customers</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.PurchaseOrderReport.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>purchaseOrderReport</span></a></li>
+
             <li class="nav-item active"><a href="dashboard-one.html" class="nav-link"><i data-feather="shopping-bag"></i> <span>Sales Monitoring</span></a></li>
             <li class="nav-item"><a href="dashboard-two.html" class="nav-link"><i data-feather="globe"></i> <span>Website Analytics</span></a></li>
             <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i data-feather="pie-chart"></i> <span>Cryptocurrency</span></a></li>
@@ -51,7 +60,7 @@
 
             <li class="nav-label mg-t-25">Pages</li>
             <li class="nav-item with-sub">
-                <a href="" class="nav-link"><i data-feather="user"></i> <span>User Pages</span></a>
+                <a class="nav-link"><i data-feather="user"></i> <span>User Pages</span></a>
                 <ul>
                     <li><a href="page-profile-view.html">View Profile</a></li>
                     <li><a href="page-connections.html">Connections</a></li>

@@ -7,14 +7,14 @@
                 <h4 id="section1" class="mg-b-10">Add Items</h4>
             </div>
             <div>
-                <a href="{{route('module.items.home')}}" class="btn btn-primary btn-icon">
+                <a href="{{route('module.'.$moduleName.'.home')}}" class="btn btn-primary btn-icon">
                     <i data-feather="arrow-left"></i>
                 </a>
             </div>
         </div>
         @include('layouts.partials.flash_message')
 
-        <form action="{{route('module.items.create')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('module.'.$moduleName.'.create')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
                 <div class="form-group col-md-4">

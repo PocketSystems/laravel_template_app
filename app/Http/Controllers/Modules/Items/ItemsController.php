@@ -11,14 +11,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 
 
 class ItemsController extends ModuleController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        View::share('moduleName', \request()->segment(2));
+    }
     public function index()
     {
         $this->injectDatatable();
-        return view('modules.items.index');
+        return $this->view('index');
     }
     public function getCategories():array{
         return Categories::all('name','id')->toArray();
@@ -26,7 +32,7 @@ class ItemsController extends ModuleController
     public function add()
     {
         $categories = $this->getCategories();
-        return view('modules.items.add',['categories'=>$categories]);
+        return $this->view('add',['categories'=>$categories]);
     }
 
     public function create(Request $request)
@@ -42,6 +48,9 @@ class ItemsController extends ModuleController
         $items->name = $request->input('name');
         $items->sku = $request->input('sku');
         $items->cost = $request->input('cost');
+        $items->last_updated_cost = $request->input('cost');
+        $items->last_updated_price = $request->input('price');
+        $items->last_updated_stock = 0;
         $items->price = $request->input('price');
         $items->description = $request->input('description');
         $items->category_id = $request->input('category_id');
@@ -54,9 +63,9 @@ class ItemsController extends ModuleController
         }
         $items->save();
         if (!empty($request->input('saveClose'))) {
-            return redirect()->route('module.items.home')->with('success', 'Item Created Successfully!');
+            return redirect()->route($this->mRoute('home'))->with('success', 'Item Created Successfully!');
         } else {
-            return redirect()->route('module.items.add')->with('success', 'Item Created Successfully!');
+            return redirect()->route($this->mRoute('add'))->with('success', 'Item Created Successfully!');
 
         }
 
@@ -68,7 +77,7 @@ class ItemsController extends ModuleController
         $data = Items::where('id', $id)->first();
         $categories = $this->getCategories();
 
-        return view('modules.items.edit', ['data' => $data,'categories'=>$categories]);
+        return $this->view('edit', ['data' => $data,'categories'=>$categories]);
     }
 
     public function update(Request $request)
@@ -92,7 +101,7 @@ class ItemsController extends ModuleController
             $cdata['image'] = Helper::file_upload($request,'image','items');
         }
         Items::where('id', $cdata['id'])->update($cdata);
-        return redirect()->route('module.items.home')->with('success', 'Items Updated Successfully!');
+        return redirect()->route($this->mRoute('home'))->with('success', 'Items Updated Successfully!');
     }
 
     protected function getDataTableColumns(): array
@@ -105,14 +114,14 @@ class ItemsController extends ModuleController
             ["data" => "cost"],
             ["data" => "price"],
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
-                $statusFun = "change_status(" . $row["id"] . ",'" . route('module.items.status', [$row["id"],'status']) . "','" . csrf_token() . "',this)";
+                $statusFun = "change_status(" . $row["id"] . ",'" . route($this->mRoute('status'), [$row["id"],'status']) . "','" . csrf_token() . "',this)";
                 $checkStatus = "" . ($row['status'] == 1 ? 'checked' : '') . "";
                 $btn = '<input switch-button onchange="' . $statusFun . '" ' . $checkStatus . ' type="checkbox" >';
                 return $btn;
             }],
             ["data" => "action1", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
-                $deleteFun = "delete_row(" . $row["id"] . ",'" . route('module.items.delete', [$row["id"]]) . "','" . csrf_token() . "',this)";
-                $btn = '<a href=' . route('module.items.edit', [$row['id']]) . '><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:" onclick="' . $deleteFun . '" style="color: red!important;"><i class="fas fa-trash"></i></a>';
+                $deleteFun = "delete_row(" . $row["id"] . ",'" . route($this->mRoute('delete'), [$row["id"]]) . "','" . csrf_token() . "',this)";
+                $btn = '<a href=' . route($this->mRoute('edit'), [$row['id']]) . '><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:" onclick="' . $deleteFun . '" style="color: red!important;"><i class="fas fa-trash"></i></a>';
                 return $btn;
             }],
         ];

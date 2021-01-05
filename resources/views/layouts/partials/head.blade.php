@@ -53,5 +53,6 @@
     <link rel="stylesheet" href="{{asset('assets/css/dashforge.demo.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/switch-button.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+{{--    <link id="dfMode" rel="stylesheet" href="{{asset('assets/css/skin.dark.css')}}">--}}
 
 </head>

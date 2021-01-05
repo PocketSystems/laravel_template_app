@@ -74,9 +74,42 @@ function createRoutes($moduleName){
         Route::put('/{id}/{field}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@status')->name('status');
     });
 }
+function createOrderRoutes($moduleName){
+    $GLOBALS['moduleName'] = $moduleName;
+    return Route::group(['prefix'=>'/'.$moduleName,'as'=>$moduleName.'.'],function (){
+        Route::get('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@index')->name('home');
+        Route::get('/get','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@datatable')->name('datatable');
+        Route::get('/add','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@add')->name('add');
+        Route::post('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@create')->name('create');
 
+        Route::get('/{id}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@viewOrder')->name('viewOrder');
+        Route::get('/invoice/{id}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@invoice')->name('invoice');
+
+        Route::delete('/{id}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@delete')->name('delete');
+        Route::put('/{id}/{field}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@status')->name('status');
+    });
+}
+
+function createReportRoutes($controller){
+    $GLOBALS['moduleName'] = 'reports';
+    $GLOBALS['controller'] = $controller;
+    return Route::group(['prefix'=>'/'.$controller,'as'=>$controller.'.'],function () use($controller){
+        Route::get('/','Modules\\'.ucfirst('reports').'\\'.$controller.'@index')->name('home');
+        Route::get('/get','Modules\\'.ucfirst('reports').'\\'.$controller.'@datatable')->name('datatable');
+        Route::get('/add','Modules\\'.ucfirst('reports').'\\'.$controller.'@add')->name('add');
+        Route::post('/','Modules\\'.ucfirst('reports').'\\'.$controller.'@search')->name('search');
+    });
+}
 Route::group(['prefix'=>'/module','as'=>'module.'],function (){
     createRoutes('suppliers');
     createRoutes('categories');
     createRoutes('items');
+
+    createRoutes('expenseCategories');
+    createRoutes('expenses');
+    createRoutes('customers');
+//    Reports
+    createReportRoutes('PurchaseOrderReport');
+    createOrderRoutes('purchaseOrders');
+    createOrderRoutes('saleOrders');
 });

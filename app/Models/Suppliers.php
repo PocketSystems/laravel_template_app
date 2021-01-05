@@ -10,8 +10,7 @@ class Suppliers extends Model
     use HasFactory;
     protected $table = 'suppliers';
     protected $fillable = [ 'image', 'name','phone','email','address'];
-    public static function select(string $string)
-    {
-
+    public function purchaseOrder(){
+        return $this->hasMany(PurchaseOrders::class);
     }
 }

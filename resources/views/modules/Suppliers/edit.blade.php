@@ -7,12 +7,12 @@
                 <h4 id="section1" class="mg-b-10">Edit Suppliers</h4>
             </div>
             <div>
-                <a href="{{route('module.suppliers.home')}}" class="btn btn-primary btn-icon">
+                <a href="{{route('module.'.$moduleName.'.home')}}" class="btn btn-primary btn-icon">
                     <i data-feather="arrow-left"></i>
                 </a>
             </div>
         </div>
-        <form action="{{route('module.suppliers.update')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('module.'.$moduleName.'.update')}}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="_method" value="put" />
             <input type="hidden" name="id" value="{{$data['id']}}" />

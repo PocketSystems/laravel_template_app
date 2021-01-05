@@ -10,6 +10,9 @@ $(function (){
         placeholder: 'Choose one',
         searchInputPlaceholder: 'Search options'
     })
+    $('.datepicker').datepicker();
+
+
 });
 
 function createDataTable(elem) {
@@ -110,3 +113,50 @@ function deleteFile(id, link, token,image) {
     });
 }
 
+
+function orderStatus(id, link, token,elem) {
+    $.confirm({
+        title: 'Update Status',
+        content: 'This dialog will automatically trigger \'cancel\' in 6 seconds if you don\'t respond.',
+        autoClose: 'cancelAction|8000',
+        theme: 'dark',
+        buttons: {
+            deleteUser: {
+                text: 'Update Status',
+                action: function () {
+                    $.ajax({
+                        url: link,
+                        data: {
+                            "_token": token,
+                        },
+                        type: 'PUT',
+                        success: function (result) {
+                            let tables = $(elem).closest("[data-table]");
+                            window.dt[$(tables[0]).attr("data-table")].ajax.reload();
+                        }
+                    });
+
+                }
+            },
+            cancelAction: function () {
+            }
+        }
+    });
+}
+function PrintElem(elem)
+{
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+    mywindow.document.write('<html><head>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>' + document.title  + '</h1>');
+    mywindow.document.write(document.getElementById(elem).innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    mywindow.print();
+
+    return true;
+}

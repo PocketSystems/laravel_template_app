@@ -16,6 +16,22 @@ abstract class ModuleController extends AuthenticatedController
     protected abstract function getDataTableColumns() : array;
     protected abstract function getDataTableRows() : array;
     protected abstract function getModuleTable() : string;
+    private $moduleName = null;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->moduleName = \request()->segment(2);
+        View::share('moduleName', $this->moduleName);
+    }
+
+    protected function view($viewName,$data = []){
+        return view('modules.'.$this->moduleName.'.'.$viewName,$data);
+    }
+
+    protected function mRoute($routeName){
+        return 'module.'.$this->moduleName.'.'.$routeName;
+    }
 
     protected function injectDatatable(){
         View::share('dataTableColumns', json_encode($this->getDataTableColumns()));

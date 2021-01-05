@@ -3,7 +3,7 @@
 @include('layouts.partials.head')
 
 <body>
-<div class="content ht-100v pd-0">
+<div class="content ht-100v pd-0" id="app">
     @include('layouts.partials.header')
     @include('layouts.partials.sidebar')
 
