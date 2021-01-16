@@ -1,8 +1,8 @@
-$(function (){
-    if(!window.dt){
+$(function () {
+    if (!window.dt) {
         window.dt = {};
     }
-    $('[data-table]').each((idx,element)=>{
+    $('[data-table]').each((idx, element) => {
         createDataTable(element)
     });
 
@@ -16,6 +16,9 @@ $(function (){
 });
 
 function createDataTable(elem) {
+    let dt = new Date();
+    let title = $(document).find("title").text();
+    let time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
     let id = $(elem).attr("data-table")
     let dataUrl = $(elem).attr("data-url")
     let columns = $(elem).attr("data-cols")
@@ -24,18 +27,33 @@ function createDataTable(elem) {
         serverSide: true,
         'ajax': dataUrl,
         "columns": JSON.parse(atob(columns)),
+        dom: 'lfBrtip',
+        buttons: [
+            { extend: 'excel', title: document.title},
+            { extend: 'pdf' ,title: 'Data export'},
+            { extend: 'print' ,title: 'Data export'},
+
+        ],
         responsive: true,
         order: [[0, "desc"]],
         language: {
             searchPlaceholder: 'Search...',
             sSearch: '',
-            lengthMenu: '_MENU_ records',
-        }
+            lengthMenu: '_MENU_',
+        },
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+
     });
+
+    setTimeout(() => {
+        $('.dataTables_wrapper select').attr('class', 'form-control')
+        $('.dataTables_length').css('margin-right', '10px')
+        $('.ui button').attr('class', 'btn btn-primary')
+    }, 100)
 
 }
 
-function delete_row(id, link, token,elem) {
+function delete_row(id, link, token, elem) {
     $.confirm({
         title: 'Delete Record?',
         content: 'This dialog will automatically trigger \'cancel\' in 6 seconds if you don\'t respond.',
@@ -65,7 +83,7 @@ function delete_row(id, link, token,elem) {
     });
 }
 
-function change_status(id, link, token,elem) {
+function change_status(id, link, token, elem) {
 
     $.ajax({
         url: link,
@@ -80,7 +98,7 @@ function change_status(id, link, token,elem) {
     });
 }
 
-function deleteFile(id, link, token,image) {
+function deleteFile(id, link, token, image) {
 
     $.confirm({
         title: 'Delete Image?',
@@ -95,13 +113,13 @@ function deleteFile(id, link, token,image) {
                         url: link,
                         data: {
                             "_token": token,
-                            "image":image
+                            "image": image
                         },
                         type: 'DELETE',
                         success: function (result) {
                             $('#image-field').removeClass('col-md-3')
                             $('#image-field').addClass('col-md-4')
-                            $('#image-box').css('display','none')
+                            $('#image-box').css('display', 'none')
                         }
                     });
 
@@ -114,7 +132,7 @@ function deleteFile(id, link, token,image) {
 }
 
 
-function orderStatus(id, link, token,elem) {
+function orderStatus(id, link, token, elem) {
     $.confirm({
         title: 'Update Status',
         content: 'This dialog will automatically trigger \'cancel\' in 6 seconds if you don\'t respond.',
@@ -143,13 +161,13 @@ function orderStatus(id, link, token,elem) {
         }
     });
 }
-function PrintElem(elem)
-{
+
+function PrintElem(elem) {
     var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
     mywindow.document.write('<html><head>');
     mywindow.document.write('</head><body >');
-    mywindow.document.write('<h1>' + document.title  + '</h1>');
+    mywindow.document.write('<h1>' + document.title + '</h1>');
     mywindow.document.write(document.getElementById(elem).innerHTML);
     mywindow.document.write('</body></html>');
 

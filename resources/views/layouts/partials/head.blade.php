@@ -1,10 +1,4 @@
 <head>
-
-
-
-
-
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -52,7 +46,20 @@
     <link rel="stylesheet" href="{{asset('assets/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/dashforge.demo.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/switch-button.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/dashforge.dashboard.css')}}">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 {{--    <link id="dfMode" rel="stylesheet" href="{{asset('assets/css/skin.dark.css')}}">--}}
+
+    <link href="{{asset('assets/lib/datatable-button/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/lib/datatable-button/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/lib/datatable-button/css/buttons.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/lib/datatable-button/css/buttons.foundation.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/lib/datatable-button/css/buttons.jqueryui.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/lib/datatable-button/css/buttons.semanticui.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/lib/datatable-button/css/common.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/lib/datatable-button/css/mixins.css')}}" rel="stylesheet">
+
+    @stack('style')
 
 </head>

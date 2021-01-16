@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\CustomDatatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\File;
+use Yajra\DataTables\Services\DataTable;
 
 abstract class ModuleController extends AuthenticatedController
 {
@@ -37,9 +39,13 @@ abstract class ModuleController extends AuthenticatedController
         View::share('dataTableColumns', json_encode($this->getDataTableColumns()));
     }
 
+    private function exportDatable(){
+
+    }
     public final function datatable(){
-        $dt = Datatables::of($this->getDataTableRows())
+        $dt = DataTables::of($this->getDataTableRows())
             ->addIndexColumn();
+//        $dt->html();
         $actions = [];
         foreach ($this->getDataTableColumns() as $column){
             if(!empty($column['onAction'])){

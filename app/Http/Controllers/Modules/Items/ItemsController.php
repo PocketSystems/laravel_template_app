@@ -27,7 +27,7 @@ class ItemsController extends ModuleController
         return $this->view('index');
     }
     public function getCategories():array{
-        return Categories::all('name','id')->toArray();
+        return Categories::where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->where('is_archive',0)->get(['name','id'])->toArray();
     }
     public function add()
     {
@@ -133,7 +133,7 @@ class ItemsController extends ModuleController
     }
     protected function getDataTableRows(): array
     {
-        return Items::with('category')->where('is_archive', 0)->orderBy('id', 'DESC')->get()->toArray();
+        return Items::with('category')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
 }

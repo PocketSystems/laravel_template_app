@@ -19,9 +19,10 @@
                     <thead>
                     <tr>
                         <th width="5%">ID</th>
+                        <th width="10%">Date</th>
                         <th width="30%">Supplier</th>
                         <th width="10%">Total</th>
-                        <th width="10%">Date</th>
+                        <th width="5%">Items</th>
                         <th width="5%">Status</th>
                         <th width="5%">Options</th>
                     </tr>

@@ -7,7 +7,7 @@
     @include('layouts.partials.header')
     @include('layouts.partials.sidebar')
 
-    <div class="content-body">
+    <div class="content">
         <div class="container">
             @include('layouts.partials.breadcrum')
             <br>

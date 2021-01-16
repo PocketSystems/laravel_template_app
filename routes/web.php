@@ -104,12 +104,17 @@ Route::group(['prefix'=>'/module','as'=>'module.'],function (){
     createRoutes('suppliers');
     createRoutes('categories');
     createRoutes('items');
+    createRoutes('inventory');
 
     createRoutes('expenseCategories');
     createRoutes('expenses');
     createRoutes('customers');
 //    Reports
     createReportRoutes('PurchaseOrderReport');
+    createReportRoutes('SaleOrderReport');
+    createReportRoutes('ExpenseReport');
+    createReportRoutes('ProfitLossReport');
+    createReportRoutes('GeneralJournalReport');
     createOrderRoutes('purchaseOrders');
     createOrderRoutes('saleOrders');
 });

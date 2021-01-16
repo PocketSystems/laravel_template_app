@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Modules\SaleOrders;
 
 use App\Http\Controllers\ModuleController;
 use App\Models\Customers;
+use App\Models\Inventory;
 use App\Models\Items;
 use App\Models\SaleOrderItems;
 use App\Models\SaleOrders;
@@ -30,12 +31,12 @@ class SaleOrdersController extends ModuleController
     }
     public function getCustomers(): array
     {
-        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->get(['name', 'id'])->toArray();
+        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
 
     }
     public function getItems(): array
     {
-        return Items::all()->toArray();
+        return Items::where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get()->toArray();
     }
     public function getStatus(): array
     {
@@ -45,6 +46,7 @@ class SaleOrdersController extends ModuleController
 
     public function add()
     {
+
         $customers = $this->getCustomers();
         $items = $this->getItems();
         $status = $this->getStatus();
@@ -94,6 +96,8 @@ class SaleOrdersController extends ModuleController
         $saleOrder->status = $request->input('status');
         $saleOrder->description = $request->input('description');
         $saleOrder->grand_total = $request->input('grandTotal');
+        $saleOrder->discount_total = $request->input('discount_total');
+        $saleOrder->count = $request->input('count');
         $saleOrder->user_id = Auth::user()->id;
         $saleOrder->company_id = Auth::user()->company_id;
         $saleOrder->save();
@@ -105,29 +109,36 @@ class SaleOrdersController extends ModuleController
                 return redirect()->back()->withInput()->with('error', 'Please Select Item!');
             }
             foreach ($items as $item) {
-                if (!empty($item['item'])) {
-                    $itemId = $item['item']["code"];
-                    $price = $item['price'];
-                    $qty = $item['qty'];
-                    $discount = $item['discount'];
-                    $tax = $item['tax'];
-                    $total = $item['total'];
-                    $saleOrderItems = new SaleOrderItems();
-                    $saleOrderItems->sale_order_id = $pId;
-                    $saleOrderItems->item_id = $itemId;
-                    $saleOrderItems->quantity = $qty;
-                    $saleOrderItems->discount = $discount;
-                    $saleOrderItems->tax = $tax;
-                    $saleOrderItems->unit_price = $price;
-                    $saleOrderItems->total = $total;
-                    $saleOrderItems->save();
+                if (!empty($item['item']) && !empty($item['qty'])) {
 
-                    if ($saleOrder->status == 1) {
-                        $itemsTable = Items::where('id', $itemId)->first();
-                        $itemsTable->last_updated_stock -= $qty;
-                        $itemsTable->last_updated_price = $price;
-                        $itemsTable->save();
-                    }
+
+                        $itemId = $item['item']["code"];
+                        $price = $item['price'];
+                        $qty = $item['qty'];
+                        $discount = $item['discount'];
+                        $discount_amount = $item['discount_amount'];
+                        $tax = $item['tax'];
+                        $total = $item['total'];
+                        $saleOrderItems = new SaleOrderItems();
+                        $saleOrderItems->sale_order_id = $pId;
+                        $saleOrderItems->item_id = $itemId;
+                        $saleOrderItems->quantity = $qty;
+                        $saleOrderItems->discount = $discount;
+                        $saleOrderItems->discount_amount = $discount_amount;
+                        $saleOrderItems->tax = $tax;
+                        $saleOrderItems->unit_price = $price;
+                        $saleOrderItems->total = $total;
+                        $saleOrderItems->save();
+
+                        if ($saleOrder->status == 1) {
+                            $inventory = Inventory::where('item_id',$itemId)->get();
+                            $this->inventory_deduction(intval($qty),$inventory);
+                   /*         $itemsTable = Items::where('id', $itemId)->first();
+                            $itemsTable->last_updated_stock -= $qty;
+                            $itemsTable->last_updated_price = $price;
+                            $itemsTable->save();*/
+                        }
+
 
                 } else {
                     $error++;
@@ -152,21 +163,68 @@ class SaleOrdersController extends ModuleController
 
     }
 
+
+    private function inventory_deduction($qty,$inventory,$debug = false): int
+    {
+        if($debug){
+            echo "<pre>";
+            print_r($inventory);
+            echo "</pre>";
+        }
+        $itemsUpdated = 0;
+        foreach ($inventory as $item){
+            if($debug) {
+                echo "<br/>";
+            }
+            if($qty === 0){
+                break;
+            }
+
+            $itemQty = $item->quantity;
+            if($itemQty < $qty){
+                if($debug) {
+                    echo "isLess";
+                }
+                $qty -= $item->quantity;
+                $item->quantity = 0;
+            }elseif($itemQty >= $qty){
+                if($debug) {
+                    echo "isGreater";
+                }
+                $item->quantity -= $qty;
+                $qty = 0;
+            }
+            $item->save();
+            $itemsUpdated++;
+            if($debug) {
+                echo "<br/>";
+                echo $qty;
+            }
+        }
+        if($debug) {
+            echo "<pre>";
+            print_r($inventory);
+            echo "</pre>";
+        }
+        return $itemsUpdated;
+    }
+
     protected function getDataTableRows(): array
     {
 
-        return SaleOrders::with('customer')->where('is_archive', 0)->orderBy('id', 'DESC')->get()->toArray();
+        return SaleOrders::with('customer')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
     protected function getDataTableColumns(): array
     {
         return [
             ["data" => "id"],
-            ["data" => "customer.name"],
-            ["data" => "grand_total"],
             ["data" => "order_date", "onAction" => function ($row) {
                 return date('m/d/Y', strtotime($row['order_date']));
             }],
+            ["data" => "customer.name"],
+            ["data" => "grand_total"],
+            ["data" => "count"],
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 $html = '';
                 if ($row['status'] == 1) {

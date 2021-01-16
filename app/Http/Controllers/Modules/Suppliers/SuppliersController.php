@@ -94,7 +94,7 @@ class SuppliersController extends ModuleController
 
     protected function getDataTableRows(): array
     {
-        return Suppliers::where('is_archive', 0)->orderBy('id', 'DESC')->get()->toArray();
+        return Suppliers::where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
 

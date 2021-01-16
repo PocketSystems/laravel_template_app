@@ -35,6 +35,7 @@
         </div><!-- aside-loggedin -->
         <ul class="nav nav-aside">
             <li class="nav-label">Dashboard</li>
+            <li class="nav-item active"><a href="{{route('dashboard')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Dashboard</span></a></li>
             <li class="nav-item active"><a href="{{route('module.suppliers.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Suppliers</span></a></li>
             <li class="nav-item active"><a href="{{route('module.categories.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Categories</span></a></li>
             <li class="nav-item active"><a href="{{route('module.expenseCategories.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Expense Categories</span></a></li>
@@ -45,7 +46,12 @@
             <li class="nav-item active"><a href="{{route('module.purchaseOrders.add')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Add Purchase Order</span></a></li>
             <li class="nav-item active"><a href="{{route('module.saleOrders.add')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Add Sale Order</span></a></li>
             <li class="nav-item active"><a href="{{route('module.customers.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Customers</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.inventory.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Inventory</span></a></li>
             <li class="nav-item active"><a href="{{route('module.PurchaseOrderReport.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>purchaseOrderReport</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.SaleOrderReport.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>saleOrderReport</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.ExpenseReport.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Expense Report</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.ProfitLossReport.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>Profit And Loss Report</span></a></li>
+            <li class="nav-item active"><a href="{{route('module.GeneralJournalReport.home')}}" class="nav-link"><i data-feather="shopping-bag"></i> <span>General Journal Report</span></a></li>
 
             <li class="nav-item active"><a href="dashboard-one.html" class="nav-link"><i data-feather="shopping-bag"></i> <span>Sales Monitoring</span></a></li>
             <li class="nav-item"><a href="dashboard-two.html" class="nav-link"><i data-feather="globe"></i> <span>Website Analytics</span></a></li>

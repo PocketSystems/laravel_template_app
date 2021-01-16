@@ -1,6 +1,7 @@
 <template>
     <div>
-        <input type="text" name="po" :value="poOrders_data" hidden />
+        <input type="text" name="po" :value="poOrders_data"  hidden/>
+        <input type="text" name="count" :value="count" hidden />
         <input type="text" name="grandTotal" :value="grandTotal" hidden />
         <input type="text" name="grandCostTotal" :value="grandCostTotal" hidden />
         <div class="panel" style="padding-bottom: 5px;border-bottom-left-radius: unset;border-bottom-right-radius:unset ">
@@ -69,6 +70,7 @@ export default {
         return {
             grandTotal: 0,
             grandCostTotal: 0,
+            count: 0,
             poOrders: [
                 poItems(),
                 poItems()
@@ -89,7 +91,7 @@ export default {
         },
         poItemChange(index, itemData) {
             this.poOrders[index] = itemData;
-            console.log(this.poOrders.map((item)=>item.total))
+            this.count = this.poOrders.filter((item)=>item.item).length
             this.grandTotal = this.poOrders.map((item)=>item.total).reduce((a, b) => a + b, 0)
             this.grandCostTotal = this.poOrders.map((item)=>item.cost_total).reduce((a, b) => a + b, 0)
             this.poOrders_data = JSON.stringify(this.poOrders)

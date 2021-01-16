@@ -1,7 +1,9 @@
 <template>
     <div>
         <input type="text" name="so" :value="soOrders_data" hidden />
+        <input type="text" name="count" :value="count" hidden />
         <input type="text" name="grandTotal" :value="grandTotal" hidden />
+        <input type="text" name="discount_total" :value="discount_total" hidden />
         <div class="panel" style="padding-bottom: 5px;border-bottom-left-radius: unset;border-bottom-right-radius:unset ">
             <div style="display: flex" class="mb-3">
                 <div style="flex: 1">
@@ -19,11 +21,10 @@
                     <thead>
                     <tr>
                         <th width="50%">Item</th>
-                        <th width="5%">Cost</th>
                         <th width="10%">Price</th>
                         <th width="5%">Stock</th>
                         <th width="10%">Qty</th>
-                        <th width="7%">Discount %</th>
+                        <th width="10%">Discount %</th>
                         <th width="7%">Tax %</th>
                         <th width="10%">Total</th>
                         <th width="10%">Action</th>
@@ -59,6 +60,7 @@ const soItems = () => ({
     stock: 0,
     qty: 0,
     discount: 0,
+    discount_amount: 0,
     tax: 0,
     total: 0
 });
@@ -70,6 +72,8 @@ export default {
     data() {
         return {
             grandTotal: 0,
+            discount_total: 0,
+            count: 0,
             soOrders: [
                 soItems(),
                 soItems()
@@ -90,7 +94,8 @@ export default {
         },
         soItemChange(index, itemData) {
             this.soOrders[index] = itemData;
-            console.log(this.soOrders.map((item)=>item.total))
+            this.count = this.soOrders.filter((item)=>item.item).length
+            this.discount_total = this.soOrders.map((item)=>item.discount_amount).reduce((a, b) => a + b, 0)
             this.grandTotal = this.soOrders.map((item)=>item.total).reduce((a, b) => a + b, 0)
             this.soOrders_data = JSON.stringify(this.soOrders)
         }

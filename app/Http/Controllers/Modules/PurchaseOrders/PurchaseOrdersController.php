@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Modules\PurchaseOrders;
 
 
 use App\Http\Controllers\ModuleController;
+use App\Models\Inventory;
 use App\Models\Items;
 use App\Models\PurchaseOrderItems;
 use App\Models\PurchaseOrders;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Process\Process;
 
 class PurchaseOrdersController extends ModuleController
 {
@@ -25,13 +27,13 @@ class PurchaseOrdersController extends ModuleController
 
     public function getSuppliers(): array
     {
-        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->get(['name', 'id'])->toArray();
+        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
 
     }
 
     public function getItems(): array
     {
-        return Items::all()->toArray();
+        return Items::where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get()->toArray();
     }
 
     public function getStatus(): array
@@ -60,6 +62,7 @@ class PurchaseOrdersController extends ModuleController
 
         $data = PurchaseOrders::with('supplier')->where('id', $id)->first();
         $orders = PurchaseOrderItems::with('item')->where('purchase_order_id', $data['id']);
+        \PDF::saveFromView($this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray()]), 'filename.pdf');
         return $this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray()]);
     }
 
@@ -94,6 +97,7 @@ class PurchaseOrdersController extends ModuleController
         $purchaseOrder->status = $request->input('status');
         $purchaseOrder->grand_total = $request->input('grandTotal');
         $purchaseOrder->grand_cost_total = $request->input('grandCostTotal');
+        $purchaseOrder->count = $request->input('count');
         $purchaseOrder->user_id = Auth::user()->id;
         $purchaseOrder->company_id = Auth::user()->company_id;
         $purchaseOrder->save();
@@ -121,14 +125,27 @@ class PurchaseOrdersController extends ModuleController
                     $purchaseOrderItems->total = $total;
                     $purchaseOrderItems->cost_total = $cost_total;
                     $purchaseOrderItems->save();
+                    $poiId = $purchaseOrderItems->id;
 
-                    if ($purchaseOrder->status == 1) {
+                    $inventory = new Inventory();
+                    $inventory->purchase_order_items_id = $poiId;
+                    $inventory->item_id = $itemId;
+                    $inventory->quantity = $qty;
+                    $inventory->unit_cost = $cost;
+                    $inventory->unit_price = $price;
+                    $inventory->price_total = $total;
+                    $inventory->cost_total = $cost_total;
+                    $inventory->user_id = Auth::user()->id;
+                    $inventory->company_id = Auth::user()->company_id;
+                    $inventory->save();
+
+                    /*if ($purchaseOrder->status == 1) {
                         $itemsTable = Items::where('id', $itemId)->first();
                         $itemsTable->last_updated_stock += $qty;
                         $itemsTable->last_updated_cost = $cost;
                         $itemsTable->last_updated_price = $price;
                         $itemsTable->save();
-                    }
+                    }*/
 
                 } else {
                     $error++;
@@ -156,18 +173,20 @@ class PurchaseOrdersController extends ModuleController
     protected function getDataTableRows(): array
     {
 
-        return PurchaseOrders::with('supplier')->where('is_archive', 0)->orderBy('id', 'DESC')->get()->toArray();
+        return PurchaseOrders::with('supplier')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
     protected function getDataTableColumns(): array
     {
         return [
             ["data" => "id"],
-            ["data" => "supplier.name"],
-            ["data" => "grand_total"],
             ["data" => "order_date", "onAction" => function ($row) {
                 return date('m/d/Y', strtotime($row['order_date']));
             }],
+            ["data" => "supplier.name"],
+            ["data" => "grand_total"],
+            ["data" => "count"],
+
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 $html = '';
                 if ($row['status'] == 1) {
