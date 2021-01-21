@@ -97,8 +97,8 @@ class ExpenseReport extends ModuleController
 
         }
 
-        if (!empty($params['customer_id'])) {
-            $query = $query->where('customer_id', $params['customer_id']);
+        if (!empty($params['category_id'])) {
+            $query = $query->where('category_id', $params['category_id']);
         }
         return $query;
     }

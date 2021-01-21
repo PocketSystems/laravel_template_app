@@ -4,116 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99ff6a28-b5d0-4539-af3e-6744601858df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Inventory/InventoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/ExpenseReport.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/GeneralJournalReport.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/ProfitLossReport.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/SaleOrderReport.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Customers.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/ExpenseCategories.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Expenses.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/PurchaseOrderItems.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/PurchaseOrders.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/SaleOrderItems.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/SaleOrders.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Providers/CustomDatatable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_12_25_121831_create_purchase_orders_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_12_25_123006_create_purchase_order_items_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_12_25_124424_update_items_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_12_30_112159_create_expense_categories_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_12_30_112455_create_expenses_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_01_132143_create_customers_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_02_104955_create_sale_orders_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_02_144903_create_sale_order_items_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_04_125348_update_expense_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_04_125738_update_purchase_ordes_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_04_125824_update_sale_orders_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_05_140454_update_purchase_order_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_01_05_141146_update_purchase_order_item_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/JSZip/jszip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/JSZip/jszip.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.bootstrap4.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.bootstrap4.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.dataTables.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.dataTables.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.foundation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.foundation.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.jqueryui.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.jqueryui.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.semanticui.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/buttons.semanticui.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/common.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/css/mixins.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.bootstrap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.bootstrap4.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.bootstrap4.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.colVis.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.colVis.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.flash.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.flash.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.foundation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.foundation.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.html5.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.html5.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.jqueryui.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.jqueryui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.print.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.print.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.semanticui.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/buttons.semanticui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/dataTables.buttons.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/js/dataTables.buttons.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/datatable-button/swf/flashExport.swf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/pdfmake/pdfmake.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/pdfmake/pdfmake.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/lib/pdfmake/vfs_fonts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/Inventory/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/Reports/expense_report.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/Reports/general_journal_report.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/Reports/profit_loss_report.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/Reports/sale_order_report.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/accounts_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/accounts_app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="99ff6a28-b5d0-4539-af3e-6744601858df" name="Default Changelist" comment="new updates">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/CustomersAccount/CustomersAccountController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/SuppliersAccount/SuppliersAccountController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/bus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/modules/CustomersAccount/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/modules/SuppliersAccount/add.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/modules/SuppliersAccount/formComponents/SupplierAmountField.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/modules/SuppliersAccount/formComponents/SupplierDropDown.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/modules/SuppliersAccount/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Helpers/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ModuleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ModuleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/Categories/CategoriesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Categories/CategoriesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/Customers/CustomersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Customers/CustomersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/ExpenseCategories/ExpenseCategoriesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/ExpenseCategories/ExpenseCategoriesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/Expenses/ExpensesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Expenses/ExpensesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/Items/ItemsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Items/ItemsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/PurchaseOrders/PurchaseOrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/PurchaseOrders/PurchaseOrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/PurchaseOrderReport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/PurchaseOrderReport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/ExpenseReport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/ExpenseReport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/SaleOrders/SaleOrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/SaleOrders/SaleOrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/Suppliers/SuppliersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Suppliers/SuppliersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Items.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Items.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Customers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Customers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Suppliers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Suppliers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/dashforge.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/dashforge.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/partials/btmjs.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/partials/btmjs.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/partials/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/partials/head.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/partials/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/modules/Expenses/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/Expenses/add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/modules/PurchaseOrders/formComponents/PoItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/PurchaseOrders/formComponents/PoItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/PurchaseOrders/formComponents/PoItems.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/PurchaseOrders/formComponents/PoItems.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/PurchaseOrders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/PurchaseOrders/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/Reports/purchase_order_report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/Reports/purchase_order_report.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/SaleOrders/formComponents/SoItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/SaleOrders/formComponents/SoItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/SaleOrders/formComponents/SoItems.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/SaleOrders/formComponents/SoItems.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/SaleOrders/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/SaleOrders/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/modules/Reports/profit_loss_report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/Reports/profit_loss_report.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,9 +50,9 @@
       <list>
         <option value="composer.json" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="SCSS File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -290,7 +210,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/modules/Inventory" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/fonts/poppins" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -305,13 +225,15 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\account_app\accounts_app\resources\views\modules\Inventory" />
-      <recent name="D:\account_app\accounts_app\resources\views\modules\Reports" />
-      <recent name="D:\account_app\accounts_app\app\Http\Controllers\Modules\Reports" />
-      <recent name="D:\account_app\accounts_app\public\assets\lib" />
-      <recent name="D:\account_app\accounts_app" />
+      <recent name="D:\account_app\accounts_app\public\assets\fonts\poppins" />
+      <recent name="D:\account_app\accounts_app\resources\views\modules\SuppliersAccount" />
+      <recent name="D:\account_app\accounts_app\resources\views\modules\CustomersAccount" />
+      <recent name="D:\account_app\accounts_app\resources\views\modules" />
+      <recent name="D:\account_app\accounts_app\app\Http\Controllers\Modules\SupplierPayments" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\account_app\accounts_app\resources\views" />
+      <recent name="D:\account_app\accounts_app\resources\views\modules\CustomerPayments\formComponents" />
       <recent name="D:\account_app\accounts_app\resources\views\modules\PurchaseOrders" />
       <recent name="D:\account_app\accounts_app\resources\js\components" />
       <recent name="D:\account_app\accounts_app\resources\views\layouts\partials" />
@@ -333,7 +255,10 @@
       <updated>1608548220746</updated>
       <workItem from="1608548223505" duration="975000" />
       <workItem from="1608549546267" duration="225840000" />
-      <workItem from="1610100239170" duration="124555000" />
+      <workItem from="1610100239170" duration="125669000" />
+      <workItem from="1610811702580" duration="1212000" />
+      <workItem from="1610961103874" duration="38511000" />
+      <workItem from="1611153309106" duration="15850000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1608830580631</created>
@@ -349,16 +274,36 @@
       <option name="project" value="LOCAL" />
       <updated>1609857071079</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="new updates">
+      <created>1610809401702</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1610809401703</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value="invoice and reporting remaining" />
-    <option name="LAST_COMMIT_MESSAGE" value="invoice and reporting remaining" />
+    <MESSAGE value="new updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="new updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -377,6 +322,11 @@
           <url>file://$PROJECT_DIR$/resources/views/dashboard.blade.php</url>
           <line>171</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/resources/views/modules/CustomerPayments/formComponents/CustomerAmountField.vue</url>
+          <line>12</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

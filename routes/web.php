@@ -100,9 +100,23 @@ function createReportRoutes($controller){
         Route::post('/','Modules\\'.ucfirst('reports').'\\'.$controller.'@search')->name('search');
     });
 }
+
+function createAccountRoutes($moduleName){
+    $GLOBALS['moduleName'] = $moduleName;
+    return Route::group(['prefix'=>'/'.$moduleName,'as'=>$moduleName.'.'],function (){
+        Route::get('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@index')->name('home');
+        Route::get('/get','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@datatable')->name('datatable');
+        Route::get('/add','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@add')->name('add');
+        Route::post('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@create')->name('create');
+        Route::post('/search','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@search')->name('search');
+    });
+}
+
 Route::group(['prefix'=>'/module','as'=>'module.'],function (){
     createRoutes('suppliers');
     createRoutes('categories');
+    createAccountRoutes('customersAccount');
+    createAccountRoutes('suppliersAccount');
     createRoutes('items');
     createRoutes('inventory');
 

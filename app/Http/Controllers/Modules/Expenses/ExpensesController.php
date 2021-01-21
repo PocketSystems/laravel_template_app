@@ -4,9 +4,11 @@
 namespace App\Http\Controllers\Modules\Expenses;
 
 
+use App\Helpers\Helper;
 use App\Http\Controllers\ModuleController;
 use App\Models\ExpenseCategories;
 use App\Models\Expenses;
+use App\Models\Ledger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +22,11 @@ class ExpensesController extends ModuleController
         parent::__construct();
         View::share('moduleName', \request()->segment(2));
     }
+    public function getMode(): array
+    {
+        return ['Cash','Card','Online'];
+
+    }
     public function index()
     {
         $this->injectDatatable();
@@ -31,7 +38,8 @@ class ExpensesController extends ModuleController
     public function add()
     {
         $categories = $this->getCategories();
-        return$this->view('add',['categories'=>$categories]);
+        $mode = $this->getMode();
+        return$this->view('add',['categories'=>$categories,'mode'=>$mode]);
     }
     public function edit($id)
     {
@@ -45,6 +53,7 @@ class ExpensesController extends ModuleController
             'expense_category_id' => 'required',
             'amount' => 'required',
             'expense_date' => 'required',
+            'mode' => 'required',
         ])->validate();
 
         $expense = new Expenses();
@@ -56,6 +65,22 @@ class ExpensesController extends ModuleController
         $expense->user_id = Auth::user()->id;
         $expense->company_id = Auth::user()->company_id;
         $expense->save();
+        $id = $expense->id;
+
+        $ledger = new Ledger();
+        $ledger->nature_id = $id;
+        $ledger->type_id = 0;
+        $ledger->date = date('Y-m-d', strtotime($request->input('expense_date')));
+        $ledger->mode = $request->input('mode');
+        $ledger->amount = $expense->amount;
+        $ledger->balance = 0;
+        $ledger->description = $request->input('description');
+        $ledger->type = 'payment';
+        $ledger->nature = 'expense';
+        $ledger->account = 'debit';
+        $ledger->user_id = Auth::user()->id;
+        $ledger->company_id = Auth::user()->company_id;
+        $ledger->save();
         if (!empty($request->input('saveClose'))) {
             return redirect()->route($this->mRoute('home'))->with('success', 'Expense Added Successfully!');
         } else {
@@ -92,7 +117,7 @@ class ExpensesController extends ModuleController
             }],
             ["data" => "action1", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 $deleteFun = "delete_row(" . $row["id"] . ",'" . route($this->mRoute('delete'), [$row["id"]]) . "','" . csrf_token() . "',this)";
-                $btn = '<a href=' . route($this->mRoute('edit'), [$row['id']]) . '><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:" onclick="' . $deleteFun . '" style="color: red!important;"><i class="fas fa-trash"></i></a>';
+                $btn = '<a href="javascript:" onclick="' . $deleteFun . '" style="color: red!important;"><i class="fas fa-trash"></i></a>';
                 return $btn;
             }],
         ];

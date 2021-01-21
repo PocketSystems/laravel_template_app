@@ -30,6 +30,18 @@
                     <div class="tx-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Mode<span class="tx-danger">*</span></label>
+                    <select class="form-control @error('mode') is-invalid @enderror" name="mode">
+                        <option label="Select Mode" value="0"></option>
+                        @foreach ($mode as $key => $value)
+                            <option value="{{$value}}" {{old('mode') == $key ? 'selected' : ''}}>{{$value}}</option>
+                        @endforeach
+                    </select>
+                    @error('mode')
+                    <div class="tx-danger">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">

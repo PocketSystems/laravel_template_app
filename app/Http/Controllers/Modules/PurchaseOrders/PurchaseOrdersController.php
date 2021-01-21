@@ -4,9 +4,11 @@
 namespace App\Http\Controllers\Modules\PurchaseOrders;
 
 
+use App\Helpers\Helper;
 use App\Http\Controllers\ModuleController;
 use App\Models\Inventory;
 use App\Models\Items;
+use App\Models\Ledger;
 use App\Models\PurchaseOrderItems;
 use App\Models\PurchaseOrders;
 use App\Models\Suppliers;
@@ -72,6 +74,23 @@ class PurchaseOrdersController extends ModuleController
         if (!empty($data)) {
             $data = (array)$data;
             DB::table($this->getModuleTable())->where('id', $id)->update([$field => ($data[$field] == 1 ? 2 : 1)]);
+            if ($data[$field] == 1) {
+                $current_balance =  Helper::getBalance($request->input('supplier_id'),'supplier');
+                $ledger = new Ledger();
+                $ledger->nature_id = $data['supplier_id'];
+                $ledger->type_id = $id;
+                $ledger->mode = 'invoice';
+                $ledger->amount = $data['grand_cost_total'];
+                $ledger->balance = $current_balance+$data['grand_cost_total'];
+                $ledger->description = $data['description'];
+                $ledger->date = date('Y-m-d');
+                $ledger->type = 'purchase';
+                $ledger->nature = 'supplier';
+                $ledger->account = 'debit';
+                $ledger->user_id = Auth::user()->id;
+                $ledger->company_id = Auth::user()->company_id;
+                $ledger->save();
+            }
         }
         return ['success' => 1];
     }
@@ -150,6 +169,24 @@ class PurchaseOrdersController extends ModuleController
                 } else {
                     $error++;
                 }
+            }
+            if ($purchaseOrder->status == 1) {
+
+                $current_balance =  Helper::getBalance($request->input('supplier_id'),'supplier');
+                $ledger = new Ledger();
+                $ledger->nature_id = $request->input('supplier_id');
+                $ledger->type_id = $pId;
+                $ledger->date = date('Y-m-d', strtotime($request->input('order_date')));
+                $ledger->mode = 'invoice';
+                $ledger->amount = $purchaseOrder->grand_cost_total;
+                $ledger->balance = $current_balance+$purchaseOrder->grand_cost_total;
+                $ledger->description = $request->input('description');
+                $ledger->type = 'purchase';
+                $ledger->nature = 'supplier';
+                $ledger->account = 'debit';
+                $ledger->user_id = Auth::user()->id;
+                $ledger->company_id = Auth::user()->company_id;
+                $ledger->save();
             }
             if ($error == sizeof($items)) {
                 $purchaseOrder->delete();

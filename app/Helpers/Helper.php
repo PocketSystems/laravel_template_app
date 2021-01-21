@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\Ledger;
 use Illuminate\Http\Request;
 
 class Helper {
@@ -42,6 +43,11 @@ class Helper {
             $months[]= $month;
         }
         return $months;
+    }
+
+    public static function getBalance($natureId,$nature){
+        $balance = Ledger::where("nature_id",$natureId)->where('nature',$nature)->orderBy('id', 'desc')->get('balance')->first();
+        return (!empty($balance) ? $balance : 0);
     }
 
 

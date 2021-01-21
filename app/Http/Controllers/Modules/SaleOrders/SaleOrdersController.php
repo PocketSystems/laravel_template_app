@@ -4,10 +4,12 @@
 namespace App\Http\Controllers\Modules\SaleOrders;
 
 
+use App\Helpers\Helper;
 use App\Http\Controllers\ModuleController;
 use App\Models\Customers;
 use App\Models\Inventory;
 use App\Models\Items;
+use App\Models\Ledger;
 use App\Models\SaleOrderItems;
 use App\Models\SaleOrders;
 use Illuminate\Support\Facades\DB;
@@ -73,6 +75,23 @@ class SaleOrdersController extends ModuleController
         if(!empty($data)){
             $data = (array)$data;
             DB::table($this->getModuleTable())->where('id', $id)->update([$field => ($data[$field] == 1 ? 2 : 1)]);
+            if ($data[$field] == 1) {
+                $current_balance =  Helper::getBalance($request->input('customer_id'),'customer');
+                $ledger = new Ledger();
+                $ledger->nature_id = $data['customer_id'];
+                $ledger->type_id = $id;
+                $ledger->mode = 'invoice';
+                $ledger->amount = $data['grand_total'];
+                $ledger->balance = $current_balance+$data['grand_total'];
+                $ledger->description = $data['description'];
+                $ledger->date = date('Y-m-d');
+                $ledger->type = 'sale';
+                $ledger->nature = 'customer';
+                $ledger->account = 'credit';
+                $ledger->user_id = Auth::user()->id;
+                $ledger->company_id = Auth::user()->company_id;
+                $ledger->save();
+            }
         }
         return ['success' => 1];
     }
@@ -143,6 +162,23 @@ class SaleOrdersController extends ModuleController
                 } else {
                     $error++;
                 }
+            }
+            if ($saleOrder->status == 1) {
+                $current_balance =  Helper::getBalance($request->input('customer_id'),'customer');
+                $ledger = new Ledger();
+                $ledger->nature_id = $request->input('customer_id');
+                $ledger->type_id = $pId;
+                $ledger->date = date('Y-m-d', strtotime($request->input('order_date')));
+                $ledger->mode = 'invoice';
+                $ledger->amount = $saleOrder->grand_total;
+                $ledger->balance = $current_balance+$saleOrder->grand_total;
+                $ledger->description = $request->input('description');
+                $ledger->type = 'sale';
+                $ledger->nature = 'customer';
+                $ledger->account = 'credit';
+                $ledger->user_id = Auth::user()->id;
+                $ledger->company_id = Auth::user()->company_id;
+                $ledger->save();
             }
             if ($error == sizeof($items)) {
                 $saleOrder->delete();

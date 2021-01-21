@@ -48,9 +48,9 @@ export default {
             handler(newVal,oldVal){
                 newVal.total = newVal.price*newVal.qty
                 newVal.cost_total = newVal.cost*newVal.qty
-                if(parseInt(newVal.stock) < parseInt(newVal.qty)){
+/*                if(parseInt(newVal.stock) < parseInt(newVal.qty)){
                     newVal.qty = newVal.stock;
-                }
+                }*/
                 this.$emit("change",this.index, newVal)
             },
             deep: true

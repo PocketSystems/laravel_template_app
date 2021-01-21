@@ -91,7 +91,7 @@
                                 @foreach($data_all as $value)
                                     <td class="tx-danger">{{!empty($value['cost']) ? $value['cost'] : '-'}}</td>
                                 @endforeach
-                                <td class="tx-danger">{{$total_all['costTotal']}}</td>
+                                <td class="tx-danger">- {{$total_all['costTotal']}}</td>
                             </tr>
                             <tr>
                                 <th scope="col" style="font-weight: 800"><strong>Gross Profit</strong></th>
@@ -123,13 +123,13 @@
                             </tr>
 
                             </tbody>
-                            <tfoot>
+                            <tfoot style="border: unset!important;">
                             <tr>
                                 <th scope="col" style="font-weight: 800"><strong>Net Profit</strong></th>
                                 @foreach($data_all as $value)
                                     <td class="{{$value['net_profit'] < 0 ? 'tx-danger' :'tx-success'}}">{{$value['net_profit']}}</td>
                                 @endforeach
-                                <td>{{$total_all['netProfitTotal']}}</td>
+                                <td {{$total_all['netProfitTotal'] < 0 ? 'tx-danger' :'tx-success'}}>{{$total_all['netProfitTotal']}}</td>
                             </tr>
                             </tfoot>
                         </table>

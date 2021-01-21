@@ -937,6 +937,20 @@ BUGS:
   font-named-instance: 'Italic';
   src: url("../fonts/inter-ui/Inter-UI-italic.var.woff2") format("woff2 supports variations(gvar)"), url("../fonts/inter-ui/Inter-UI-italic.var.woff2") format("woff2-variations"), url("../fonts/inter-ui/Inter-UI-italic.var.woff2") format("woff2"); }
 
+
+/* poppins-regular - latin */
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/poppins/poppins-v15-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local(''),
+    url('../fonts/poppins/poppins-v15-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/poppins/poppins-v15-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../fonts/poppins/poppins-v15-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('../fonts/poppins/poppins-v15-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/poppins/poppins-v15-latin-regular.svg#Poppins') format('svg'); /* Legacy iOS */
+}
 /* ############### BOOTSTRAP FRAMEWORK ############### */
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -990,7 +1004,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Poppins";
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
@@ -5176,7 +5190,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -5261,7 +5275,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -12016,7 +12030,7 @@ textarea.parsley-success:focus {
 
 /* Setup basic CSS for Label */
 .jqvmap-pin {
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Poppins";
   cursor: default;
   pointer-events: none; }
 
@@ -12485,7 +12499,7 @@ textarea.parsley-success:focus {
     padding: 8px 15px;
     background-image: none;
     background-color: #b4bdce;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "Poppins";
     font-size: 12px;
     text-shadow: none;
     text-transform: capitalize;
@@ -12497,7 +12511,7 @@ textarea.parsley-success:focus {
       text-shadow: none; }
 
 .sp-button-container .sp-cancel {
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "Poppins";
   font-size: 12px;
   text-transform: capitalize;
   color: #7987a1 !important; }
