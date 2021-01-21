@@ -36,7 +36,7 @@
         <ul class="nav nav-aside">
             <li class="nav-item"><a href="{{route('dashboard')}}" class="nav-link"><i data-feather="home"></i> <span>Dashboard</span></a></li>
             <li class="nav-item with-sub">
-                <a class="nav-link"><i data-feather="tag"></i> <span>Products</span></a>
+                <a href="" class="nav-link"><i data-feather="tag"></i> <span>Products</span></a>
                 <ul>
                     <li><a href="{{route('module.categories.home')}}">Categories</a></li>
                     <li><a href="{{route('module.categories.add')}}">Add Category</a></li>
@@ -45,7 +45,7 @@
                 </ul>
             </li>
             <li class="nav-item with-sub">
-                <a class="nav-link"><i data-feather="users"></i> <span>Parties</span></a>
+                <a href="" class="nav-link"><i data-feather="users"></i> <span>Parties</span></a>
                 <ul>
                     <li><a href="{{route('module.suppliers.home')}}">View Suppliers</a></li>
                     <li><a href="{{route('module.suppliers.add')}}">Add Supplier</a></li>
@@ -54,7 +54,7 @@
                 </ul>
             </li>
             <li class="nav-item with-sub">
-                <a class="nav-link"><i data-feather="credit-card"></i> <span>Accounts</span></a>
+                <a href="" class="nav-link"><i data-feather="credit-card"></i> <span>Accounts</span></a>
                 <ul>
                     <li><a href="{{route('module.suppliersAccount.home')}}">Suppliers Account</a></li>
                     <li><a href="{{route('module.suppliersAccount.add')}}">Add Supplier Payment</a></li>
@@ -63,7 +63,7 @@
                 </ul>
             </li>
             <li class="nav-item with-sub">
-                <a class="nav-link"><i data-feather="clipboard"></i> <span>Purchases</span></a>
+                <a href="" class="nav-link"><i data-feather="clipboard"></i> <span>Purchases</span></a>
                 <ul>
                     <li><a href="{{route('module.purchaseOrders.home')}}">History</a></li>
                     <li><a href="{{route('module.purchaseOrders.add')}}">Add Purchase Order</a></li>
@@ -71,14 +71,14 @@
             </li>
             <li class="nav-item"><a href="{{route('module.inventory.home')}}" class="nav-link"><i data-feather="archive"></i> <span>Inventory</span></a></li>
             <li class="nav-item with-sub">
-                <a class="nav-link"><i data-feather="dollar-sign"></i> <span>Orders</span></a>
+                <a href="" class="nav-link"><i data-feather="dollar-sign"></i> <span>Orders</span></a>
                 <ul>
                     <li><a href="{{route('module.saleOrders.home')}}">History</a></li>
                     <li><a href="{{route('module.saleOrders.add')}}">Add Sale Order</a></li>
                 </ul>
             </li>
             <li class="nav-item with-sub">
-                <a class="nav-link"><i data-feather="inbox"></i> <span>Expenses</span></a>
+                <a href="" class="nav-link"><i data-feather="inbox"></i> <span>Expenses</span></a>
                 <ul>
                     <li><a href="{{route('module.expenses.home')}}">History</a></li>
                     <li><a href="{{route('module.expenseCategories.home')}}">Categories</a></li>
@@ -87,7 +87,7 @@
                 </ul>
             </li>
             <li class="nav-item with-sub">
-                <a class="nav-link"><i data-feather="file-text"></i> <span>Reports</span></a>
+                <a href="" class="nav-link"><i data-feather="file-text"></i> <span>Reports</span></a>
                 <ul>
                     <li><a href="{{route('module.PurchaseOrderReport.home')}}">Purchase Order Report</a></li>
                     <li><a href="{{route('module.SaleOrderReport.home')}}">Sale Order Report</a></li>

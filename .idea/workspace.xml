@@ -4,37 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99ff6a28-b5d0-4539-af3e-6744601858df" name="Default Changelist" comment="new updates">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/CustomersAccount/CustomersAccountController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/SuppliersAccount/SuppliersAccountController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/fonts/poppins/poppins-v15-latin-regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/bus.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/CustomersAccount/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/SuppliersAccount/add.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/SuppliersAccount/formComponents/SupplierAmountField.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/SuppliersAccount/formComponents/SupplierDropDown.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/modules/SuppliersAccount/index.blade.php" afterDir="false" />
+    <list default="true" id="99ff6a28-b5d0-4539-af3e-6744601858df" name="Default Changelist" comment="- customer account&#10;- supplier account&#10;- add ledger&#10;- customer payment&#10;- supplier payment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/Expenses/ExpensesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Expenses/ExpensesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/PurchaseOrders/PurchaseOrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/PurchaseOrders/PurchaseOrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/ExpenseReport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/Reports/ExpenseReport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Modules/SaleOrders/SaleOrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Modules/SaleOrders/SaleOrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Customers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Customers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Suppliers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Suppliers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/dashforge.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/dashforge.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/partials/btmjs.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/partials/btmjs.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/partials/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/Expenses/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/Expenses/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/PurchaseOrders/formComponents/PoItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/PurchaseOrders/formComponents/PoItem.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/Reports/profit_loss_report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/Reports/profit_loss_report.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +183,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets/fonts/poppins" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../DASHFORGE" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -258,7 +231,7 @@
       <workItem from="1610100239170" duration="125669000" />
       <workItem from="1610811702580" duration="1212000" />
       <workItem from="1610961103874" duration="38511000" />
-      <workItem from="1611153309106" duration="15850000" />
+      <workItem from="1611153309106" duration="17874000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1608830580631</created>
@@ -281,7 +254,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610809401703</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="- customer account&#10;- supplier account&#10;- add ledger&#10;- customer payment&#10;- supplier payment">
+      <created>1611232548957</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1611232548957</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +283,8 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="invoice and reporting remaining" />
     <MESSAGE value="new updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="new updates" />
+    <MESSAGE value="- customer account&#10;- supplier account&#10;- add ledger&#10;- customer payment&#10;- supplier payment" />
+    <option name="LAST_COMMIT_MESSAGE" value="- customer account&#10;- supplier account&#10;- add ledger&#10;- customer payment&#10;- supplier payment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

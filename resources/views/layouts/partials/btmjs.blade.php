@@ -1,6 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 <script type="text/javascript" src="../../js/app.js"></script>
 <script src="{{asset('assets/js/dashforge.js')}}"></script>
+<script src="{{asset('assets/js/dashforge.aside.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
 <script src="{{asset('assets/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/lib/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
