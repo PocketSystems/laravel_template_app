@@ -38,13 +38,13 @@ class SuppliersAccountController extends ModuleController
 
         $suppliers = $this->getSupplier();
         $mode = $this->getMode();
-        return view('modules.suppliersAccount.index',['suppliers'=>$suppliers,'mode'=>$mode]);
+        return $this->view('index',['suppliers'=>$suppliers,'mode'=>$mode]);
     }
     public function add()
     {
         $customers = $this->getSupplier();
         $mode = $this->getMode();
-        return view('modules.suppliersAccount.add',['suppliers'=>$customers,'mode'=>$mode]);
+        return $this->view('add',['suppliers'=>$customers,'mode'=>$mode]);
     }
     public function create(Request $request)
     {
@@ -71,9 +71,9 @@ class SuppliersAccountController extends ModuleController
         $ledger->company_id = Auth::user()->company_id;
         $ledger->save();
         if (!empty($request->input('saveClose'))) {
-            return redirect()->route('module.suppliersAccount.home')->with('success', 'Payments Added Successfully!');
+            return redirect()->route($this->mRoute('home'))->with('success', 'Payments Added Successfully!');
         } else {
-            return redirect()->route('module.suppliersAccount.home')->with('success', 'Payments Added Successfully!');
+            return redirect()->route('home')->with('success', 'Payments Added Successfully!');
         }
 
     }
