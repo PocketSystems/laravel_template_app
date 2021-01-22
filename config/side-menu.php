@@ -98,10 +98,10 @@ return [
                 "child" => "module.expenseCategories.home",
                 "title" => "Categories"
             ], [
-                "child" => "module.expenseCategories.home",
+                "child" => "module.expenseCategories.add",
                 "title" => "Add Expense Category"
             ], [
-                "child" => "module.expenses.home",
+                "child" => "module.expenses.add",
                 "title" => "Add Expense"
             ],
         ]
