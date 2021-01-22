@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Modules\Inventory;
 
 
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
 use App\Models\Inventory;
 use App\Models\Items;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
 
 class InventoryController extends ModuleController
 {
+
+    use DatatableTrait;
 
     public function __construct()
     {

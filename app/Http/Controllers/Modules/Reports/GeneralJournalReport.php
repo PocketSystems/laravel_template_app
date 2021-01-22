@@ -4,7 +4,8 @@
 namespace App\Http\Controllers\Modules\Reports;
 
 
-use App\Http\Controllers\AuthenticatedReportController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SubModuleTrait;
 use App\Models\Expenses;
 use App\Models\PurchaseOrders;
 use App\Models\SaleOrders;
@@ -12,25 +13,28 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
 
-class GeneralJournalReport extends AuthenticatedReportController
+class GeneralJournalReport extends ModuleController
 {
+
+    use SubModuleTrait{
+        SubModuleTrait::__construct as subModuleConstructor;
+    }
+
     public function __construct()
     {
         parent::__construct();
+        $this->subModuleConstructor();
+        $this->setModuleName('reports');
     }
 
     public function index()
     {
-
-        return view('modules.reports.general_journal_report');
+        return $this->view('general_journal_report');
     }
 
     public function search(Request $request)
     {
-
-
         Validator::make($request->all(), [
             'from_date' => 'required',
             'to_date' => 'required',
@@ -83,7 +87,7 @@ class GeneralJournalReport extends AuthenticatedReportController
             'total_all' => $total_all,
         ];
 
-        return view('modules.reports.general_journal_report', $data);
+        return $this->view('general_journal_report', $data);
 
     }
 }

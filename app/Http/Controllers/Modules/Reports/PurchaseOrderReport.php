@@ -5,22 +5,28 @@ namespace App\Http\Controllers\Modules\Reports;
 
 
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
-use App\Http\Controllers\ReportModuleController;
+use App\Http\Controllers\SubModuleTrait;
 use App\Models\PurchaseOrders;
 use App\Models\Suppliers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
-use League\CommonMark\Inline\Element\Emphasis;
 
-class PurchaseOrderReport extends ReportModuleController
+class PurchaseOrderReport extends ModuleController
 {
+    use DatatableTrait;
+    use SubModuleTrait{
+        SubModuleTrait::__construct as subModuleConstructor;
+    }
+
     public $record = [];
 
     public function __construct()
     {
         parent::__construct();
+        $this->subModuleConstructor();
+        $this->setModuleName("reports");
     }
 
     public function getStatus(): array
@@ -39,7 +45,7 @@ class PurchaseOrderReport extends ReportModuleController
         $status = $this->getStatus();
         $suppliers = $this->getSuppliers();
         $this->injectDatatable();
-        return view('modules.reports.purchase_order_report', ['status' => $status, 'suppliers' => $suppliers]);
+        return $this->view('purchase_order_report', ['status' => $status, 'suppliers' => $suppliers]);
     }
 
     public function search(Request $request)
@@ -74,7 +80,7 @@ class PurchaseOrderReport extends ReportModuleController
             'pItem' => $pItem
         ];
 
-        return view('modules.reports.purchase_order_report', $data);
+        return $this->view('purchase_order_report', $data);
 
     }
 

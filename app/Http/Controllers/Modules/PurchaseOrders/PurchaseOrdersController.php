@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Modules\PurchaseOrders;
 
 
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
 use App\Models\Inventory;
 use App\Models\Items;
@@ -12,14 +13,15 @@ use App\Models\Ledger;
 use App\Models\PurchaseOrderItems;
 use App\Models\PurchaseOrders;
 use App\Models\Suppliers;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class PurchaseOrdersController extends ModuleController
 {
+
+    use DatatableTrait;
 
     public function index()
     {

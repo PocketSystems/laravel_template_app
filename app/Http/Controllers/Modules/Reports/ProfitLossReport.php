@@ -3,7 +3,8 @@
 
 namespace App\Http\Controllers\Modules\Reports;
 
-use App\Http\Controllers\AuthenticatedReportController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SubModuleTrait;
 use App\Models\Expenses;
 use App\Models\PurchaseOrders;
 use App\Models\SaleOrders;
@@ -13,17 +14,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class ProfitLossReport extends AuthenticatedReportController
+class ProfitLossReport extends ModuleController
 {
+
+    use SubModuleTrait{
+        SubModuleTrait::__construct as subModuleConstructor;
+    }
 
     public function __construct()
     {
         parent::__construct();
+        $this->subModuleConstructor();
+        $this->setModuleName("reports");
     }
 
     public function index()
     {
-        return view('modules.reports.profit_loss_report');
+        return $this->view('profit_loss_report');
     }
 
     public function search(Request $request)

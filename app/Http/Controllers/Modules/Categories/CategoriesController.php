@@ -2,9 +2,10 @@
 
 
 namespace App\Http\Controllers\Modules\Categories;
-use App\Models\Categories;
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends ModuleController
 {
+    use DatatableTrait;
+
     public function index()
     {
         $this->injectDatatable();

@@ -5,18 +5,21 @@ namespace App\Http\Controllers\Modules\Expenses;
 
 
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
 use App\Models\ExpenseCategories;
 use App\Models\Expenses;
 use App\Models\Ledger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
 
 class ExpensesController extends ModuleController
 {
+
+
+    use DatatableTrait;
+
     public function __construct()
     {
         parent::__construct();

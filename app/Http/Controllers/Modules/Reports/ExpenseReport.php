@@ -1,25 +1,31 @@
 <?php
 
-
 namespace App\Http\Controllers\Modules\Reports;
 
-
 use App\Helpers\Helper;
-use App\Http\Controllers\ReportModuleController;
+use App\Http\Controllers\DatatableTrait;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SubModuleTrait;
 use App\Models\ExpenseCategories;
 use App\Models\Expenses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ExpenseReport extends ReportModuleController
+class ExpenseReport extends ModuleController
 {
+    use DatatableTrait;
+    use SubModuleTrait{
+        SubModuleTrait::__construct as subModuleConstructor;
+    }
+
     public $record = [];
 
     public function __construct()
     {
         parent::__construct();
+        $this->subModuleConstructor();
+        $this->setModuleName('reports');
     }
-
 
     public function getCategories(): array
     {
@@ -30,7 +36,7 @@ class ExpenseReport extends ReportModuleController
     {
         $categories = $this->getCategories();
         $this->injectDatatable();
-        return view('modules.reports.expense_report', [ 'categories' => $categories]);
+        return $this->view('expense_report', [ 'categories' => $categories]);
     }
 
     public function search(Request $request)
@@ -77,7 +83,7 @@ class ExpenseReport extends ReportModuleController
 //            'pItem' => $pItem
         ];
 
-        return view('modules.reports.expense_report', $data);
+        return $this->view('expense_report', $data);
 
     }
 

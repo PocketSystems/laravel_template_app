@@ -15,9 +15,6 @@ use Yajra\DataTables\Services\DataTable;
 
 abstract class ModuleController extends AuthenticatedController
 {
-    protected abstract function getDataTableColumns() : array;
-    protected abstract function getDataTableRows() : array;
-    protected abstract function getModuleTable() : string;
     private $moduleName = null;
 
     public function __construct()
@@ -38,28 +35,6 @@ abstract class ModuleController extends AuthenticatedController
 
     protected function mRoute($routeName){
         return 'module.'.$this->moduleName.'.'.$routeName;
-    }
-
-    protected function injectDatatable(){
-        View::share('dataTableColumns', json_encode($this->getDataTableColumns()));
-    }
-
-    private function exportDatable(){
-
-    }
-    public final function datatable(){
-        $dt = DataTables::of($this->getDataTableRows())
-            ->addIndexColumn();
-//        $dt->html();
-        $actions = [];
-        foreach ($this->getDataTableColumns() as $column){
-            if(!empty($column['onAction'])){
-                $dt->addColumn($column['data'],$column['onAction']);
-                $actions[] = $column['data'];
-            }
-        }
-        $dt->rawColumns($actions);
-        return $dt->make(true);
     }
 
     public function deleteFile(Request $request,$id,$field): array
