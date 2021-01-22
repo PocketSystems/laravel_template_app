@@ -38,6 +38,7 @@
                 <?php
                     $parentClasses = ["nav-item"];
                     $routeName = \Request::route()->getName();
+                    echo $routeName;
                     if(is_array($menuItem['child'])){
                         $parentClasses[] = "with-sub";
                         $checkSubItemsActive = array_search($routeName,array_map(function(array $value){
