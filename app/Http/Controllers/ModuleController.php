@@ -33,7 +33,7 @@ abstract class ModuleController extends AuthenticatedController
     }
 
     protected function view($viewName,$data = []){
-        return view('modules.'.$this->moduleName.'.'.$viewName,$data);
+        return view('modules.'.ucfirst($this->moduleName).'.'.$viewName,$data);
     }
 
     protected function mRoute($routeName){
