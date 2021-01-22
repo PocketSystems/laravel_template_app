@@ -4,7 +4,7 @@
 
 
 
-            <div class="panel">
+            <div class="card card-body">
                 <div style="display: flex" class="mb-3">
                     <div style="flex: 1">
                         <h4 id="section1" class="mg-b-10">Categories</h4>

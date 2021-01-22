@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel" style="padding-bottom: 5px;border-bottom-left-radius: unset;border-bottom-right-radius:unset " >
+        <div class="card card-body" style="padding-bottom: 5px;border-bottom-left-radius: unset;border-bottom-right-radius:unset " >
             <table class="table table-striped">
                 <thead>
                 <tr>

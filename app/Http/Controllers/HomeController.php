@@ -27,7 +27,8 @@ class HomeController extends AuthenticatedController
         return view('dashboard', ['topBox' => $topBox,'secondBox'=>$secondBox,'thirdBox'=>$thirdBox]);
 
     }
-    private function secondBox(){
+    private function secondBox(): array
+    {
        $dates_month = Helper::rangeMonth();
         $sale_purchase_comp = [];
        foreach ($dates_month as $key => $value){
@@ -51,7 +52,8 @@ class HomeController extends AuthenticatedController
 
     }
 
-    private function thirdBox(){
+    private function thirdBox(): array
+    {
         $saleSumToday = SaleOrders::where('is_archive', 0)->where('status', 1)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id)->where('order_date',date('Y-m-d'))->sum('grand_total');
         $saleSumWeek = SaleOrders::where('is_archive', 0)->where('status', 1)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id)->whereBetween('order_date',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->sum('grand_total');
         $saleSumMonth = SaleOrders::where('is_archive', 0)->where('status', 1)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id)->whereMonth('order_date',Carbon::parse(date('Y-m-d'))->month)->sum('grand_total');
@@ -85,7 +87,7 @@ class HomeController extends AuthenticatedController
         return $data;
     }
 
-    private function topBox()
+    private function topBox(): array
     {
         $purchaseSum = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id);
         $saleSum = SaleOrders::where('is_archive', 0)->where('status', 1)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id);

@@ -168,7 +168,7 @@
     color: #fff; }
 
 .nav-aside .nav-link {
-  color: #63a3fe; }
+  color: #63a3fe!important; }
   .nav-aside .nav-link svg {
     color: #63a3fe;
     stroke-width: 1.7px; }

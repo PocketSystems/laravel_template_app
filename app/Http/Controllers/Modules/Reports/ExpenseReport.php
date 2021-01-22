@@ -4,24 +4,20 @@
 namespace App\Http\Controllers\Modules\Reports;
 
 
-use App\Http\Controllers\ModuleController;
+use App\Helpers\Helper;
+use App\Http\Controllers\ReportModuleController;
 use App\Models\ExpenseCategories;
 use App\Models\Expenses;
-use App\Models\PurchaseOrders;
-use App\Models\Suppliers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
-use League\CommonMark\Inline\Element\Emphasis;
 
-class ExpenseReport extends ModuleController
+class ExpenseReport extends ReportModuleController
 {
     public $record = [];
 
     public function __construct()
     {
         parent::__construct();
-        View::share('controllerName', \request()->segment(2));
     }
 
 
@@ -123,7 +119,9 @@ class ExpenseReport extends ModuleController
                 return date('m/d/Y', strtotime($row['expense_date']));
             }],
             ["data" => "expense_category.name"],
-            ["data" => "amount"],
+            ["data" => "amount","onAction"=>function($row){
+                return Helper::price($row['amount']);
+            }],
 
         ];
     }

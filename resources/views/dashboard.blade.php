@@ -14,7 +14,7 @@
                     <div class="card card-body">
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Today Sale</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$thirdBox['saleSumToday']}}</h3>
+                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumToday'])</h3>
                             <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['todayComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['todayComp'] ? 'up' : 'down' }}"></i></span> {{$thirdBox['saleSumTodayLast']}} Yesterday</p>
                         </div>
 
@@ -24,7 +24,7 @@
                     <div class="card card-body">
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Week Sales</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$thirdBox['saleSumWeek']}}</h3>
+                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumWeek'])</h3>
                             <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['weekComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['weekComp'] ? 'up' : 'down' }}"></i></span> {{$thirdBox['saleSumWeekLast']}} last week</p>
                         </div>
 
@@ -34,7 +34,7 @@
                     <div class="card card-body">
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">{{date('F')}} Sales</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$thirdBox['saleSumMonth']}}</h3>
+                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumMonth'])</h3>
                             <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['monthComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['monthComp'] ? 'up' : 'down' }}"></i></span> {{$thirdBox['saleSumMonthLast']}} last Month</p>
                         </div>
 
@@ -44,7 +44,7 @@
                     <div class="card card-body">
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">{{date('Y')}} Sales</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">{{$thirdBox['saleSumYear']}}</h3>
+                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumYear'])</h3>
                             <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['yearComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['yearComp'] ? 'up' : 'down' }}"></i></span> {{$thirdBox['saleSumYearLast']}} last Year</p>
                         </div>
 
@@ -90,21 +90,21 @@
                                     <p class="tx-10 tx-uppercase tx-medium tx-color-03 tx-spacing-1 tx-nowrap mg-b-5">Sales</p>
                                     <div class="d-flex align-items-center">
                                         <div class="wd-10 ht-10 rounded-circle bg-primary mg-r-5"></div>
-                                        <h5 class="tx-normal tx-rubik mg-b-0">{{$secondBox['sale_month_pie']}}</h5>
+                                        <h5 class="tx-normal tx-rubik mg-b-0">@price($secondBox['sale_month_pie'])</h5>
                                     </div>
                                 </div><!-- col -->
                                 <div class="col-4">
                                     <p class="tx-10 tx-uppercase tx-medium tx-color-03 tx-spacing-1 mg-b-5">Purchase</p>
                                     <div class="d-flex align-items-center">
                                         <div class="wd-10 ht-10 rounded-circle bg-pink mg-r-5"></div>
-                                        <h5 class="tx-normal tx-rubik mg-b-0">{{$secondBox['purchase_month_pie']}}</h5>
+                                        <h5 class="tx-normal tx-rubik mg-b-0">@price($secondBox['purchase_month_pie'])</h5>
                                     </div>
                                 </div><!-- col -->
                                 <div class="col-4">
                                     <p class="tx-10 tx-uppercase tx-medium tx-color-03 tx-spacing-1 mg-b-5">Expense</p>
                                     <div class="d-flex align-items-center">
                                         <div class="wd-10 ht-10 rounded-circle bg-teal mg-r-5"></div>
-                                        <h5 class="tx-normal tx-rubik mg-b-0">{{$secondBox['exp_month_pie']}}</h5>
+                                        <h5 class="tx-normal tx-rubik mg-b-0">@price($secondBox['exp_month_pie'])</h5>
                                     </div>
                                 </div><!-- col -->
 
@@ -119,7 +119,7 @@
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{$topBox['saleSum']}}</h3>
+                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($topBox['saleSum'])</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Total Sales</h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single impression.</p>
                                 </div>
@@ -137,7 +137,7 @@
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{$topBox['purchaseSum']}}</h3>
+                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($topBox['purchaseSum'])</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-pink mg-b-5">Total Purchase</h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single impression.</p>
                                 </div>
@@ -155,7 +155,7 @@
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{$topBox['expenseSum']}}</h3>
+                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($topBox['expenseSum'])</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Total Expense</h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single impression.</p>
                                 </div>

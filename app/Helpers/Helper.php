@@ -50,7 +50,10 @@ class Helper {
         return (!empty($balance) ? $balance : 0);
     }
 
-
+    public static function price($amount): string
+    {
+        return "Rs. ".number_format(floatval($amount));
+    }
 }
 
 ?>

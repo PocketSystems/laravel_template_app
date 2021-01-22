@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="panel">
+    <div class="card card-body">
         <div style="display: flex" class="mb-3">
             <div style="flex: 1">
                 <h4 id="section1" class="mg-b-10">Supplier Ledger</h4>
@@ -71,7 +71,7 @@
                     <div class="card-body pd-y-20 pd-x-25">
                         <div class="row row-sm">
                             <div class="col-7">
-                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{$purchase}}</h3>
+                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($purchase)</h3>
                                 <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Total
                                     Purchase</h6>
                                 <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single
@@ -92,7 +92,7 @@
                     <div class="card-body pd-y-20 pd-x-25">
                         <div class="row row-sm">
                             <div class="col-7">
-                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{$paid}}</h3>
+                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($paid)</h3>
                                 <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-pink mg-b-5">Total
                                     Paid</h6>
                                 <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single
@@ -113,7 +113,7 @@
                     <div class="card-body pd-y-20 pd-x-25">
                         <div class="row row-sm">
                             <div class="col-7">
-                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{$balance}}</h3>
+                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($balance)</h3>
                                 <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Ending
                                     Balance</h6>
                                 <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single
@@ -133,7 +133,7 @@
         </div>
         <br>
     @endif
-    <div class="panel">
+    <div class="card card-body">
 
         <div style="display: flex" class="mb-3">
 

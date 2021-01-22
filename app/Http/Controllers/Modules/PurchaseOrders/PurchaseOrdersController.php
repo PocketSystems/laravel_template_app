@@ -221,7 +221,9 @@ class PurchaseOrdersController extends ModuleController
                 return date('m/d/Y', strtotime($row['order_date']));
             }],
             ["data" => "supplier.name"],
-            ["data" => "grand_total"],
+            ["data" => "grand_total","onAction"=>function($row){
+                return Helper::price($row['grand_total']);
+            }],
             ["data" => "count"],
 
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {

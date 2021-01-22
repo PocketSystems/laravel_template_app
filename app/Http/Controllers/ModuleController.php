@@ -27,6 +27,11 @@ abstract class ModuleController extends AuthenticatedController
         View::share('moduleName', $this->moduleName);
     }
 
+    protected function setModuleName($moduleName){
+        $this->moduleName = $moduleName;
+        View::share('moduleName', $this->moduleName);
+    }
+
     protected function view($viewName,$data = []){
         return view('modules.'.$this->moduleName.'.'.$viewName,$data);
     }

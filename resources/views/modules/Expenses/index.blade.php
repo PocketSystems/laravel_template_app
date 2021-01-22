@@ -4,7 +4,7 @@
 
 
 
-            <div class="panel">
+            <div class="card card-body">
                 <div style="display: flex" class="mb-3">
                     <div style="flex: 1">
                         <h4 id="section1" class="mg-b-10">Expenses</h4>
@@ -19,9 +19,9 @@
                     <thead>
                     <tr>
                         <th width="5%">ID</th>
+                        <th width="5%">Date</th>
                         <th width="40%">Category</th>
                         <th width="5%">Amount</th>
-                        <th width="5%">Date</th>
                         <th width="5%">Action</th>
                     </tr>
                     </thead>

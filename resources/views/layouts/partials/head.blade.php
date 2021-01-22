@@ -4,32 +4,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Twitter -->
+<!--
     <meta name="twitter:site" content="@themepixels">
     <meta name="twitter:creator" content="@themepixels">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="DashForge">
     <meta name="twitter:description" content="Responsive Bootstrap 4 Dashboard Template">
     <meta name="twitter:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+-->
 
     <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/dashforge">
-    <meta property="og:title" content="DashForge">
-    <meta property="og:description" content="Responsive Bootstrap 4 Dashboard Template">
+<!--    <meta property="og:url" content="www">
+    <meta property="og:title" content="Pocket Account">
+    <meta property="og:description" content="Pocket Accounting">-->
 
-    <meta property="og:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+<!--    <meta property="og:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+    <meta property="og:image:secure_url" content="http://themepixels.me/dashforge/img/dashforge-social.png">-->
+<!--
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="600">
+-->
 
     <!-- Meta -->
-    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="author" content="ThemePixels">
+    <meta name="description" content="Pocket Accounting">
+    <meta name="author" content="Pocket Systems">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
-    <title>DashForge Responsive Bootstrap 4 Dashboard Template</title>
+    <title>Pocket Accounting</title>
 
     <!-- vendor css -->
     <link href="{{asset('assets/lib/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
@@ -49,7 +53,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/dashforge.dashboard.css')}}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-{{--    <link id="dfMode" rel="stylesheet" href="{{asset('assets/css/skin.dark.css')}}">--}}
+    {{--    <link id="dfMode" rel="stylesheet" href="{{asset('assets/css/skin.dark.css')}}">--}}
 
     <link href="{{asset('assets/lib/datatable-button/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/lib/datatable-button/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
@@ -60,6 +64,8 @@
     <link href="{{asset('assets/lib/datatable-button/css/common.css')}}" rel="stylesheet">
     <link href="{{asset('assets/lib/datatable-button/css/mixins.css')}}" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{asset('assets/css/skin.deepblue.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/skin.light.css')}}">
     @stack('style')
 
 </head>

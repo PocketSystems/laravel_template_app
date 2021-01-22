@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    protected $appends = ["company"];
 
     /**
      * The attributes that are mass assignable.
@@ -40,4 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function getCompanyAttribute(){
+        return Company::where("id",$this->attributes['company_id'])->where("status",1)->where('is_archive',0)->get()->first();
+    }
+
 }

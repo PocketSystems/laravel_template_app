@@ -23,7 +23,7 @@ class SaleOrdersController extends ModuleController
     public function __construct()
     {
         parent::__construct();
-        View::share('moduleName', \request()->segment(2));
+        $this->setModuleName("saleOrders");
     }
 
     public function index()
@@ -259,7 +259,9 @@ class SaleOrdersController extends ModuleController
                 return date('m/d/Y', strtotime($row['order_date']));
             }],
             ["data" => "customer.name"],
-            ["data" => "grand_total"],
+            ["data" => "grand_total","onAction"=>function($row){
+                return Helper::price($row['grand_total']);
+            }],
             ["data" => "count"],
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 $html = '';

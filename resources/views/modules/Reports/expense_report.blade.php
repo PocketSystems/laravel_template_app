@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="panel">
+    <div class="card card-body">
         <div style="display: flex" class="mb-3">
             <div style="flex: 1">
                 <h4 id="section1" class="mg-b-10">Expense Report</h4>
@@ -67,7 +67,7 @@
                     <div class="card-body pd-y-20 pd-x-25">
                         <div class="row row-sm">
                             <div class="col-7">
-                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{$grand_total}}</h3>
+                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($grand_total)</h3>
                                 <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Total
                                     Amount</h6>
                                 <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single
@@ -91,7 +91,7 @@
                     <div class="card-body pd-y-10">
 
                         <div class="d-flex align-items-baseline tx-rubik">
-                            <h1 class="tx-40 lh-1 tx-normal tx-spacing--2 mg-b-5 mg-r-5">{{$category['amount']}}</h1>
+                            <h1 class="tx-40 lh-1 tx-normal tx-spacing--2 mg-b-5 mg-r-5">@price($category['amount'])</h1>
 
                         </div>
                         <p class="tx-11 tx-color-03 mg-b-7">Total amount of {{$category['category']}}</p>
@@ -103,7 +103,7 @@
         </div>
         <br>
     @endif
-    <div class="panel">
+    <div class="card card-body">
 
         <div style="display: flex" class="mb-3">
 

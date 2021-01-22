@@ -58,77 +58,95 @@ Route::get('storage/app/{dir}/{filename}', function ($dir,$filename)
 });
 
 
-function createRoutes($moduleName){
-    $GLOBALS['moduleName'] = $moduleName;
-    return Route::group(['prefix'=>'/'.$moduleName,'as'=>$moduleName.'.'],function (){
-        Route::get('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@index')->name('home');
-        Route::get('/get','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@datatable')->name('datatable');
-        Route::get('/add','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@add')->name('add');
-        Route::post('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@create')->name('create');
+function createRoutes($moduleName,$routePath = ""){
+    $routePath = empty($routePath) ? $moduleName : $routePath;
+    return Route::group(['prefix'=>'/'.$routePath,'as'=>$moduleName.'.'],function () use($moduleName){
+        Route::get('/','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@index')->name('home');
+        Route::get('/get','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@datatable')->name('datatable');
+        Route::get('/add','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@add')->name('add');
+        Route::post('/','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@create')->name('create');
 
-        Route::get('/{id}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@edit')->name('edit');
-        Route::put('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@update')->name('update');
+        Route::get('/{id}','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@edit')->name('edit');
+        Route::put('/','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@update')->name('update');
 
-        Route::delete('/{id}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@delete')->name('delete');
-        Route::delete('/{id}/{field}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@deleteFile')->name('deleteFile');
-        Route::put('/{id}/{field}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@status')->name('status');
+        Route::delete('/{id}','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@delete')->name('delete');
+        Route::delete('/{id}/{field}','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@deleteFile')->name('deleteFile');
+        Route::put('/{id}/{field}','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@status')->name('status');
     });
 }
-function createOrderRoutes($moduleName){
-    $GLOBALS['moduleName'] = $moduleName;
-    return Route::group(['prefix'=>'/'.$moduleName,'as'=>$moduleName.'.'],function (){
-        Route::get('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@index')->name('home');
-        Route::get('/get','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@datatable')->name('datatable');
-        Route::get('/add','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@add')->name('add');
-        Route::post('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@create')->name('create');
+function createOrderRoutes($moduleName,$routePath = ""){
+    $routePath = empty($routePath) ? $moduleName : $routePath;
+    return Route::group(['prefix'=>'/'.$routePath,'as'=>$moduleName.'.'],function () use($moduleName){
+        Route::get('/','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@index')->name('home');
+        Route::get('/get','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@datatable')->name('datatable');
+        Route::get('/add','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@add')->name('add');
+        Route::post('/','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@create')->name('create');
 
-        Route::get('/{id}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@viewOrder')->name('viewOrder');
-        Route::get('/invoice/{id}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@invoice')->name('invoice');
+        Route::get('/{id}','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@viewOrder')->name('viewOrder');
+        Route::get('/invoice/{id}','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@invoice')->name('invoice');
 
-        Route::delete('/{id}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@delete')->name('delete');
-        Route::put('/{id}/{field}','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@status')->name('status');
-    });
-}
-
-function createReportRoutes($controller){
-    $GLOBALS['moduleName'] = 'reports';
-    $GLOBALS['controller'] = $controller;
-    return Route::group(['prefix'=>'/'.$controller,'as'=>$controller.'.'],function () use($controller){
-        Route::get('/','Modules\\'.ucfirst('reports').'\\'.$controller.'@index')->name('home');
-        Route::get('/get','Modules\\'.ucfirst('reports').'\\'.$controller.'@datatable')->name('datatable');
-        Route::get('/add','Modules\\'.ucfirst('reports').'\\'.$controller.'@add')->name('add');
-        Route::post('/','Modules\\'.ucfirst('reports').'\\'.$controller.'@search')->name('search');
+        Route::delete('/{id}','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@delete')->name('delete');
+        Route::put('/{id}/{field}','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@status')->name('status');
     });
 }
 
-function createAccountRoutes($moduleName){
-    $GLOBALS['moduleName'] = $moduleName;
-    return Route::group(['prefix'=>'/'.$moduleName,'as'=>$moduleName.'.'],function (){
-        Route::get('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@index')->name('home');
-        Route::get('/get','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@datatable')->name('datatable');
-        Route::get('/add','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@add')->name('add');
-        Route::post('/','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@create')->name('create');
-        Route::post('/search','Modules\\'.ucfirst($GLOBALS['moduleName']).'\\'.ucfirst($GLOBALS['moduleName']).'Controller@search')->name('search');
+function createReportRoutes($controller,$routePath = ""){
+    $moduleName = 'reports';
+    $routePath = empty($routePath) ? $controller : $routePath;
+    return Route::group(['prefix'=>'/'.$routePath,'as'=>$controller.'.'],function () use($moduleName,$controller){
+        Route::get('/','Modules\\'.ucfirst($moduleName).'\\'.$controller.'@index')->name('home');
+        Route::get('/get','Modules\\'.ucfirst($moduleName).'\\'.$controller.'@datatable')->name('datatable');
+        Route::get('/add','Modules\\'.ucfirst($moduleName).'\\'.$controller.'@add')->name('add');
+        Route::post('/','Modules\\'.ucfirst($moduleName).'\\'.$controller.'@search')->name('search');
     });
 }
 
-Route::group(['prefix'=>'/module','as'=>'module.'],function (){
-    createRoutes('suppliers');
-    createRoutes('categories');
-    createAccountRoutes('customersAccount');
-    createAccountRoutes('suppliersAccount');
-    createRoutes('items');
+function createAccountRoutes($moduleName,$routePath = ""){
+    $routePath = empty($routePath) ? $moduleName : $routePath;
+    return Route::group(['prefix'=>'/'.$routePath,'as'=>$moduleName.'.'],function () use ($moduleName){
+        Route::get('/','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@index')->name('home');
+        Route::get('/get','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@datatable')->name('datatable');
+        Route::get('/add','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@add')->name('add');
+        Route::post('/','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@create')->name('create');
+        Route::post('/search','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@search')->name('search');
+    });
+}
+
+Route::group(['prefix'=>'/','as'=>'module.'],function (){
     createRoutes('inventory');
+});
 
-    createRoutes('expenseCategories');
-    createRoutes('expenses');
+Route::group(['prefix'=>'/parties','as'=>'module.'],function () {
     createRoutes('customers');
-//    Reports
-    createReportRoutes('PurchaseOrderReport');
-    createReportRoutes('SaleOrderReport');
-    createReportRoutes('ExpenseReport');
-    createReportRoutes('ProfitLossReport');
-    createReportRoutes('GeneralJournalReport');
+    createRoutes('suppliers');
+});
+
+Route::group(['prefix'=>'/accounts','as'=>'module.'],function () {
+    createAccountRoutes('suppliersAccount','Supplier Account');
+    createAccountRoutes('customersAccount','Customer Account');
+});
+
+Route::group(['prefix'=>'/expenses','as'=>'module.'],function () {
+    createRoutes('expenseCategories','Categories');
+    createRoutes('expenses','History');
+});
+
+Route::group(['prefix'=>'/purchases','as'=>'module.'],function (){
     createOrderRoutes('purchaseOrders');
-    createOrderRoutes('saleOrders');
+});
+
+Route::group(['prefix'=>'/orders','as'=>'module.'],function (){
+    createOrderRoutes('saleOrders','Sales Orders');
+});
+
+Route::group(['prefix'=>'/products','as'=>'module.'],function (){
+    createRoutes('categories');
+    createRoutes('items','listing');
+});
+
+Route::group(['prefix'=>'/reports','as'=>'module.'],function (){
+    createReportRoutes('PurchaseOrderReport','Purchase Order Report');
+    createReportRoutes('SaleOrderReport','Sales Order Report');
+    createReportRoutes('ExpenseReport','Expense Report');
+    createReportRoutes('ProfitLossReport','Profit & Loss Report');
 });

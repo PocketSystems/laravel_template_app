@@ -3,39 +3,31 @@
 
 namespace App\Http\Controllers\Modules\Reports;
 
-use App\Http\Controllers\AuthenticatedController;
+use App\Http\Controllers\AuthenticatedReportController;
 use App\Models\Expenses;
 use App\Models\PurchaseOrders;
 use App\Models\SaleOrders;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
-use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 
-class ProfitLossReport extends AuthenticatedController
+class ProfitLossReport extends AuthenticatedReportController
 {
 
     public function __construct()
     {
         parent::__construct();
-        View::share('controllerName', \request()->segment(2));
     }
 
     public function index()
     {
-
         return view('modules.reports.profit_loss_report');
     }
 
-
-
-
     public function search(Request $request)
     {
-
-
         Validator::make($request->all(), [
             'from_date' => 'required',
             'to_date' => 'required',

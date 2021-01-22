@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="panel">
+    <div class="card card-body">
         <div style="display: flex" class="mb-3">
             <div style="flex: 1">
                 <h4 id="section1" class="mg-b-10">Profit & Loss Report</h4>
@@ -50,7 +50,7 @@
     </div>
     <br>
     @if(!empty($months))
-        <div class="panel">
+        <div class="card card-body">
             <div class="row">
                 <div class="mb-3 col-12">
                     <div class="table-responsive">
@@ -129,7 +129,7 @@
                                 @foreach($data_all as $value)
                                     <td class="{{$value['net_profit'] < 0 ? 'tx-danger' :'tx-success'}}">{{$value['net_profit']}}</td>
                                 @endforeach
-                                <td>{{$total_all['netProfitTotal']}}</td>
+                                <td>@price($total_all['netProfitTotal'])</td>
                             </tr>
                             </tfoot>
                         </table>

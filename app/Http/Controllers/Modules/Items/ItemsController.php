@@ -19,7 +19,8 @@ class ItemsController extends ModuleController
     public function __construct()
     {
         parent::__construct();
-        View::share('moduleName', \request()->segment(2));
+        $this->setModuleName("items");
+
     }
     public function index()
     {
@@ -111,8 +112,12 @@ class ItemsController extends ModuleController
             ["data" => "sku"],
             ["data" => "category.name"],
             ["data" => "name"],
-            ["data" => "cost"],
-            ["data" => "price"],
+            ["data" => "cost","onAction"=>function($row){
+                return Helper::price($row['cost']);
+            }],
+            ["data" => "price","onAction"=>function($row){
+                return Helper::price($row['price']);
+            }],
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 $statusFun = "change_status(" . $row["id"] . ",'" . route($this->mRoute('status'), [$row["id"],'status']) . "','" . csrf_token() . "',this)";
                 $checkStatus = "" . ($row['status'] == 1 ? 'checked' : '') . "";

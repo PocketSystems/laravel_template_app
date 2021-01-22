@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Modules\Inventory;
 
 
+use App\Helpers\Helper;
 use App\Http\Controllers\ModuleController;
 use App\Models\Inventory;
 use App\Models\Items;
@@ -16,7 +17,7 @@ class InventoryController extends ModuleController
     public function __construct()
     {
         parent::__construct();
-        View::share('moduleName', \request()->segment(2));
+        $this->setModuleName('inventory');
     }
     public function index()
     {
@@ -45,7 +46,9 @@ class InventoryController extends ModuleController
             ["data" => "id"],
             ["data" => "name"],
             ["data" => "stock"],
-            ["data" => "total"],
+            ["data" => "total","onAction"=>function($row){
+            return Helper::price($row['total']);
+            }],
         ];
     }
 }

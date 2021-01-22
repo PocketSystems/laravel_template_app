@@ -174,7 +174,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         PhantomPdf\Laravel\LaravelServiceProvider::class,
-
+        App\Providers\BladeServiceProvider::class
     ],
 
     /*

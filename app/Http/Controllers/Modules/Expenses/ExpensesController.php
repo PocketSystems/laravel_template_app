@@ -20,8 +20,9 @@ class ExpensesController extends ModuleController
     public function __construct()
     {
         parent::__construct();
-        View::share('moduleName', \request()->segment(2));
+        $this->setModuleName("expenses");
     }
+
     public function getMode(): array
     {
         return ['Cash','Card','Online'];
@@ -110,10 +111,12 @@ class ExpensesController extends ModuleController
     {
         return [
             ["data" => "id"],
-            ["data" => "expense_category.name"],
-            ["data" => "amount"],
             ["data" => "expense_date","onAction" => function ($row) {
-            return date('m/d/Y',strtotime($row['expense_date']));
+                return date('m/d/Y',strtotime($row['expense_date']));
+            }],
+            ["data" => "expense_category.name"],
+            ["data" => "amount","onAction"=>function($row){
+                return Helper::price($row['amount']);
             }],
             ["data" => "action1", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 $deleteFun = "delete_row(" . $row["id"] . ",'" . route($this->mRoute('delete'), [$row["id"]]) . "','" . csrf_token() . "',this)";

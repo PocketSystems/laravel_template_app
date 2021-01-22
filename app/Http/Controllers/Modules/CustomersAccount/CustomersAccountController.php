@@ -18,7 +18,8 @@ class CustomersAccountController extends ModuleController
     public function __construct()
     {
         parent::__construct();
-        View::share('moduleName', \request()->segment(2));
+        $this->setModuleName("customersAccount");
+
     }
     public function getCustomers(): array
     {
@@ -155,15 +156,16 @@ class CustomersAccountController extends ModuleController
             ["data" => "description"],
             ["data" => "amount","onAction"=>function($row){
                 if($row['type'] == 'payment'){
-                    return '<span class="badge badge-danger">- '.$row['amount'].'</span>';
+                    return '<span class="badge badge-danger">- '.Helper::price($row['amount']).'</span>';
                 }elseif ($row['type'] == 'sale'){
-                    return '<span class="badge badge-success">'.$row['amount'].'</span>';
-
+                    return '<span class="badge badge-success">'.Helper::price($row['amount']).'</span>';
+                }else{
+                    return  "";
                 }
             }],
             ["data" => "balance","onAction"=>function($row){
 
-                    return '<span class="badge badge-info">'.$row['balance'].'</span>';
+                    return '<span class="badge badge-info">'.Helper::price($row['balance']).'</span>';
 
             }],
 

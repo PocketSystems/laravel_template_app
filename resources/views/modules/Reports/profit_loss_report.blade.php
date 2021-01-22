@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="panel">
+    <div class="card card-body">
         <div style="display: flex" class="mb-3">
             <div style="flex: 1">
                 <h4 id="section1" class="mg-b-10">Profit & Loss Report</h4>
@@ -50,7 +50,7 @@
     </div>
     <br>
     @if(!empty($months))
-        <div class="panel">
+        <div class="card card-body">
             <div class="row">
                 <div class="mb-3 col-12">
                     <div class="table-responsive">
@@ -75,30 +75,30 @@
                             <tr>
                                 <td>Sales</td>
                                 @foreach($data_all as $value)
-                                    <td>{{!empty($value['sale']) ? $value['sale']: '-'}}</td>
+                                    <td>{{!empty($value['sale']) ? \App\Helpers\Helper::price($value['sale']): '-'}}</td>
                                 @endforeach
-                                <td >{{$total_all['saleTotal']}}</td>
+                                <td >@price($total_all['saleTotal'])</td>
                             </tr>
                             <tr>
                                 <td>Discount</td>
                                 @foreach($data_all as $value)
-                                    <td class="tx-danger">{{!empty($value['discount']) ? $value['discount'] : '-'}}</td>
+                                    <td class="tx-danger">{{!empty($value['discount']) ? \App\Helpers\Helper::price($value['discount']) : '-'}}</td>
                                 @endforeach
-                                <td class="tx-danger">- {{$total_all['discountTotal']}}</td>
+                                <td class="tx-danger">- @price($total_all['discountTotal'])</td>
                             </tr>
                             <tr>
                                 <td>Cost of Goods</td>
                                 @foreach($data_all as $value)
-                                    <td class="tx-danger">{{!empty($value['cost']) ? $value['cost'] : '-'}}</td>
+                                    <td class="tx-danger">{{!empty($value['cost']) ? \App\Helpers\Helper::price($value['cost']) : '-'}}</td>
                                 @endforeach
-                                <td class="tx-danger">- {{$total_all['costTotal']}}</td>
+                                <td class="tx-danger">- @price($total_all['costTotal'])</td>
                             </tr>
                             <tr>
                                 <th scope="col" style="font-weight: 800"><strong>Gross Profit</strong></th>
                                 @foreach($data_all as $value)
-                                    <td class="{{$value['gross_profit'] < 0 ? 'tx-danger' :'tx-success'}}">{{!empty($value['gross_profit']) ? $value['gross_profit'] :'-'}}</td>
+                                    <td class="{{$value['gross_profit'] < 0 ? 'tx-danger' :'tx-success'}}">{{!empty($value['gross_profit']) ? \App\Helpers\Helper::price($value['gross_profit']) :'-'}}</td>
                                 @endforeach
-                                <td class="{{$total_all['grossProfitTotal'] < 0 ? 'tx-danger' :'tx-success'}}">{{$total_all['grossProfitTotal']}}</td>
+                                <td class="{{$total_all['grossProfitTotal'] < 0 ? 'tx-danger' :'tx-success'}}">@price($total_all['grossProfitTotal'])</td>
                             </tr>
                             <tr>
                                 <th>Less Expense</th>
@@ -110,16 +110,16 @@
                             <tr>
                                 <td>Expenses</td>
                                 @foreach($data_all as $value)
-                                    <td>{{!empty($value['expense']) ? $value['expense'] : '-'}}</td>
+                                    <td>{{!empty($value['expense']) ? \App\Helpers\Helper::price($value['expense']) : '-'}}</td>
                                 @endforeach
-                                <td>{{$total_all['expenseTotal']}}</td>
+                                <td>@price($total_all['expenseTotal'])</td>
                             </tr>
                             <tr>
                                 <th><strong>Expense Total</strong></th>
                                 @foreach($data_all as $value)
-                                    <td >{{!empty($value['expense']) ? $value['expense'] : '-'}}</td>
+                                    <td >{{!empty($value['expense']) ? \App\Helpers\Helper::price($value['expense']) : '-'}}</td>
                                 @endforeach
-                                <td>{{$total_all['expenseTotal']}}</td>
+                                <td>@price($total_all['expenseTotal'])</td>
                             </tr>
 
                             </tbody>
@@ -127,9 +127,9 @@
                             <tr>
                                 <th scope="col" style="font-weight: 800"><strong>Net Profit</strong></th>
                                 @foreach($data_all as $value)
-                                    <td class="{{$value['net_profit'] < 0 ? 'tx-danger' :'tx-success'}}">{{$value['net_profit']}}</td>
+                                    <td class="{{$value['net_profit'] < 0 ? 'tx-danger' :'tx-success'}}">@price($value['net_profit'])</td>
                                 @endforeach
-                                <td {{$total_all['netProfitTotal'] < 0 ? 'tx-danger' :'tx-success'}}>{{$total_all['netProfitTotal']}}</td>
+                                <td {{$total_all['netProfitTotal'] < 0 ? 'tx-danger' :'tx-success'}}>@price($total_all['netProfitTotal'])</td>
                             </tr>
                             </tfoot>
                         </table>

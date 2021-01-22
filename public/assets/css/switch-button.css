@@ -8,13 +8,13 @@
   position: relative;
   display: block;
   float: none;
-  width: 30px;
+  width: 15px;
   cursor: pointer;
 }
 [switch-button]:before {
   content: "NO";
   display: block;
-  width: 37px;
+  width: 40px;
   height: 11px;
   background: #fdfdfd;
   border: 1px solid #cecece;
@@ -75,11 +75,11 @@
 }
 [switch-button]:checked:after {
   background: #0168fa;
-  transform: translateX(22px);
-  -webkit-transform: translateX(22px);
-  -moz-transform: translateX(22px);
-  -ms-transform: translateX(22px);
-  -o-transform: translateX(22px);
+  transform: translateX(25px);
+  -webkit-transform: translateX(25px);
+  -moz-transform: translateX(25px);
+  -ms-transform: translateX(25px);
+  -o-transform: translateX(25px);
 }
 [switch-button]:focus, [switch-button]:hover {
   outline: 0 !important;

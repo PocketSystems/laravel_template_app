@@ -4,7 +4,9 @@
 namespace App\Http\Controllers\Modules\Reports;
 
 
+use App\Helpers\Helper;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\ReportModuleController;
 use App\Models\PurchaseOrders;
 use App\Models\Suppliers;
 use Illuminate\Http\Request;
@@ -12,14 +14,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use League\CommonMark\Inline\Element\Emphasis;
 
-class PurchaseOrderReport extends ModuleController
+class PurchaseOrderReport extends ReportModuleController
 {
     public $record = [];
 
     public function __construct()
     {
         parent::__construct();
-        View::share('controllerName', \request()->segment(2));
     }
 
     public function getStatus(): array
@@ -120,7 +121,9 @@ class PurchaseOrderReport extends ModuleController
                 return date('m/d/Y', strtotime($row['order_date']));
             }],
             ["data" => "supplier.name"],
-            ["data" => "grand_total"],
+            ["data" => "grand_total","onAction"=>function($row){
+                return Helper::price($row['grand_total']);
+            }],
             ["data" => "count"],
 
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {

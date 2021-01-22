@@ -4,7 +4,7 @@
 namespace App\Http\Controllers\Modules\Reports;
 
 
-use App\Http\Controllers\AuthenticatedController;
+use App\Http\Controllers\AuthenticatedReportController;
 use App\Models\Expenses;
 use App\Models\PurchaseOrders;
 use App\Models\SaleOrders;
@@ -14,12 +14,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class GeneralJournalReport extends AuthenticatedController
+class GeneralJournalReport extends AuthenticatedReportController
 {
     public function __construct()
     {
         parent::__construct();
-        View::share('controllerName', \request()->segment(2));
     }
 
     public function index()

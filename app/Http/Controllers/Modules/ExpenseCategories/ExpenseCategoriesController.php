@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Validator;
 class ExpenseCategoriesController extends ModuleController
 {
 
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setModuleName("expenseCategories");
+    }
 
     public function index()
     {

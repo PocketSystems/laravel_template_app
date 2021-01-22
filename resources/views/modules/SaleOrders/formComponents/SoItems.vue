@@ -4,7 +4,7 @@
         <input type="text" name="count" :value="count" hidden />
         <input type="text" name="grandTotal" :value="grandTotal" hidden />
         <input type="text" name="discount_total" :value="discount_total" hidden />
-        <div class="panel" style="padding-bottom: 5px;border-bottom-left-radius: unset;border-bottom-right-radius:unset ">
+        <div class="card card-body" style="padding-bottom: 5px;border-bottom-left-radius: unset;border-bottom-right-radius:unset ">
             <div style="display: flex" class="mb-3">
                 <div style="flex: 1">
                     <h4 id="section1" class="mg-b-10">Add Items</h4>

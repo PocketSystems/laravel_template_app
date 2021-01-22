@@ -3,15 +3,17 @@
 @include('layouts.partials.head')
 
 <body>
+@include('layouts.partials.sidebar')
 <div class="content ht-100v pd-0" id="app">
-    @include('layouts.partials.header')
-    @include('layouts.partials.sidebar')
 
-    <div class="content">
-        <div class="container">
-            @include('layouts.partials.breadcrum')
-            <br>
-            @yield('content')
+    <div class="content ht-100v pd-0">
+        @include('layouts.partials.header')
+        <div class="content-body">
+            <div class="container pd-x-0">
+                @include('layouts.partials.breadcrum')
+
+                @yield('content')
+            </div>
         </div>
     </div>
 </div>

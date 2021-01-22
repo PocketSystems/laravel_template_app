@@ -1,5 +1,15 @@
 <ol class="breadcrumb df-breadcrumbs mg-b-10">
-    <li class="breadcrumb-item"><a href="#">Components</a></li>
-    <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Table Basic</li>
+    @if(count(Request::segments()) > 1)
+        <?php $segments = ''; ?>
+        @foreach(Request::segments() as $index => $segment)
+            <?php $segments .= '/' . $segment; ?>
+            <li class="breadcrumb-item {{Request::segments()[count(Request::segments())-1] == $segment ? 'active' : ''}}" {{Request::segments()[count(Request::segments())-1] == $segment ? 'aria-current="page"' : ''}}>
+                @if(Request::segments()[count(Request::segments())-1] == $segment or $index == 0)
+                    {{$segment}}
+                @else
+                    <a href="{{ $segments }}">{{$segment}}</a>
+                @endif
+            </li>
+        @endforeach
+    @endif
 </ol>
