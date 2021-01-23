@@ -139,7 +139,7 @@
 
         </div>
         <table data-table="mainGrid" data-url="{{route('module.'.$moduleName.'.datatable',request()->toArray())}}"
-               data-cols='{!! base64_encode($dataTableColumns) !!}'
+               data-exportable="true" data-cols='{!! base64_encode($dataTableColumns) !!}'
                class="table table-hover">
             <thead>
             <tr>

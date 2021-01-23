@@ -155,6 +155,7 @@
         </div>
         <table data-table="mainGrid" data-url="{{route('module.'.$controllerName.'.datatable',request()->toArray())}}"
                data-cols='{!! base64_encode((!empty($dataTableColumns) ? $dataTableColumns : '')) !!}'
+               data-exportable="true"
                class="table table-hover">
             <thead>
             <tr>

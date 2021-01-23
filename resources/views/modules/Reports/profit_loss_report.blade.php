@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="mb-3 col-12">
                     <div class="table-responsive">
-                        <table class="table " id="example1">
+                        <table class="table "  data-exportable="true" id="example1">
                             <thead class="thead-primary">
                             <tr>
                                 <th scope="col" width="100px"></th>
