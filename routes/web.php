@@ -96,8 +96,7 @@ function createReportRoutes($controller,$routePath = ""){
     return Route::group(['prefix'=>'/'.$routePath,'as'=>$controller.'.'],function () use($moduleName,$controller){
         Route::get('/','Modules\\'.ucfirst($moduleName).'\\'.$controller.'@index')->name('home');
         Route::get('/get','Modules\\'.ucfirst($moduleName).'\\'.$controller.'@datatable')->name('datatable');
-        Route::get('/add','Modules\\'.ucfirst($moduleName).'\\'.$controller.'@add')->name('add');
-        Route::post('/','Modules\\'.ucfirst($moduleName).'\\'.$controller.'@search')->name('search');
+        Route::post('/','Modules\\'.ucfirst($moduleName).'\\'.$controller.'@search')->name('home.search');
     });
 }
 
@@ -108,7 +107,7 @@ function createAccountRoutes($moduleName,$routePath = ""){
         Route::get('/get','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@datatable')->name('datatable');
         Route::get('/add','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@add')->name('add');
         Route::post('/','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@create')->name('create');
-        Route::post('/search','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@search')->name('search');
+        Route::post('/search','Modules\\'.ucfirst($moduleName).'\\'.ucfirst($moduleName).'Controller@search')->name('home.search');
     });
 }
 

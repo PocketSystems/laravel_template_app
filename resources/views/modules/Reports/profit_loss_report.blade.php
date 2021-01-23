@@ -12,7 +12,7 @@
         </div>
         @include('layouts.partials.flash_message')
 
-        <form action="{{route('module.'.$controllerName.'.search')}}" method="post">
+        <form action="{{route('module.'.$controllerName.'.home.search')}}" method="post">
             @csrf
             <div class="form-row">
 

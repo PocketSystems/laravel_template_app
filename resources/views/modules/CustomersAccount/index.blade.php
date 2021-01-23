@@ -14,7 +14,7 @@
                 </a>
             </div>
         </div>
-        <form action="{{route('module.'.$moduleName.'.search')}}" method="post">
+        <form action="{{route('module.'.$moduleName.'.home.search')}}" method="post">
             @csrf
             <div class="form-row">
 

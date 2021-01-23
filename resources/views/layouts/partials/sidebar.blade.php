@@ -36,8 +36,11 @@
         <ul class="nav nav-aside">
             @foreach(config('side-menu') as $menuItem)
                 <?php
+                    $menuItem['isActive'] = false;
                     $parentClasses = ["nav-item"];
                     $routeName = \Request::route()->getName();
+                    $routeName = explode(".",$routeName);
+                    $routeName = implode(".",array_slice($routeName,0,3));
                     if(is_array($menuItem['child'])){
                         $parentClasses[] = "with-sub";
                         $checkSubItemsActive = array_search($routeName,array_map(function(array $value){
@@ -47,9 +50,9 @@
                             $parentClasses[] = "active";
                             $parentClasses[] = "show";
                         }
-
                     }elseif ($routeName == $menuItem['child']){
                         $parentClasses[] = "active";
+                        $menuItem['isActive'] = true;
                     }
                 ?>
                 <li style="cursor: pointer" class="{{implode(" ",$parentClasses)}}">
@@ -58,8 +61,21 @@
                     <ul>
                         @foreach($menuItem['child'] as $child)
                             <li class="{{$routeName == $child['child'] ? 'active' : ''}}"><a href="{{route($child['child'])}}">{{$child['title']}}</a></li>
+                            @if($routeName == $child['child'])
+                                @push('scripts')
+                                    <script>
+                                        document.title = "<?php echo $child['title'] ?> | "+document.title;
+                                    </script>
+                                @endpush
+                            @endif
                         @endforeach
                     </ul>
+                    @elseif($menuItem['isActive'])
+                        @push('scripts')
+                            <script>
+                                document.title = "<?php echo $menuItem['title'] ?> | "+document.title;
+                            </script>
+                        @endpush
                     @endif
                 </li>
             @endforeach
