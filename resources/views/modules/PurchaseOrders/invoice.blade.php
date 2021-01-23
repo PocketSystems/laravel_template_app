@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app_full')
 
 @section('content')
-    <div class="panel mb-5">
+    <div class=" mb-5">
     <div class="content tx-13" id="poOrderPrint">
         <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
             <div class="row">
@@ -45,7 +45,6 @@
                     <thead>
                     <tr>
                         <th class="wd-40p d-none d-sm-table-cell">Item</th>
-                        <th class="wd-20p tx-right">Unit Cost</th>
                         <th class="tx-right">Unit Price</th>
                         <th class="tx-right">QTY</th>
                         <th class="tx-right">Amount</th>
@@ -55,10 +54,9 @@
                     @foreach($orders as $order)
                         <tr>
                             <td  class="d-none d-sm-table-cell tx-color-03">{{$order['item']['name']}}</td>
-                            <td class="tx-right">{{$order['unit_cost']}}</td>
-                            <td class="tx-right">{{$order['unit_price']}}</td>
+                            <td class="tx-right">@price($order['unit_cost'])</td>
                             <td class="tx-right">{{$order['quantity']}}</td>
-                            <td class="tx-right">{{$order['total']}}</td>
+                            <td class="tx-right">@price($order['total'])</td>
                         </tr>
                     @endforeach
 
@@ -68,19 +66,19 @@
 
             <div class="row justify-content-between">
                 <div class="col-sm-6 col-lg-6 order-2 order-sm-0 mg-t-40 mg-sm-t-0">
-                    <label class="tx-sans tx-uppercase tx-10 tx-medium tx-spacing-1 tx-color-03">Notes</label>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
-                </div><!-- col -->
+<!--                    <label class="tx-sans tx-uppercase tx-10 tx-medium tx-spacing-1 tx-color-03">Notes</label>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>-->
+                </div>
                 <div class="col-sm-6 col-lg-4 order-1 order-sm-0">
                     <ul class="list-unstyled lh-7 pd-r-10">
 
                         <li class="d-flex justify-content-between" style="font-size:20px; ">
                             <strong>Total Amount</strong>
-                            <strong>{{ $data['grand_total'] }}</strong>
+                            <strong>@price($data['grand_total'])</strong>
                         </li>
                     </ul>
-
-                    <button onclick="PrintElem('poOrderPrint')" class="btn btn-block btn-primary">Pay Now</button>
+<!--
+                    <button onclick="PrintElem('poOrderPrint')" class="btn btn-block btn-primary">Pay Now</button>-->
                 </div><!-- col -->
             </div><!-- row -->
         </div><!-- container -->

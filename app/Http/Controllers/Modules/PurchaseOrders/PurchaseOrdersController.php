@@ -66,7 +66,7 @@ class PurchaseOrdersController extends ModuleController
 
         $data = PurchaseOrders::with('supplier')->where('id', $id)->first();
         $orders = PurchaseOrderItems::with('item')->where('purchase_order_id', $data['id']);
-        \PDF::saveFromView($this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray()]), $id." - ".date('d-m-Y').'.pdf');
+//        \PDF::saveFromView($this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray()]), $id." - ".date('d-m-Y').'.pdf');
         return $this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray()]);
     }
 
