@@ -91,4 +91,8 @@ class ProfitLossReport extends ModuleController
 
     }
 
+    protected function getModuleTable(): string
+    {
+        return  "";
+    }
 }

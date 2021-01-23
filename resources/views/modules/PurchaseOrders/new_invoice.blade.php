@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Sale Order Invoice {{date('F d Y')}}</title>
+    <title>A simple, clean, and responsive HTML invoice template</title>
 
     <style>
         .invoice-box {
@@ -62,13 +62,8 @@
             border-bottom: none;
         }
 
-        .invoice-box table tr.total td {
+        .invoice-box table tr.total td:nth-child(2) {
             border-top: 2px solid #eee;
-            font-weight: bold;
-        }
-
-        .invoice-box table tr.totalFnf td {
-            background: #eee;
             font-weight: bold;
         }
 
@@ -115,13 +110,8 @@
             div.divFooter {
                 position: fixed;
                 bottom: 0;
-                width: calc(100% - 60px);
+                width: calc( 100% - 60px);
                 text-align: center;
-            }
-
-            .invoice-box table tr.heading td {
-                background: #eee !important;
-
             }
         }
 
@@ -131,28 +121,23 @@
             }
         }
     </style>
-    <script>
-        window.onload = function (){
-            window.print()
-        }
-    </script>
 </head>
 
-<body>
+<body onload="window.print()">
 <div class="invoice-box">
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
-            <td colspan="4">
+            <td colspan="2">
                 <table>
                     <tr>
                         <td class="title">
-                            <img src="{{url($company_info['company']['logo'])}}" style="width:100%; max-width:300px;">
+                            <img src="https://www.sparksuite.com/images/logo.png" style="width:100%; max-width:300px;">
                         </td>
 
                         <td>
-                            Invoice #: {{$data['id']}}<br>
-                            Invoice Date: {{date('F d Y',strtotime($data['order_date']))}}<br>
-                            Issue Date: {{date('F d Y')}}
+                            Invoice #: 123<br>
+                            Created: January 1, 2015<br>
+                            Due: February 1, 2015
                         </td>
                     </tr>
                 </table>
@@ -160,28 +145,26 @@
         </tr>
 
         <tr class="information">
-            <td colspan="4">
+            <td colspan="2">
                 <table>
                     <tr>
                         <td>
-                            {{$data['customer']['name']}}<br>
-                            Email: {{$data['customer']['email']}}<br>
-                            Tel No: {{$data['customer']['phone']}}<br>
-                            Address: {{$data['customer']['address']}}<br>
+                            Sparksuite, Inc.<br>
+                            12345 Sunny Road<br>
+                            Sunnyville, CA 12345
                         </td>
 
                         <td>
-                            {{ucfirst($company_info['company']['name'])}}<br>
-                            {{ucfirst($company_info['name'])}}<br>
-                            {{ucfirst($company_info['company']['email'])}}<br>
-                            {{ucfirst($company_info['company']['phone'])}}
+                            Acme Corp.<br>
+                            John Doe<br>
+                            john@example.com
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
 
-<!--        <tr class="heading">
+        <tr class="heading">
             <td>
                 Payment Method
             </td>
@@ -199,69 +182,59 @@
             <td>
                 1000
             </td>
-        </tr>-->
+        </tr>
 
         <tr class="heading">
             <td>
                 Item
             </td>
 
-            <td  width="20%">
-                Unit Price
-            </td>
-            <td  width="20%" style="text-align: right">
-                Quantity
-            </td>
-            <td width="20%" style="text-align: right">
-                Total
+            <td>
+                Price
             </td>
         </tr>
-        @foreach($orders as $order)
-            <tr>
-                <td >{{$order['item']['name']}}</td>
-                <td>@price($order['unit_price'])</td>
-                <td style="text-align: right">{{$order['quantity']}}</td>
-                <td style="text-align: right">@price($order['total'])</td>
-            </tr>
-        @endforeach
 
+        <tr class="item">
+            <td>
+                Website design
+            </td>
+
+            <td>
+                $300.00
+            </td>
+        </tr>
+
+        <tr class="item">
+            <td>
+                Hosting (3 months)
+            </td>
+
+            <td>
+                $75.00
+            </td>
+        </tr>
+
+        <tr class="item last">
+            <td>
+                Domain name (1 year)
+            </td>
+
+            <td>
+                $10.00
+            </td>
+        </tr>
 
         <tr class="total">
-            <td colspan="3">Total</td>
-
-
-            <td>
-               @price($data['grand_total'])
-            </td>
-        </tr>
-        <tr class="total">
-            <td colspan="3">Balance</td>
-
+            <td></td>
 
             <td>
-                @price($balance)
+                Total: $385.00
             </td>
         </tr>
-        <tr class="totalFnf ">
-            <td colspan="3">Grand Total</td>
-
-
-            <td>
-                @price($balance+$data['grand_total'])
-            </td>
-        </tr>
-
     </table>
     <div class="divFooter" style="text-align: center">
-        <p class="center-text">Invoice Generated by PocketSystems</p>
+        <p class="center-text">Copyright 2021 &copy;. PocketSystems LTD</p>
     </div>
 </div>
-<script>
-    setTimeout(function (){
-        window.close()
-    },1000)
-</script>
 </body>
 </html>
-
-

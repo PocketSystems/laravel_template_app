@@ -90,4 +90,9 @@ class GeneralJournalReport extends ModuleController
         return $this->view('general_journal_report', $data);
 
     }
+
+    protected function getModuleTable(): string
+    {
+        return  "";
+    }
 }

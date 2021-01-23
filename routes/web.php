@@ -113,6 +113,8 @@ function createAccountRoutes($moduleName,$routePath = ""){
 
 Route::group(['prefix'=>'/','as'=>'module.'],function (){
     createRoutes('inventory');
+    createRoutes('companySettings');
+    createRoutes('profileSettings');
 });
 
 Route::group(['prefix'=>'/parties','as'=>'module.'],function () {

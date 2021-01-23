@@ -104,7 +104,13 @@ function change_status(id, link, token, elem) {
     });
 }
 
-function deleteFile(id, link, token, image) {
+function deleteFile(id, link, token, image,key = 'image') {
+
+    const params = {
+        "_token": token
+    };
+
+    params[key] = image;
 
     $.confirm({
         title: 'Delete Image?',
@@ -117,10 +123,7 @@ function deleteFile(id, link, token, image) {
                 action: function () {
                     $.ajax({
                         url: link,
-                        data: {
-                            "_token": token,
-                            "image": image
-                        },
+                        data: params,
                         type: 'DELETE',
                         success: function (result) {
                             $('#image-field').removeClass('col-md-3')

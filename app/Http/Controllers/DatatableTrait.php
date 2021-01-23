@@ -11,7 +11,6 @@ trait DatatableTrait
 {
     protected abstract function getDataTableColumns() : array;
     protected abstract function getDataTableRows() : array;
-    protected abstract function getModuleTable() : string;
 
     protected function injectDatatable(){
         View::share('dataTableColumns', json_encode($this->getDataTableColumns()));

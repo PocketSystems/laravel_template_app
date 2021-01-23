@@ -9,7 +9,7 @@
     <div class="aside-body">
         <div class="aside-loggedin">
             <div class="d-flex align-items-center justify-content-start">
-                <a href="" class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle" alt=""></a>
+                <a href="" class="avatar"><img src="{{url(Auth::user()['company']['logo'])}}" class="rounded-circle" alt=""></a>
                 <div class="aside-alert-link">
 <!--                    <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a>
                     <a href="" class="new" data-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a>-->
@@ -79,7 +79,11 @@
                     @endif
                 </li>
             @endforeach
-            <li class="nav-label mg-t-25">Contact Us</li>
+            <li class="nav-label mg-t-25">Settings</li>
+                <li class="nav-item"><a href="{{route('module.companySettings.home')}}" class="nav-link"><i data-feather="home"></i> <span>Company</span></a></li>
+                <li class="nav-item"><a href="{{route('module.profileSettings.home')}}" class="nav-link"><i data-feather="home"></i> <span>Profile</span></a></li>
+
+                <li class="nav-label mg-t-25">Contact Us</li>
             <li class="nav-item"><a href="{{route('module.inventory.home')}}" class="nav-link"><i data-feather="phone-call"></i> <span>+92 317 1015636</span></a></li>
 
 

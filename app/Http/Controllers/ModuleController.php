@@ -15,6 +15,7 @@ use Yajra\DataTables\Services\DataTable;
 
 abstract class ModuleController extends AuthenticatedController
 {
+    protected abstract function getModuleTable() : string;
     private $moduleName = null;
 
     public function __construct()
