@@ -11,8 +11,6 @@ $(function () {
         searchInputPlaceholder: 'Search options'
     })
     $('.datepicker').datepicker();
-
-
 });
 
 function createDataTable(elem) {
