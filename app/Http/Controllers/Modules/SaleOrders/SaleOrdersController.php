@@ -64,12 +64,18 @@ class SaleOrdersController extends ModuleController
         $orders = SaleOrderItems::with('item')->where('sale_order_id', $data['id']);
         return $this->view('viewOrder', ['data' => $data, 'orders' => $orders->get()->toArray()]);
     }
+
     public function invoice($id)
     {
 
         $data = SaleOrders::with('customer')->where('id', $id)->first();
+        $current_balance =  Helper::getBalance($data['customer']['id'],'customer');
+
         $orders = SaleOrderItems::with('item')->where('sale_order_id', $data['id']);
-        return $this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray()]);
+        $company_info = Auth::user()->toArray();
+
+//        \PDF::saveFromView($this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray()]), $id." - ".date('d-m-Y').'.pdf');
+        return $this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray(),'company_info'=>$company_info,'balance'=>$current_balance['balance']]);
     }
     public function status(Request $request,$id,$field = "status"): array
     {
@@ -280,9 +286,10 @@ class SaleOrdersController extends ModuleController
                 $deleteFun = "delete_row(" . $row["id"] . ",'" . route($this->mRoute('delete'), [$row["id"]]) . "','" . csrf_token() . "',this)";
                 $statusFun = "orderStatus(" . $row["id"] . ",'" . route($this->mRoute('status'), [$row["id"],'status']) . "','" . csrf_token() . "',this)";
                 $checkStatus = "" . ($row['status'] == 1 ? 'd-none' : '') . "";
+                $invoiceWindow = "window.open('".route($this->mRoute('invoice'), [$row['id']])."?print=1','popup_name','height=' + screen.height + ',width=' + screen.width + ',directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no')";
 
                 $html = '
-                    <div class="dropdown">
+                    <div class="dropdown" >
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
                       </button>
@@ -290,6 +297,7 @@ class SaleOrdersController extends ModuleController
 
                         <a href="#" class="dropdown-item '.$checkStatus.' href="#" onclick="' . $statusFun . '"><i class="fas fa-check"></i>&nbsp;&nbsp;Confirm</a>
                         <a class="dropdown-item" href="'.route($this->mRoute('viewOrder'), [$row['id']]).'"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a>
+                         <a class="dropdown-item" style="cursor: pointer" onclick="' . $invoiceWindow . '"><i class="fas fa-print"></i>&nbsp;&nbsp;Invoice</a>
                         <a class="dropdown-item '.$checkStatus.'" href="#" onclick="' . $deleteFun . '"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
                       </div>
                     </div>
