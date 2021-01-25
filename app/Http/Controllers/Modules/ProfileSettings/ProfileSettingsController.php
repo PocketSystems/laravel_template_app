@@ -9,6 +9,7 @@ use App\Http\Controllers\ModuleController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -37,14 +38,22 @@ class ProfileSettingsController extends ModuleController
 
         $cdata = $request->except('_token', '_method');
         if(empty($cdata['password'])){
+            unset($cdata['password_confirmation']);
             unset($cdata['password']);
+        }else{
+            $cdata['password'] = Hash::make($cdata['password']);
+
         }
-        unset($cdata['password_confirmation']);
 
 
         User::where('id', $cdata['id'])->update($cdata);
 
         return redirect()->route($this->mRoute('home'))->with('success', 'Profile Updated Successfully!');
 
+    }
+
+    protected function getModuleTable(): string
+    {
+        return 'users';
     }
 }

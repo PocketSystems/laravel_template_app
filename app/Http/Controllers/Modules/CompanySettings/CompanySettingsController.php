@@ -25,6 +25,9 @@ class CompanySettingsController extends ModuleController
         return $this->view('index',['data'=>$company]);
     }
 
+
+
+
     public function update(Request $request)
     {
         Validator::make($request->all(), [
@@ -52,8 +55,9 @@ class CompanySettingsController extends ModuleController
 
     }
 
+
     protected function getModuleTable(): string
     {
-        return 'company';
+       return 'company';
     }
 }

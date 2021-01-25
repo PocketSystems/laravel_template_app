@@ -80,10 +80,14 @@
                 </li>
             @endforeach
             <li class="nav-label mg-t-25">Settings</li>
-                <li class="nav-item"><a href="{{route('module.companySettings.home')}}" class="nav-link"><i data-feather="home"></i> <span>Company</span></a></li>
-                <li class="nav-item"><a href="{{route('module.profileSettings.home')}}" class="nav-link"><i data-feather="home"></i> <span>Profile</span></a></li>
+                <li class="nav-item"><a href="{{route('module.companySettings.home')}}" class="nav-link"><i data-feather="hash"></i> <span>Company</span></a></li>
+                <li class="nav-item"><a href="{{route('module.profileSettings.home')}}" class="nav-link"><i data-feather="user-check"></i> <span>Profile</span></a></li>
 
-                <li class="nav-label mg-t-25">Contact Us</li>
+            <li class="nav-label mg-t-25">Administrator</li>
+                <li class="nav-item"><a href="{{route('module.companies.home')}}" class="nav-link"><i data-feather="home"></i> <span>Companies</span></a></li>
+                <li class="nav-item"><a href="{{route('module.users.home')}}" class="nav-link"><i data-feather="home"></i> <span>Users</span></a></li>
+
+            <li class="nav-label mg-t-25">Contact Us</li>
             <li class="nav-item"><a href="{{route('module.inventory.home')}}" class="nav-link"><i data-feather="phone-call"></i> <span>+92 317 1015636</span></a></li>
 
 

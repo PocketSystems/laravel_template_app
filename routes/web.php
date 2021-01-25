@@ -115,6 +115,8 @@ Route::group(['prefix'=>'/','as'=>'module.'],function (){
     createRoutes('inventory');
     createRoutes('companySettings');
     createRoutes('profileSettings');
+    createRoutes('companies');
+    createRoutes('users');
 });
 
 Route::group(['prefix'=>'/parties','as'=>'module.'],function () {
