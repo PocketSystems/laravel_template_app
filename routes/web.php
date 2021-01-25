@@ -39,11 +39,10 @@ Route::get('/logout', 'HomeController@logout');
         Route::delete('/{id}','Modules\Vendors\VendorsController@delete')->name('delete');
     });
 });*/
-
 Route::get('storage/app/{dir}/{filename}', function ($dir,$filename)
 {
     $path = storage_path('app/'.$dir.'/' . $filename);
-
+    /*
     if (!File::exists($path)) {
         abort(404);
     }
@@ -53,10 +52,9 @@ Route::get('storage/app/{dir}/{filename}', function ($dir,$filename)
 
     $response = Response::make($file, 200);
     $response->header("Content-Type", $type);
-
-    return $response;
+    */
+    return response()->file($path);
 });
-
 
 function createRoutes($moduleName,$routePath = ""){
     $routePath = empty($routePath) ? $moduleName : $routePath;
