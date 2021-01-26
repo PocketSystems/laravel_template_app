@@ -69,7 +69,6 @@ class UsersController extends ModuleController
         $user->company_id = $request->input('company_id');
         $user->password = Hash::make($request->input('password'));
 
-
         $user->save();
         if (!empty($request->input('saveClose'))) {
             return redirect()->route($this->mRoute('home'))->with('success', 'User Created Successfully!');
@@ -93,8 +92,9 @@ class UsersController extends ModuleController
         ])->validate();
 
         $cdata = $request->except('_token', '_method');
+        unset($cdata['password_confirmation']);
+
         if(empty($cdata['password'])){
-            unset($cdata['password_confirmation']);
             unset($cdata['password']);
         }else{
             $cdata['password'] = Hash::make($cdata['password']);
