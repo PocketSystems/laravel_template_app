@@ -1,6 +1,6 @@
 <aside class="aside aside-fixed">
     <div class="aside-header">
-        <a href="../../index.html" class="aside-logo">dash<span>forge</span></a>
+        <a style="font-size: 20px" href="{{route('dashboard')}}" class="aside-logo">Pocket<span>Accounts</span></a>
         <a href="" class="aside-menu-link">
             <i data-feather="menu"></i>
             <i data-feather="x"></i>
@@ -9,7 +9,7 @@
     <div class="aside-body">
         <div class="aside-loggedin">
             <div class="d-flex align-items-center justify-content-start">
-                <a href="" class="avatar"><img src="{{url(Auth::user()['company']['logo'])}}" class="rounded-circle" alt=""></a>
+                <a href="{{route('dashboard')}}" class="avatar"><img src="{{url(Auth::user()['company']['logo'])}}" class="rounded-circle" alt=""></a>
                 <div class="aside-alert-link">
 <!--                    <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a>
                     <a href="" class="new" data-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a>-->
