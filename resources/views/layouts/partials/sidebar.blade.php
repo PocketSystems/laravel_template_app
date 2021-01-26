@@ -9,8 +9,14 @@
     <div class="aside-body">
         <div class="aside-loggedin">
             <div class="d-flex align-items-center justify-content-start">
-                <a href="{{route('dashboard')}}" class="avatar"><img src="{{url(Auth::user()['company']['logo'])}}" class="rounded-circle" alt=""></a>
-                <div class="aside-alert-link">
+                <a href="{{route('dashboard')}}" class="avatar">
+                    @if(!empty((Auth::user()['company']['logo'])))
+                    <img src="{{url(Auth::user()['company']['logo'])}}" class="rounded-circle" alt=""></a>
+                @else
+                    <img src="{{url(asset('assets/img/favicon.png'))}}" class="rounded-circle" alt=""></a>
+
+                @endif
+                    <div class="aside-alert-link">
 <!--                    <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a>
                     <a href="" class="new" data-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a>-->
 {{--                    <a href="" data-toggle="tooltip" title="Sign out"><i data-feather="log-out"></i></a>--}}
