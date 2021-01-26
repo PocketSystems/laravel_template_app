@@ -23,8 +23,9 @@
                         <th width="30%">Name</th>
                         <th width="10%">Phone</th>
                         <th width="10%">Email</th>
+                        <th width="10%">Type</th>
                         <th width="5%">Status</th>
-                        <th width="5%">Action</th>
+                        <th width="10%">Action</th>
                     </tr>
                     </thead>
                     <tbody>

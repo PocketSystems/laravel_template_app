@@ -34,14 +34,16 @@ class UsersController extends ModuleController
     }
     public function add()
     {
+        $type = config('auth.user-types');
         $companies = $this->getCompanies();
-        return $this->view('add',['companies'=>$companies]);
+        return $this->view('add',['companies'=>$companies,'types'=>$type]);
     }
     public function edit($id)
     {
+        $type = config('auth.user-types');
         $companies = $this->getCompanies();
         $data = User::where('id', $id)->first();
-        return $this->view('edit', ['data' => $data,'companies'=>$companies]);
+        return $this->view('edit', ['data' => $data,'companies'=>$companies,'types'=>$type]);
     }
 
 
@@ -113,6 +115,7 @@ class UsersController extends ModuleController
             ["data" => "name"],
             ["data" => "phone"],
             ["data" => "email"],
+            ["data" => "type"],
             ["data" => "action", "orderable" => false, "searchable" => false, "onAction" => function ($row) {
                 //delete_row('.$row["id"].','.route('module.suppliers.delete',[$row["id"]]).')
                 $statusFun = "change_status(" . $row["id"] . ",'" . route($this->mRoute('status'), [$row["id"],'status']) . "','" . csrf_token() . "',this)";

@@ -15,7 +15,7 @@
             <input type="hidden" name="_method" value="put" />
             <input type="hidden" name="id" value="{{$data['id']}}" />
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="inputEmail4">Companies <span class="tx-danger">*</span></label>
                     <select class="form-control select2  @error('company_id') is-invalid @enderror" name="company_id">
                         @foreach ($companies as $value)
@@ -26,14 +26,24 @@
                     <div class="tx-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="inputEmail4">Name <span class="tx-danger">*</span></label>
                     <input type="text" name="name" value="{{$data['name']}}" required class="form-control @error('name') is-invalid @enderror" id="inputEmail4" placeholder="Please enter user name" required>
                     @error('name')
                     <div class="tx-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Type <span class="tx-danger">*</span></label>
+                    <select class="form-control select2  @error('type') is-invalid @enderror" name="type">
+                        @foreach ($types as $value)
+                            <option value="{{$value}}" {{$data['type'] == $value ? 'selected' : ''}}>{{ucfirst($value)}}</option>
+                        @endforeach
+                    </select>
+                    @error('type')
+                    <div class="tx-danger">{{ $message }}</div>
+                    @enderror
+                </div>
 
             </div>
 

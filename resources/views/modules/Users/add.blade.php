@@ -13,7 +13,7 @@
         <form action="{{route('module.'.$moduleName.'.create')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="inputEmail4">Companies <span class="tx-danger">*</span></label>
                     <select class="form-control select2  @error('company_id') is-invalid @enderror" name="company_id" required>
                         <option label="Select Company"></option>
@@ -25,7 +25,7 @@
                     <div class="tx-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="inputEmail4">Name <span class="tx-danger">*</span></label>
                     <input type="text" name="name" value="{{old('name')}}" required class="form-control @error('name') is-invalid @enderror" id="inputEmail4" placeholder="Please enter user name">
                     @error('name')
@@ -33,7 +33,18 @@
                     @enderror
                 </div>
 
-
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Type <span class="tx-danger">*</span></label>
+                    <select class="form-control select2  @error('type') is-invalid @enderror" name="type" required>
+                        <option label="Select Company"></option>
+                        @foreach ($types as $value)
+                            <option value="{{$value}}">{{ucfirst($value)}}</option>
+                        @endforeach
+                    </select>
+                    @error('type')
+                    <div class="tx-danger">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
 
             <div class="form-row">
