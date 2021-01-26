@@ -47,9 +47,5 @@ class User extends Authenticatable
         return Company::where("id",$this->attributes['company_id'])->get()->first();
     }
 
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = Hash::make($password);
-    }
 
 }

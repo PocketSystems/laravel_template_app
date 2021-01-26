@@ -69,7 +69,6 @@ class UsersController extends ModuleController
         $user->company_id = $request->input('company_id');
         $user->password = Hash::make($request->input('password'));
 
-
         $user->save();
         if (!empty($request->input('saveClose'))) {
             return redirect()->route($this->mRoute('home'))->with('success', 'User Created Successfully!');
