@@ -93,8 +93,9 @@ class UsersController extends ModuleController
         ])->validate();
 
         $cdata = $request->except('_token', '_method');
+        unset($cdata['password_confirmation']);
+
         if(empty($cdata['password'])){
-            unset($cdata['password_confirmation']);
             unset($cdata['password']);
         }else{
             $cdata['password'] = Hash::make($cdata['password']);
