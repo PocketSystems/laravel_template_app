@@ -53,7 +53,8 @@ class UsersController extends ModuleController
             'phone' => 'required',
             'email' => 'required|string',
             'password' => 'required_with:password_confirmation|same:password_confirmation|between:8,20',
-            'password_confirmation' => 'between:8,20'
+            'password_confirmation' => 'between:8,20',
+            'type' => 'required|in:'.implode(",",config('auth.user-types')),
 
         ])->validate();
 
@@ -62,6 +63,7 @@ class UsersController extends ModuleController
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
+        $user->type = $request->input('type');
         $user->company_id = $request->input('company_id');
         $user->password = Hash::make($request->input('password'));
 
@@ -84,7 +86,8 @@ class UsersController extends ModuleController
             'phone' => 'required',
             'email' => 'required|string',
             'password' => 'required_with:password_confirmation|same:password_confirmation|sometimes|nullable|between:8,20',
-            'password_confirmation' => 'sometimes|nullable|between:8,20'
+            'password_confirmation' => 'sometimes|nullable|between:8,20',
+            'type' => 'required|in:'.implode(",",config('auth.user-types')),
         ])->validate();
 
         $cdata = $request->except('_token', '_method');
@@ -93,7 +96,6 @@ class UsersController extends ModuleController
             unset($cdata['password']);
         }else{
             $cdata['password'] = Hash::make($cdata['password']);
-
         }
 
 

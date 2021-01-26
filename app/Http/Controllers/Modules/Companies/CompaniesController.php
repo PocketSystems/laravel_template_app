@@ -8,6 +8,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -133,6 +134,23 @@ class CompaniesController extends ModuleController
     protected function getDataTableRows(): array
     {
         return Company::where('is_archive', 0)->orderBy('id', 'DESC')->get()->toArray();
+    }
+
+    public function status(Request $request, $id, $field = "status"): array
+    {
+        $users = User::where('company_id',$id)->get();
+        $company = Company::where("id",$id)->first();
+        if($company->status == 1){
+            foreach ($users as $user){
+                if($user->type !== "ADMIN" or empty($users->tokens)){
+                    continue;
+                }
+                $user->tokens->each(function($token, $key) {
+                    $token->delete();
+                });
+            }
+        }
+        return parent::status($request, $id, $field);
     }
 
 }

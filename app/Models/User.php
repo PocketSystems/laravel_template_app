@@ -44,7 +44,7 @@ class User extends Authenticatable
     ];
 
     public function getCompanyAttribute(){
-        return Company::where("id",$this->attributes['company_id'])->where("status",1)->where('is_archive',0)->get()->first();
+        return Company::where("id",$this->attributes['company_id'])->get()->first();
     }
 
     public function setPasswordAttribute($password)

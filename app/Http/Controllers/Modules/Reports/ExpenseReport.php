@@ -29,7 +29,7 @@ class ExpenseReport extends ModuleController
 
     public function getCategories(): array
     {
-        return ExpenseCategories::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
+        return ExpenseCategories::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
     }
 
     public function index()
@@ -41,26 +41,30 @@ class ExpenseReport extends ModuleController
 
     public function search(Request $request)
     {
+        $data =[];
         $categories = $this->getCategories();
         $this->injectDatatable();
         $params = \request()->all();
-        $base = Expenses::with('expense_category')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id);
+        $base = Expenses::with('expense_category')->where('is_archive', 0)->where('company_id',Auth::user()->company_id);
         $query = $this->poQuery($base, $params);
 
         $sumTotal = $query->sum('amount');
         $sumTotalGraph = json_encode($query->get(['amount'])->toArray());
         $category_amount = [];
-        $categories_amount = $query->groupBy('expense_category_id')->get(['expense_category_id'])->toArray();
-        foreach ($categories_amount as $key => $category){
-            $inner = Expenses::where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id);
-            $inner = $this->poQuery($inner, $params);
-            $amount = $inner->where('expense_category_id',$category['expense_category_id']);
+        if(empty($params['category_id'])){
+            $categories_amount = $query->groupBy('expense_category_id')->get(['expense_category_id'])->toArray();
+            foreach ($categories_amount as $key => $category){
+                $inner = Expenses::where('is_archive', 0)->where('company_id',Auth::user()->company_id);
+                $inner = $this->poQuery($inner, $params);
+                $amount = $inner->where('expense_category_id',$category['expense_category_id']);
 
-            $total = $amount->sum('amount');
-            $category_amount[$key]['category']=$category['expense_category']['name'];
-            $category_amount[$key]['amount']=$total;
+                $total = $amount->sum('amount');
+                $category_amount[$key]['category']=$category['expense_category']['name'];
+                $category_amount[$key]['amount']=$total;
 
+            }
         }
+
 
 //        $sumItems = $query->sum('count');
 //        $sumCountGraph = json_encode($query->get(['count'])->toArray());
@@ -100,7 +104,7 @@ class ExpenseReport extends ModuleController
         }
 
         if (!empty($params['category_id'])) {
-            $query = $query->where('category_id', $params['category_id']);
+            $query = $query->where('expense_category_id', $params['category_id']);
         }
         return $query;
     }
@@ -109,7 +113,7 @@ class ExpenseReport extends ModuleController
     {
         $params = \request()->all();
         if (!empty($params['_token'])) {
-            $base = Expenses::with('expense_category')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
+            $base = Expenses::with('expense_category')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
             $query = $this->poQuery($base, $params);
             return $query->get()->toArray();
         } else {

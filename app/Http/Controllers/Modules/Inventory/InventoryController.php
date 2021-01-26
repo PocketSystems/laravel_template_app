@@ -36,7 +36,7 @@ class InventoryController extends ModuleController
     {
 
         return Items::where('is_archive', 0)
-            ->where('user_id',Auth::user()->id)
+
             ->where('company_id',Auth::user()->company_id)
             ->orderBy('id', 'DESC')
             ->get()

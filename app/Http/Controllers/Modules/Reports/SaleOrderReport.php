@@ -38,7 +38,7 @@ class SaleOrderReport extends ModuleController
 
     public function getCustomers(): array
     {
-        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
+        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
     }
 
     public function index()
@@ -56,7 +56,7 @@ class SaleOrderReport extends ModuleController
         $customers = $this->getCustomers();
         $this->injectDatatable();
         $params = \request()->all();
-        $base = SaleOrders::with('customer')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id);
+        $base = SaleOrders::with('customer')->where('is_archive', 0)->where('company_id',Auth::user()->company_id);
         $query = $this->poQuery($base, $params);
 
         $sumTotal = $query->sum('grand_total');
@@ -107,7 +107,7 @@ class SaleOrderReport extends ModuleController
     {
         $params = \request()->all();
         if (!empty($params['_token'])) {
-            $base = SaleOrders::with('customer')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('order_date', 'ASC');
+            $base = SaleOrders::with('customer')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('order_date', 'ASC');
             $query = $this->poQuery($base, $params);
             return $query->get()->toArray();
         } else {

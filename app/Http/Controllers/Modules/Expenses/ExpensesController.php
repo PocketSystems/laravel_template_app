@@ -37,7 +37,7 @@ class ExpensesController extends ModuleController
         return $this->view('index');
     }
     public function getCategories():array{
-        return ExpenseCategories::select('name','id')->where('status','=',1)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get()->toArray();
+        return ExpenseCategories::select('name','id')->where('status','=',1)->where('company_id',Auth::user()->company_id)->get()->toArray();
     }
     public function add()
     {
@@ -135,7 +135,7 @@ class ExpensesController extends ModuleController
     }
     protected function getDataTableRows(): array
     {
-        return Expenses::with('expense_category')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
+        return Expenses::with('expense_category')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
 

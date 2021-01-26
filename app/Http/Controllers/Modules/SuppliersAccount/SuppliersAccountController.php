@@ -24,7 +24,7 @@ class SuppliersAccountController extends ModuleController
     }
     public function getSupplier(): array
     {
-        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get()->toArray();
+        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get()->toArray();
 
     }
     public function getMode(): array
@@ -90,12 +90,12 @@ class SuppliersAccountController extends ModuleController
 
         $params = \request()->all();
         if(!empty($params)) {
-            $purchaseBase = Ledger::where('type', 'purchase')->where('nature', 'supplier')->where('is_archive', 0)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id);
+            $purchaseBase = Ledger::where('type', 'purchase')->where('nature', 'supplier')->where('is_archive', 0)->where('company_id', Auth::user()->company_id);
             $purchaseQuery = $this->poQuery($purchaseBase, $params);
             $purchase = $purchaseQuery->sum('amount');
             $purchaseTotalGraph = json_encode($purchaseQuery->get(['amount'])->toArray());
 
-            $paidBase = Ledger::where('type', 'payment')->where('nature', 'supplier')->where('is_archive', 0)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id);
+            $paidBase = Ledger::where('type', 'payment')->where('nature', 'supplier')->where('is_archive', 0)->where('company_id', Auth::user()->company_id);
             $paidQuery = $this->poQuery($paidBase, $params);
             $paid = $paidQuery->sum('amount');
             $paidTotalGraph = json_encode($paidQuery->get(['amount'])->toArray());
@@ -138,7 +138,7 @@ class SuppliersAccountController extends ModuleController
     {
         $params = \request()->all();
         if (!empty($params['_token'])) {
-            $base = Ledger::where('nature','supplier')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
+            $base = Ledger::where('nature','supplier')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
             $query = $this->poQuery($base, $params);
             return $query->get()->toArray();
         } else {

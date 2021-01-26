@@ -35,7 +35,7 @@ class SaleOrdersController extends ModuleController
     }
     public function getCustomers(): array
     {
-        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
+        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
 
     }
     public function getItems(): array
@@ -256,7 +256,7 @@ class SaleOrdersController extends ModuleController
     protected function getDataTableRows(): array
     {
 
-        return SaleOrders::with('customer')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
+        return SaleOrders::with('customer')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
     protected function getDataTableColumns(): array

@@ -31,7 +31,7 @@ class PurchaseOrdersController extends ModuleController
 
     public function getSuppliers(): array
     {
-        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
+        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
 
     }
 
@@ -214,7 +214,7 @@ class PurchaseOrdersController extends ModuleController
     protected function getDataTableRows(): array
     {
 
-        return PurchaseOrders::with('supplier')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
+        return PurchaseOrders::with('supplier')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
     protected function getDataTableColumns(): array

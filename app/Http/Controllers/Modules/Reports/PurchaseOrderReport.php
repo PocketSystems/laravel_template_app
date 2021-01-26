@@ -37,7 +37,7 @@ class PurchaseOrderReport extends ModuleController
 
     public function getSuppliers(): array
     {
-        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
+        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
     }
 
     public function index()
@@ -54,7 +54,7 @@ class PurchaseOrderReport extends ModuleController
         $suppliers = $this->getSuppliers();
         $this->injectDatatable();
         $params = \request()->all();
-        $base = PurchaseOrders::with('supplier')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id);
+        $base = PurchaseOrders::with('supplier')->where('is_archive', 0)->where('company_id',Auth::user()->company_id);
         $query = $this->poQuery($base, $params);
 
         $sumTotal = $query->sum('grand_cost_total');
@@ -111,7 +111,7 @@ class PurchaseOrderReport extends ModuleController
     {
         $params = \request()->all();
         if (!empty($params['_token'])) {
-            $base = PurchaseOrders::with('supplier')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
+            $base = PurchaseOrders::with('supplier')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
             $query = $this->poQuery($base, $params);
             return $query->get()->toArray();
         } else {

@@ -141,7 +141,7 @@ class ItemsController extends ModuleController
     }
     protected function getDataTableRows(): array
     {
-        return Items::with('category')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
+        return Items::with('category')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
 }
