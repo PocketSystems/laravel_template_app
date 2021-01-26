@@ -41,10 +41,10 @@ function createDataTable(elem) {
     if(isExportable === 'true'){
         configs['buttons'] =  [
             { extend: 'excel', title: document.title},
-            { extend: 'pdf' ,title: 'Data export'},
-            { extend: 'print' ,title: 'Data export'},
-            { extend: 'copy' ,title: 'Data export'},
-            { extend: 'csv' ,title: 'Data export'},
+            { extend: 'pdf' ,title: document.title},
+            { extend: 'print' ,title: document.title},
+            { extend: 'copy' ,title: document.title},
+            { extend: 'csv' ,title: document.title},
 
         ];
         configs['dom'] = 'lfBrtip';
