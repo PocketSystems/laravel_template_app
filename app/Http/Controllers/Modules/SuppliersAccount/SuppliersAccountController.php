@@ -4,18 +4,18 @@
 namespace App\Http\Controllers\Modules\SuppliersAccount;
 
 use App\Helpers\Helper;
-use App\Http\Controllers\AuthenticatedController;
-
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
 use App\Models\Ledger;
 use App\Models\Suppliers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
 
 class SuppliersAccountController extends ModuleController
 {
+    use DatatableTrait;
+
     public function __construct()
     {
         parent::__construct();
@@ -24,7 +24,7 @@ class SuppliersAccountController extends ModuleController
     }
     public function getSupplier(): array
     {
-        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get()->toArray();
+        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get()->toArray();
 
     }
     public function getMode(): array
@@ -38,13 +38,13 @@ class SuppliersAccountController extends ModuleController
 
         $suppliers = $this->getSupplier();
         $mode = $this->getMode();
-        return view('modules.suppliersAccount.index',['suppliers'=>$suppliers,'mode'=>$mode]);
+        return $this->view('index',['suppliers'=>$suppliers,'mode'=>$mode]);
     }
     public function add()
     {
         $customers = $this->getSupplier();
         $mode = $this->getMode();
-        return view('modules.suppliersAccount.add',['suppliers'=>$customers,'mode'=>$mode]);
+        return $this->view('add',['suppliers'=>$customers,'mode'=>$mode]);
     }
     public function create(Request $request)
     {
@@ -71,9 +71,9 @@ class SuppliersAccountController extends ModuleController
         $ledger->company_id = Auth::user()->company_id;
         $ledger->save();
         if (!empty($request->input('saveClose'))) {
-            return redirect()->route('module.suppliersAccount.home')->with('success', 'Payments Added Successfully!');
+            return redirect()->route($this->mRoute('home'))->with('success', 'Payments Added Successfully!');
         } else {
-            return redirect()->route('module.suppliersAccount.home')->with('success', 'Payments Added Successfully!');
+            return redirect()->route('home')->with('success', 'Payments Added Successfully!');
         }
 
     }
@@ -90,12 +90,12 @@ class SuppliersAccountController extends ModuleController
 
         $params = \request()->all();
         if(!empty($params)) {
-            $purchaseBase = Ledger::where('type', 'purchase')->where('nature', 'supplier')->where('is_archive', 0)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id);
+            $purchaseBase = Ledger::where('type', 'purchase')->where('nature', 'supplier')->where('is_archive', 0)->where('company_id', Auth::user()->company_id);
             $purchaseQuery = $this->poQuery($purchaseBase, $params);
             $purchase = $purchaseQuery->sum('amount');
             $purchaseTotalGraph = json_encode($purchaseQuery->get(['amount'])->toArray());
 
-            $paidBase = Ledger::where('type', 'payment')->where('nature', 'supplier')->where('is_archive', 0)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id);
+            $paidBase = Ledger::where('type', 'payment')->where('nature', 'supplier')->where('is_archive', 0)->where('company_id', Auth::user()->company_id);
             $paidQuery = $this->poQuery($paidBase, $params);
             $paid = $paidQuery->sum('amount');
             $paidTotalGraph = json_encode($paidQuery->get(['amount'])->toArray());
@@ -138,7 +138,7 @@ class SuppliersAccountController extends ModuleController
     {
         $params = \request()->all();
         if (!empty($params['_token'])) {
-            $base = Ledger::where('nature','supplier')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
+            $base = Ledger::where('nature','supplier')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
             $query = $this->poQuery($base, $params);
             return $query->get()->toArray();
         } else {

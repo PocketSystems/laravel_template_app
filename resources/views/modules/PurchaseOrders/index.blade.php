@@ -24,7 +24,7 @@
                         <th width="10%">Total</th>
                         <th width="5%">Items</th>
                         <th width="5%">Status</th>
-                        <th width="5%">Options</th>
+                        <th width="10%">Options</th>
                     </tr>
                     </thead>
                     <tbody>

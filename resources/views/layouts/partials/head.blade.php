@@ -33,7 +33,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.png')}}">
 
-    <title>Pocket Accounting</title>
+    <title>{{env('APP_NAME')}}</title>
 
     <!-- vendor css -->
     <link href="{{asset('assets/lib/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">

@@ -11,8 +11,6 @@ $(function () {
         searchInputPlaceholder: 'Search options'
     })
     $('.datepicker').datepicker();
-
-
 });
 
 function createDataTable(elem) {
@@ -22,18 +20,13 @@ function createDataTable(elem) {
     let id = $(elem).attr("data-table")
     let dataUrl = $(elem).attr("data-url")
     let columns = $(elem).attr("data-cols")
-    window.dt[id] = $(elem).DataTable({
+    let isExportable = $(elem).attr("data-exportable")
+
+    const configs = {
         processing: true,
         serverSide: true,
         'ajax': dataUrl,
         "columns": JSON.parse(atob(columns)),
-        dom: 'lfBrtip',
-        buttons: [
-            { extend: 'excel', title: document.title},
-            { extend: 'pdf' ,title: 'Data export'},
-            { extend: 'print' ,title: 'Data export'},
-
-        ],
         responsive: true,
         order: [[0, "desc"]],
         language: {
@@ -43,7 +36,20 @@ function createDataTable(elem) {
         },
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
 
-    });
+    };
+
+    if(isExportable === 'true'){
+        configs['buttons'] =  [
+            { extend: 'excel', title: document.title},
+            { extend: 'pdf' ,title: document.title},
+            { extend: 'print' ,title: document.title},
+            { extend: 'copy' ,title: document.title},
+            { extend: 'csv' ,title: document.title},
+
+        ];
+        configs['dom'] = 'lfBrtip';
+    }
+    window.dt[id] = $(elem).DataTable(configs);
 
     setTimeout(() => {
         $('.dataTables_wrapper select').attr('class', 'form-control')
@@ -98,7 +104,13 @@ function change_status(id, link, token, elem) {
     });
 }
 
-function deleteFile(id, link, token, image) {
+function deleteFile(id, link, token, image,key = 'image') {
+
+    const params = {
+        "_token": token
+    };
+
+    params[key] = image;
 
     $.confirm({
         title: 'Delete Image?',
@@ -111,10 +123,7 @@ function deleteFile(id, link, token, image) {
                 action: function () {
                     $.ajax({
                         url: link,
-                        data: {
-                            "_token": token,
-                            "image": image
-                        },
+                        data: params,
                         type: 'DELETE',
                         success: function (result) {
                             $('#image-field').removeClass('col-md-3')

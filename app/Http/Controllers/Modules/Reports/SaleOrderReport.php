@@ -5,23 +5,29 @@ namespace App\Http\Controllers\Modules\Reports;
 
 
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
-use App\Http\Controllers\ReportModuleController;
+use App\Http\Controllers\SubModuleTrait;
 use App\Models\Customers;
-use App\Models\PurchaseOrders;
 use App\Models\SaleOrders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
-use League\CommonMark\Inline\Element\Emphasis;
 
-class SaleOrderReport extends ReportModuleController
+class SaleOrderReport extends ModuleController
 {
+
+    use DatatableTrait;
+    use SubModuleTrait{
+        SubModuleTrait::__construct as subModuleConstructor;
+    }
+
     public $record = [];
 
     public function __construct()
     {
         parent::__construct();
+        $this->subModuleConstructor();
+        $this->setModuleName("reports");
     }
 
     public function getStatus(): array
@@ -32,7 +38,7 @@ class SaleOrderReport extends ReportModuleController
 
     public function getCustomers(): array
     {
-        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
+        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
     }
 
     public function index()
@@ -41,7 +47,7 @@ class SaleOrderReport extends ReportModuleController
         $status = $this->getStatus();
         $customers = $this->getCustomers();
         $this->injectDatatable();
-        return view('modules.reports.sale_order_report', ['status' => $status, 'customers' => $customers]);
+        return $this->view('sale_order_report', ['status' => $status, 'customers' => $customers]);
     }
 
     public function search(Request $request)
@@ -50,7 +56,7 @@ class SaleOrderReport extends ReportModuleController
         $customers = $this->getCustomers();
         $this->injectDatatable();
         $params = \request()->all();
-        $base = SaleOrders::with('customer')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id);
+        $base = SaleOrders::with('customer')->where('is_archive', 0)->where('company_id',Auth::user()->company_id);
         $query = $this->poQuery($base, $params);
 
         $sumTotal = $query->sum('grand_total');
@@ -73,7 +79,7 @@ class SaleOrderReport extends ReportModuleController
             'cItem' => $cItem,
             'pItem' => $pItem
         ];
-        return view('modules.reports.sale_order_report', $data);
+        return $this->view('sale_order_report', $data);
     }
 
     public function poQuery($query, $params, $status = null)
@@ -101,7 +107,7 @@ class SaleOrderReport extends ReportModuleController
     {
         $params = \request()->all();
         if (!empty($params['_token'])) {
-            $base = SaleOrders::with('customer')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('order_date', 'ASC');
+            $base = SaleOrders::with('customer')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('order_date', 'ASC');
             $query = $this->poQuery($base, $params);
             return $query->get()->toArray();
         } else {

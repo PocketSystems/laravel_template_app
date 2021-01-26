@@ -14,7 +14,7 @@
                 </a>
             </div>
         </div>
-        <form action="{{route('module.'.$moduleName.'.search')}}" method="post">
+        <form action="{{route('module.'.$moduleName.'.home.search')}}" method="post">
             @csrf
             <div class="form-row">
 
@@ -139,7 +139,7 @@
 
         </div>
         <table data-table="mainGrid" data-url="{{route('module.'.$moduleName.'.datatable',request()->toArray())}}"
-               data-cols='{!! base64_encode($dataTableColumns) !!}'
+               data-exportable="true" data-cols='{!! base64_encode($dataTableColumns) !!}'
                class="table table-hover">
             <thead>
             <tr>

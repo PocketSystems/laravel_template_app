@@ -1,90 +1,246 @@
-@extends('layouts.app')
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Purchase Order Invoice {{date('F d Y')}}</title>
 
-@section('content')
-    <div class="panel mb-5">
-    <div class="content tx-13" id="poOrderPrint">
-        <div class="container pd-x-0 pd-lg-x-10 pd-xl-x-0">
-            <div class="row">
-                <div class="col-sm-6">
-                    <label class="tx-sans tx-uppercase tx-10 tx-medium tx-spacing-1 tx-color-03">Supplier Information</label>
-                    <h6 class="tx-15 mg-b-10">{{$data['supplier']['name']}}</h6>
-                    <p class="mg-b-0">Email: {{$data['supplier']['email']}}</p>
-                    <p class="mg-b-0">Tel No: {{$data['supplier']['phone']}}</p>
-                </div><!-- col -->
-                <div class="col-sm-6 tx-right d-none d-md-block">
-                    <label class="tx-sans tx-uppercase tx-10 tx-medium tx-spacing-1 tx-color-03">Invoice Number</label>
-                    <h1 class="tx-normal tx-color-04 mg-b-10 tx-spacing--2">#{{$data['id']}}</h1>
-                </div><!-- col -->
-                <div class="col-sm-6 col-lg-8 mg-t-40 mg-sm-t-0 mg-md-t-40">
-                    <label class="tx-sans tx-uppercase tx-10 tx-medium tx-spacing-1 tx-color-03">Supplier Address</label>
-                    <p class="mg-b-0">{{$data['supplier']['address']}}</p>
+    <style>
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
 
-                </div><!-- col -->
-                <div class="col-sm-6 col-lg-4 mg-t-40">
-                    <label class="tx-sans tx-uppercase tx-10 tx-medium tx-spacing-1 tx-color-03">Invoice Information</label>
-                    <ul class="list-unstyled lh-7">
-                        <li class="d-flex justify-content-between">
-                            <span>Purchase Order Number</span>
-                            <span>#{{$data['id']}}</span>
-                        </li>
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
 
-                        <li class="d-flex justify-content-between">
-                            <span>Issue Date</span>
-                            <span>{{date('m/d/Y',strtotime($data['order_date']))}}</span>
-                        </li>
-                        <li class="d-flex justify-content-between">
-                            <span>Order Status</span>
-                            <span> {{$data['status'] == 1 ? 'Confirmed' :'Pending' }}</span>
-                        </li>
-                    </ul>
-                </div><!-- col -->
-            </div><!-- row -->
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
 
-            <div class="table-responsive mg-t-40">
-                <table class="table table-invoice bd-b">
-                    <thead>
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .invoice-box table tr.totalFnf td {
+            background: #eee;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .rtl table {
+            text-align: right;
+        }
+
+        .rtl table tr td:nth-child(2) {
+            text-align: left;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+            html, body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            /* ... the rest of the rules ... */
+            div.divFooter {
+                position: fixed;
+                bottom: 0;
+                width: calc(100% - 60px);
+                text-align: center;
+            }
+
+            .invoice-box table tr.heading td {
+                background: #eee !important;
+
+            }
+        }
+
+        @media screen {
+            div.divFooter {
+                display: none;
+            }
+        }
+    </style>
+    <script>
+        window.onload = function (){
+            window.print()
+        }
+    </script>
+</head>
+
+<body>
+<div class="invoice-box">
+    <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+            <td colspan="4">
+                <table>
                     <tr>
-                        <th class="wd-40p d-none d-sm-table-cell">Item</th>
-                        <th class="wd-20p tx-right">Unit Cost</th>
-                        <th class="tx-right">Unit Price</th>
-                        <th class="tx-right">QTY</th>
-                        <th class="tx-right">Amount</th>
+                        <td class="title">
+
+                            <img src="{{url($company_info['company']['logo'])}}" style="width:100%; max-width:300px;">
+                        </td>
+
+                        <td>
+                            Invoice #: {{$data['id']}}<br>
+                            Invoice Date: {{date('F d Y',strtotime($data['order_date']))}}<br>
+                            Issue Date: {{date('F d Y')}}
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($orders as $order)
-                        <tr>
-                            <td  class="d-none d-sm-table-cell tx-color-03">{{$order['item']['name']}}</td>
-                            <td class="tx-right">{{$order['unit_cost']}}</td>
-                            <td class="tx-right">{{$order['unit_price']}}</td>
-                            <td class="tx-right">{{$order['quantity']}}</td>
-                            <td class="tx-right">{{$order['total']}}</td>
-                        </tr>
-                    @endforeach
-
-                    </tbody>
                 </table>
-            </div>
+            </td>
+        </tr>
 
-            <div class="row justify-content-between">
-                <div class="col-sm-6 col-lg-6 order-2 order-sm-0 mg-t-40 mg-sm-t-0">
-                    <label class="tx-sans tx-uppercase tx-10 tx-medium tx-spacing-1 tx-color-03">Notes</label>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
-                </div><!-- col -->
-                <div class="col-sm-6 col-lg-4 order-1 order-sm-0">
-                    <ul class="list-unstyled lh-7 pd-r-10">
+        <tr class="information">
+            <td colspan="4">
+                <table>
+                    <tr>
+                        <td>
+                            {{$data['supplier']['name']}}<br>
+                            Email: {{$data['supplier']['email']}}<br>
+                            Tel No: {{$data['supplier']['phone']}}<br>
+                            Address: {{$data['supplier']['address']}}<br>
+                        </td>
 
-                        <li class="d-flex justify-content-between" style="font-size:20px; ">
-                            <strong>Total Amount</strong>
-                            <strong>{{ $data['grand_total'] }}</strong>
-                        </li>
-                    </ul>
+                        <td>
+                            {{ucfirst($company_info['company']['name'])}}<br>
+                            {{ucfirst($company_info['name'])}}<br>
+                            {{ucfirst($company_info['company']['email'])}}<br>
+                            {{ucfirst($company_info['company']['phone'])}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
 
-                    <button onclick="PrintElem('poOrderPrint')" class="btn btn-block btn-primary">Pay Now</button>
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container -->
+<!--        <tr class="heading">
+            <td>
+                Payment Method
+            </td>
+
+            <td>
+                Check #
+            </td>
+        </tr>
+
+        <tr class="details">
+            <td>
+                Check
+            </td>
+
+            <td>
+                1000
+            </td>
+        </tr>-->
+
+        <tr class="heading">
+            <td>
+                Item
+            </td>
+
+            <td  width="20%">
+                Unit Price
+            </td>
+            <td  width="20%" style="text-align: right">
+                Quantity
+            </td>
+            <td width="20%" style="text-align: right">
+                Total
+            </td>
+        </tr>
+        @foreach($orders as $order)
+            <tr>
+                <td >{{$order['item']['name']}}</td>
+                <td>@price($order['unit_cost'])</td>
+                <td style="text-align: right">{{$order['quantity']}}</td>
+                <td style="text-align: right">@price($order['total'])</td>
+            </tr>
+        @endforeach
+
+
+        <tr class="totalFnf">
+            <td colspan="3">Total</td>
+
+
+            <td>
+                @price($data['grand_total'])
+            </td>
+        </tr>
+    </table>
+    <div class="divFooter" style="text-align: center">
+        <p class="center-text">Invoice Generated by PocketSystems</p>
     </div>
-    </div>
+</div>
+<script>
+    setTimeout(function (){
+        window.close()
+    },1000)
+</script>
+</body>
+</html>
 
-@endsection
+

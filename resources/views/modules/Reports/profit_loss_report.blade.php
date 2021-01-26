@@ -12,7 +12,7 @@
         </div>
         @include('layouts.partials.flash_message')
 
-        <form action="{{route('module.'.$controllerName.'.search')}}" method="post">
+        <form action="{{route('module.'.$controllerName.'.home.search')}}" method="post">
             @csrf
             <div class="form-row">
 
@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="mb-3 col-12">
                     <div class="table-responsive">
-                        <table class="table " id="example1">
+                        <table class="table "  data-exportable="true" id="example1">
                             <thead class="thead-primary">
                             <tr>
                                 <th scope="col" width="100px"></th>
@@ -87,7 +87,7 @@
                                 <td class="tx-danger">- @price($total_all['discountTotal'])</td>
                             </tr>
                             <tr>
-                                <td>Cost of Goods</td>
+                                <td>Purchase Cost</td>
                                 @foreach($data_all as $value)
                                     <td class="tx-danger">{{!empty($value['cost']) ? \App\Helpers\Helper::price($value['cost']) : '-'}}</td>
                                 @endforeach
@@ -175,9 +175,11 @@
                 "info":     false,
                 dom: 'lBrtip',
                 buttons: [
-                    { extend: 'excel', title: document.title},
-                    { extend: 'pdf' ,title: 'Data export'},
-                    { extend: 'print' ,title: 'Data export'},
+                    { extend: 'excel', title: 'Profit_and_loss'},
+                    { extend: 'pdf' ,title: 'Profit_and_loss'},
+                    { extend: 'print' ,title: 'Profit_and_loss'},
+                    { extend: 'copy' ,title: 'Profit_and_loss'},
+                    { extend: 'csv' ,title: 'Profit_and_loss'},
 
                 ],
 

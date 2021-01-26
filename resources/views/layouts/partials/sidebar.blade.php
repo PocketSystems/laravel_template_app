@@ -1,6 +1,6 @@
 <aside class="aside aside-fixed">
     <div class="aside-header">
-        <a href="../../index.html" class="aside-logo">dash<span>forge</span></a>
+        <a style="font-size: 20px" href="{{route('dashboard')}}" class="aside-logo">Pocket<span>Accounts</span></a>
         <a href="" class="aside-menu-link">
             <i data-feather="menu"></i>
             <i data-feather="x"></i>
@@ -9,7 +9,7 @@
     <div class="aside-body">
         <div class="aside-loggedin">
             <div class="d-flex align-items-center justify-content-start">
-                <a href="" class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle" alt=""></a>
+                <a href="{{route('dashboard')}}" class="avatar"><img src="{{url(Auth::user()['company']['logo'])}}" class="rounded-circle" alt=""></a>
                 <div class="aside-alert-link">
 <!--                    <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a>
                     <a href="" class="new" data-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a>-->
@@ -36,8 +36,11 @@
         <ul class="nav nav-aside">
             @foreach(config('side-menu') as $menuItem)
                 <?php
+                    $menuItem['isActive'] = false;
                     $parentClasses = ["nav-item"];
                     $routeName = \Request::route()->getName();
+                    $routeName = explode(".",$routeName);
+                    $routeName = implode(".",array_slice($routeName,0,3));
                     if(is_array($menuItem['child'])){
                         $parentClasses[] = "with-sub";
                         $checkSubItemsActive = array_search($routeName,array_map(function(array $value){
@@ -47,9 +50,9 @@
                             $parentClasses[] = "active";
                             $parentClasses[] = "show";
                         }
-
                     }elseif ($routeName == $menuItem['child']){
                         $parentClasses[] = "active";
+                        $menuItem['isActive'] = true;
                     }
                 ?>
                 <li style="cursor: pointer" class="{{implode(" ",$parentClasses)}}">
@@ -58,11 +61,42 @@
                     <ul>
                         @foreach($menuItem['child'] as $child)
                             <li class="{{$routeName == $child['child'] ? 'active' : ''}}"><a href="{{route($child['child'])}}">{{$child['title']}}</a></li>
+                            @if($routeName == $child['child'])
+                                @push('scripts')
+                                    <script>
+                                        document.title = "<?php echo $child['title'] ?> | "+document.title;
+                                    </script>
+                                @endpush
+                            @endif
                         @endforeach
                     </ul>
+                    @elseif($menuItem['isActive'])
+                        @push('scripts')
+                            <script>
+                                document.title = "<?php echo $menuItem['title'] ?> | "+document.title;
+                            </script>
+                        @endpush
                     @endif
                 </li>
             @endforeach
+
+            <li class="nav-label mg-t-25">Settings</li>
+            @company
+            <li class="nav-item"><a href="{{route('module.companySettings.home')}}" class="nav-link"><i data-feather="hash"></i> <span>Company</span></a></li>
+            @endcompany
+
+            @admin
+            <li class="nav-item"><a href="{{route('module.companySettings.home')}}" class="nav-link"><i data-feather="hash"></i> <span>Company</span></a></li>
+            @endadmin
+
+            <li class="nav-item"><a href="{{route('module.profileSettings.home')}}" class="nav-link"><i data-feather="user-check"></i> <span>Profile</span></a></li>
+
+            @admin
+            <li class="nav-label mg-t-25">Administrator</li>
+            <li class="nav-item"><a href="{{route('module.companies.home')}}" class="nav-link"><i data-feather="home"></i> <span>Companies</span></a></li>
+            <li class="nav-item"><a href="{{route('module.users.home')}}" class="nav-link"><i data-feather="home"></i> <span>Users</span></a></li>
+            @endadmin
+
             <li class="nav-label mg-t-25">Contact Us</li>
             <li class="nav-item"><a href="{{route('module.inventory.home')}}" class="nav-link"><i data-feather="phone-call"></i> <span>+92 317 1015636</span></a></li>
 

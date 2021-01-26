@@ -3,8 +3,9 @@
 
 namespace App\Http\Controllers\Modules\Customers;
 
-use App\Http\Controllers\ModuleController;
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
+use App\Http\Controllers\ModuleController;
 use App\Models\Customers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\View;
 
 class CustomersController extends ModuleController
 {
+    use DatatableTrait;
+
     public function __construct()
     {
         parent::__construct();
@@ -94,7 +97,7 @@ class CustomersController extends ModuleController
 
     protected function getDataTableRows(): array
     {
-        return Customers::where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
+        return Customers::where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
 

@@ -27,9 +27,9 @@
                         <div class="d-flex justify-content-between mg-b-5">
                             <label class="mg-b-0-f">Password</label>
                             @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                               {{-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
-                                </a>
+                                </a>--}}
                             @endif
                         </div>
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">

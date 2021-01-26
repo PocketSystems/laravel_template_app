@@ -3,7 +3,8 @@
 
 namespace App\Http\Controllers\Modules\Reports;
 
-use App\Http\Controllers\AuthenticatedReportController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\SubModuleTrait;
 use App\Models\Expenses;
 use App\Models\PurchaseOrders;
 use App\Models\SaleOrders;
@@ -13,17 +14,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class ProfitLossReport extends AuthenticatedReportController
+class ProfitLossReport extends ModuleController
 {
+
+    use SubModuleTrait{
+        SubModuleTrait::__construct as subModuleConstructor;
+    }
 
     public function __construct()
     {
         parent::__construct();
+        $this->subModuleConstructor();
+        $this->setModuleName("reports");
     }
 
     public function index()
     {
-        return view('modules.reports.profit_loss_report');
+        return $this->view('profit_loss_report');
     }
 
     public function search(Request $request)
@@ -58,10 +65,10 @@ class ProfitLossReport extends AuthenticatedReportController
             /*          echo Carbon::parse($dt)->month.'<br>';*/
             /*     echo $dt.'<br>';
                  echo $dt->format("Y-m").'<br>';*/
-            $data_all[$key]['sale'] = SaleOrders::where('is_archive', 0)->where('status', 1)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->whereYear('order_date', Carbon::parse($dt)->year)->whereMonth('order_date', Carbon::parse($dt)->month)->sum('grand_total');
-            $data_all[$key]['discount'] = SaleOrders::where('is_archive', 0)->where('status', 1)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->whereYear('order_date', Carbon::parse($dt)->year)->whereMonth('order_date', Carbon::parse($dt)->month)->sum('discount_total');
-            $data_all[$key]['cost'] = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->whereYear('order_date', Carbon::parse($dt)->year)->whereMonth('order_date', Carbon::parse($dt)->month)->sum('grand_cost_total');
-            $data_all[$key]['expense'] = Expenses::where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->whereYear('expense_date', Carbon::parse($dt)->year)->whereMonth('expense_date', Carbon::parse($dt)->month)->sum('amount');
+            $data_all[$key]['sale'] = SaleOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereYear('order_date', Carbon::parse($dt)->year)->whereMonth('order_date', Carbon::parse($dt)->month)->sum('grand_total');
+            $data_all[$key]['discount'] = SaleOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereYear('order_date', Carbon::parse($dt)->year)->whereMonth('order_date', Carbon::parse($dt)->month)->sum('discount_total');
+            $data_all[$key]['cost'] = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereYear('order_date', Carbon::parse($dt)->year)->whereMonth('order_date', Carbon::parse($dt)->month)->sum('grand_cost_total');
+            $data_all[$key]['expense'] = Expenses::where('is_archive', 0)->where('company_id',Auth::user()->company_id)->whereYear('expense_date', Carbon::parse($dt)->year)->whereMonth('expense_date', Carbon::parse($dt)->month)->sum('amount');
             $data_all[$key]['gross_profit'] =   ($data_all[$key]['sale']-$data_all[$key]['discount'])-$data_all[$key]['cost'];
             $data_all[$key]['net_profit'] =      $data_all[$key]['gross_profit']-$data_all[$key]['expense'];
             $total_all['grossProfitTotal'] +=$data_all[$key]['gross_profit'];
@@ -84,4 +91,8 @@ class ProfitLossReport extends AuthenticatedReportController
 
     }
 
+    protected function getModuleTable(): string
+    {
+        return  "";
+    }
 }

@@ -5,16 +5,18 @@ namespace App\Http\Controllers\Modules\CustomersAccount;
 
 
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
 use App\Models\Customers;
 use App\Models\Ledger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\View;
 
 class CustomersAccountController extends ModuleController
 {
+    use DatatableTrait;
+
     public function __construct()
     {
         parent::__construct();
@@ -23,7 +25,7 @@ class CustomersAccountController extends ModuleController
     }
     public function getCustomers(): array
     {
-        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get()->toArray();
+        return Customers::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get()->toArray();
 
     }
     public function getMode(): array
@@ -89,12 +91,12 @@ class CustomersAccountController extends ModuleController
 
         $params = \request()->all();
         if(!empty($params)) {
-            $soldBase = Ledger::where('type', 'sale')->where('nature', 'customer')->where('is_archive', 0)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id);
+            $soldBase = Ledger::where('type', 'sale')->where('nature', 'customer')->where('is_archive', 0)->where('company_id', Auth::user()->company_id);
             $soldQuery = $this->poQuery($soldBase, $params);
             $sold = $soldQuery->sum('amount');
             $soldTotalGraph = json_encode($soldQuery->get(['amount'])->toArray());
 
-            $receiveBase = Ledger::where('type', 'payment')->where('nature', 'customer')->where('is_archive', 0)->where('user_id', Auth::user()->id)->where('company_id', Auth::user()->company_id);
+            $receiveBase = Ledger::where('type', 'payment')->where('nature', 'customer')->where('is_archive', 0)->where('company_id', Auth::user()->company_id);
             $receiveQuery = $this->poQuery($receiveBase, $params);
             $receive = $receiveQuery->sum('amount');
             $receiveTotalGraph = json_encode($receiveQuery->get(['amount'])->toArray());
@@ -137,7 +139,7 @@ class CustomersAccountController extends ModuleController
     {
         $params = \request()->all();
         if (!empty($params['_token'])) {
-            $base = Ledger::where('nature','customer')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
+            $base = Ledger::where('nature','customer')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
             $query = $this->poQuery($base, $params);
             return $query->get()->toArray();
         } else {

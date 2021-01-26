@@ -5,22 +5,28 @@ namespace App\Http\Controllers\Modules\Reports;
 
 
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
-use App\Http\Controllers\ReportModuleController;
+use App\Http\Controllers\SubModuleTrait;
 use App\Models\PurchaseOrders;
 use App\Models\Suppliers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
-use League\CommonMark\Inline\Element\Emphasis;
 
-class PurchaseOrderReport extends ReportModuleController
+class PurchaseOrderReport extends ModuleController
 {
+    use DatatableTrait;
+    use SubModuleTrait{
+        SubModuleTrait::__construct as subModuleConstructor;
+    }
+
     public $record = [];
 
     public function __construct()
     {
         parent::__construct();
+        $this->subModuleConstructor();
+        $this->setModuleName("reports");
     }
 
     public function getStatus(): array
@@ -31,7 +37,7 @@ class PurchaseOrderReport extends ReportModuleController
 
     public function getSuppliers(): array
     {
-        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
+        return Suppliers::where('is_archive', '=', '0')->where('status', '=', '1')->where('company_id',Auth::user()->company_id)->get(['name', 'id'])->toArray();
     }
 
     public function index()
@@ -39,7 +45,7 @@ class PurchaseOrderReport extends ReportModuleController
         $status = $this->getStatus();
         $suppliers = $this->getSuppliers();
         $this->injectDatatable();
-        return view('modules.reports.purchase_order_report', ['status' => $status, 'suppliers' => $suppliers]);
+        return $this->view('purchase_order_report', ['status' => $status, 'suppliers' => $suppliers]);
     }
 
     public function search(Request $request)
@@ -48,7 +54,7 @@ class PurchaseOrderReport extends ReportModuleController
         $suppliers = $this->getSuppliers();
         $this->injectDatatable();
         $params = \request()->all();
-        $base = PurchaseOrders::with('supplier')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id);
+        $base = PurchaseOrders::with('supplier')->where('is_archive', 0)->where('company_id',Auth::user()->company_id);
         $query = $this->poQuery($base, $params);
 
         $sumTotal = $query->sum('grand_cost_total');
@@ -74,7 +80,7 @@ class PurchaseOrderReport extends ReportModuleController
             'pItem' => $pItem
         ];
 
-        return view('modules.reports.purchase_order_report', $data);
+        return $this->view('purchase_order_report', $data);
 
     }
 
@@ -105,7 +111,7 @@ class PurchaseOrderReport extends ReportModuleController
     {
         $params = \request()->all();
         if (!empty($params['_token'])) {
-            $base = PurchaseOrders::with('supplier')->where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
+            $base = PurchaseOrders::with('supplier')->where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC');
             $query = $this->poQuery($base, $params);
             return $query->get()->toArray();
         } else {

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -36,11 +40,34 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+
         $this->middleware('guest')->except('logout');
     }
 
     protected function authenticated(Request $request, $user)
     {
         return redirect()->route('dashboard');
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        Validator::extend('user_validator', function ($attribute, $value) {
+            $query = User::where('email',$value)->where("status",1)->first();
+            if($query->type === "ADMIN"){
+                return true;
+            }
+            return $query->company->status === 1;
+        });
+
+
+        $request->validate([
+            $this->username() => [
+                'required',
+                'email',
+                'user_validator'
+            ],
+        ],[
+            'user_validator' => 'Your account or company is no longer have access'
+        ]);
     }
 }

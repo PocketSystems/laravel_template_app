@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Modules\Suppliers;
 use App\Helpers\Helper;
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
 use App\Models\Suppliers;
 use Illuminate\Http\Request;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\View;
 
 class SuppliersController extends ModuleController
 {
+    use DatatableTrait;
+
     public function __construct()
     {
         parent::__construct();
@@ -94,7 +97,7 @@ class SuppliersController extends ModuleController
 
     protected function getDataTableRows(): array
     {
-        return Suppliers::where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
+        return Suppliers::where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
 

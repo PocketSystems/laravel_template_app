@@ -4,16 +4,16 @@
 namespace App\Http\Controllers\Modules\ExpenseCategories;
 
 
+use App\Http\Controllers\DatatableTrait;
 use App\Http\Controllers\ModuleController;
 use App\Models\ExpenseCategories;
-use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ExpenseCategoriesController extends ModuleController
 {
+    use DatatableTrait;
 
     public function __construct()
     {
@@ -76,7 +76,7 @@ class ExpenseCategoriesController extends ModuleController
 
     protected function getDataTableRows(): array
     {
-        return ExpenseCategories::where('is_archive', 0)->where('user_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
+        return ExpenseCategories::where('is_archive', 0)->where('company_id',Auth::user()->company_id)->orderBy('id', 'DESC')->get()->toArray();
     }
 
     protected function getDataTableColumns(): array
