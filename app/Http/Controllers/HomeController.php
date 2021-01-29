@@ -34,11 +34,11 @@ class HomeController extends AuthenticatedController
        foreach ($dates_month as $key => $value){
            $sale_purchase_comp[date('M',strtotime($value))] = [];
            $sale_purchase_comp[date('M',strtotime($value))]['so'] = SaleOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse($value)->month)->sum('grand_total');
-           $sale_purchase_comp[date('M',strtotime($value))]['po'] = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse($value)->month)->sum('grand_cost_total');
+           $sale_purchase_comp[date('M',strtotime($value))]['po'] = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse($value)->month)->sum('grand_total');
        }
 
         $sale_month_pie = SaleOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse(date('Y-m-d'))->month)->sum('grand_total');
-        $purchase_month_pie = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse(date('Y-m-d'))->month)->sum('grand_cost_total');
+        $purchase_month_pie = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse(date('Y-m-d'))->month)->sum('grand_total');
         $exp_month_pie = Expenses::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('expense_date',Carbon::parse(date('Y-m-d'))->month)->sum('amount');
 
         $data =
@@ -94,10 +94,10 @@ class HomeController extends AuthenticatedController
         $saleItem = SaleOrders::where('is_archive', 0)->where('status', 1)->where('company_id', Auth::user()->company_id);
         $expenseSum = Expenses::where('is_archive', 0)->where('company_id', Auth::user()->company_id);
         $saleSumGraph = json_encode($saleSum->get(['grand_total'])->toArray());
-        $purchaseSumGraph = json_encode($purchaseSum->get(['grand_cost_total'])->toArray());
+        $purchaseSumGraph = json_encode($purchaseSum->get(['grand_total'])->toArray());
         $expSumGraph = json_encode($expenseSum->get(['amount'])->toArray());
 //        dd($saleCountGraph);
-        $purchase = $purchaseSum->sum('grand_cost_total');
+        $purchase = $purchaseSum->sum('grand_total');
         $sale = $saleSum->sum('grand_total');
         $saleI = $saleItem->sum('count');
         $exp = $expenseSum->sum('amount');

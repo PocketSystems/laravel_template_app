@@ -46,13 +46,14 @@ class Helper {
     }
 
     public static function getBalance($natureId,$nature){
-        $balance = Ledger::where("nature_id",$natureId)->where('nature',$nature)->orderBy('id', 'desc')->get('balance')->first();
+        $balance = Ledger::where("nature_id",$natureId)->where('nature',$nature)->orderBy('id', 'desc')->get('balance')->first()['balance'];
         return (!empty($balance) ? $balance : 0);
     }
 
     public static function price($amount): string
     {
-        return "Rs. ".number_format(floatval($amount));
+        $format = getenv('MIX_APP_PRICE_FORMAT');
+        return str_ireplace("#AMOUNT",number_format(floatval($amount)),$format);
     }
 }
 

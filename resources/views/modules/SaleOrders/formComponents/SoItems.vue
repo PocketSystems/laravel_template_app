@@ -43,8 +43,8 @@
         </div>
         <div class="bottom-panel-td">
             <div class="row">
-                <div class="col-md-1 offset-md-10 "><span class="bottom-panel-text">Total</span></div>
-                <div class="col-md-1 "><span class="bottom-panel-text"><strong>{{ grandTotal }}</strong></span></div>
+                <div class="col-md-1 offset-md-9 "><span style="float:right;" class="bottom-panel-text">Total</span></div>
+                <div class="col-md-2"><span style="float:right;padding-right: 15px;" class="bottom-panel-text"><strong>{{  $root.price(grandTotal) }}</strong></span></div>
             </div>
         </div>
     </div>
@@ -55,7 +55,6 @@ import SoItem from "./SoItem";
 
 const soItems = () => ({
     item: 0,
-    cost: 0,
     price: 0,
     stock: 0,
     qty: 0,

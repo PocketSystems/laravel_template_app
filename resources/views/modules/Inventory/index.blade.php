@@ -19,9 +19,9 @@
                     <thead>
                     <tr>
                         <th width="5%">ID</th>
+                        <th width="10%">Category</th>
                         <th width="30%">Item Name</th>
                         <th width="5%">Stock</th>
-                        <th width="5%">Total</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -78,14 +78,28 @@ class PurchaseOrdersController extends ModuleController
         if (!empty($data)) {
             $data = (array)$data;
             DB::table($this->getModuleTable())->where('id', $id)->update([$field => ($data[$field] == 1 ? 2 : 1)]);
-            if ($data[$field] == 1) {
+            $field = $data[$field] == 1 ? 2 : 1;
+            $items = PurchaseOrderItems::where('purchase_order_id',$id)->get()->toArray();
+            if ($field == 1) {
+                foreach ($items as $item) {
+                    $inventory = new Inventory();
+                    $inventory->purchase_order_items_id = $item['id'];
+                    $inventory->item_id = $item['item_id'];
+                    $inventory->quantity = $item['quantity'];
+                    $inventory->unit_cost = $item['unit_cost'];
+                    $inventory->cost_total = $item['total'];;
+                    $inventory->user_id = Auth::user()->id;
+                    $inventory->company_id = Auth::user()->company_id;
+                    $inventory->save();
+                }
+
                 $current_balance =  Helper::getBalance($request->input('supplier_id'),'supplier');
                 $ledger = new Ledger();
                 $ledger->nature_id = $data['supplier_id'];
                 $ledger->type_id = $id;
                 $ledger->mode = 'invoice';
-                $ledger->amount = $data['grand_cost_total'];
-                $ledger->balance = $current_balance+$data['grand_cost_total'];
+                $ledger->amount = $data['grand_total'];
+                $ledger->balance = $current_balance+$data['grand_total'];
                 $ledger->description = $data['description'];
                 $ledger->date = date('Y-m-d');
                 $ledger->type = 'purchase';
@@ -119,7 +133,6 @@ class PurchaseOrdersController extends ModuleController
         $purchaseOrder->description = $request->input('description');
         $purchaseOrder->status = $request->input('status');
         $purchaseOrder->grand_total = $request->input('grandTotal');
-        $purchaseOrder->grand_cost_total = $request->input('grandCostTotal');
         $purchaseOrder->count = $request->input('count');
         $purchaseOrder->user_id = Auth::user()->id;
         $purchaseOrder->company_id = Auth::user()->company_id;
@@ -135,32 +148,27 @@ class PurchaseOrdersController extends ModuleController
                 if (!empty($item['item'])) {
                     $itemId = $item['item']["code"];
                     $cost = $item['cost'];
-                    $price = $item['price'];
                     $qty = $item['qty'];
                     $total = $item['total'];
-                    $cost_total = $item['cost_total'];
                     $purchaseOrderItems = new PurchaseOrderItems();
                     $purchaseOrderItems->purchase_order_id = $pId;
                     $purchaseOrderItems->item_id = $itemId;
                     $purchaseOrderItems->quantity = $qty;
                     $purchaseOrderItems->unit_cost = $cost;
-                    $purchaseOrderItems->unit_price = $price;
                     $purchaseOrderItems->total = $total;
-                    $purchaseOrderItems->cost_total = $cost_total;
                     $purchaseOrderItems->save();
                     $poiId = $purchaseOrderItems->id;
-
-                    $inventory = new Inventory();
-                    $inventory->purchase_order_items_id = $poiId;
-                    $inventory->item_id = $itemId;
-                    $inventory->quantity = $qty;
-                    $inventory->unit_cost = $cost;
-                    $inventory->unit_price = $price;
-                    $inventory->price_total = $total;
-                    $inventory->cost_total = $cost_total;
-                    $inventory->user_id = Auth::user()->id;
-                    $inventory->company_id = Auth::user()->company_id;
-                    $inventory->save();
+                    if ($purchaseOrder->status == 1) {
+                        $inventory = new Inventory();
+                        $inventory->purchase_order_items_id = $poiId;
+                        $inventory->item_id = $itemId;
+                        $inventory->quantity = $qty;
+                        $inventory->unit_cost = $cost;
+                        $inventory->cost_total = $total;
+                        $inventory->user_id = Auth::user()->id;
+                        $inventory->company_id = Auth::user()->company_id;
+                        $inventory->save();
+                    }
 
                     /*if ($purchaseOrder->status == 1) {
                         $itemsTable = Items::where('id', $itemId)->first();
@@ -177,13 +185,14 @@ class PurchaseOrdersController extends ModuleController
             if ($purchaseOrder->status == 1) {
 
                 $current_balance =  Helper::getBalance($request->input('supplier_id'),'supplier');
+
                 $ledger = new Ledger();
                 $ledger->nature_id = $request->input('supplier_id');
                 $ledger->type_id = $pId;
                 $ledger->date = date('Y-m-d', strtotime($request->input('order_date')));
                 $ledger->mode = 'invoice';
-                $ledger->amount = $purchaseOrder->grand_cost_total;
-                $ledger->balance = $current_balance+$purchaseOrder->grand_cost_total;
+                $ledger->amount = $purchaseOrder->grand_total;
+                $ledger->balance = $current_balance+$purchaseOrder->grand_total;
                 $ledger->description = $request->input('description');
                 $ledger->type = 'purchase';
                 $ledger->nature = 'supplier';
