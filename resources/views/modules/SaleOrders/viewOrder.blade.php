@@ -50,11 +50,11 @@
                 @foreach($orders as $order)
                 <tr>
                     <td>{{$order['item']['name']}}</td>
-                    <td>{{$order['unit_price']}}</td>
+                    <td>@price($order['unit_price'])</td>
                     <td>{{$order['quantity']}}</td>
                     <td>{{$order['discount']}} %</td>
                     <td>{{$order['tax']}} %</td>
-                    <td>{{$order['total']}}</td>
+                    <td>@price($order['total'])</td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -64,7 +64,7 @@
         </div>
         <div class="bottom-panel-td">
             <div class="row">
-                <div class="col-md-12 pr-5"><div class="float-right"><span class="bottom-panel-text">Total</span>&nbsp;&nbsp;<span class="bottom-panel-text"><strong>{{ $data['grand_total'] }}</strong></span></div></div>
+                <div class="col-md-12 pr-5"><div class="float-right"><span class="bottom-panel-text">Total</span>&nbsp;&nbsp;<span class="bottom-panel-text"><strong>@price($data['grand_total'])</strong></span></div></div>
             </div>
         </div>
 

@@ -26,4 +26,10 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 const app = new Vue({
     el: '#app',
+    methods:{
+        price(amount){
+            const format = process.env.MIX_APP_PRICE_FORMAT;
+            return format.replaceAll('#AMOUNT',new Intl.NumberFormat().format(parseFloat(amount)));
+        }
+    }
 });

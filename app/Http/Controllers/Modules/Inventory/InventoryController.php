@@ -35,7 +35,7 @@ class InventoryController extends ModuleController
     protected function getDataTableRows(): array
     {
 
-        return Items::where('is_archive', 0)
+        return Items::with('category')->where('is_archive', 0)
 
             ->where('company_id',Auth::user()->company_id)
             ->orderBy('id', 'DESC')
@@ -46,11 +46,10 @@ class InventoryController extends ModuleController
     {
         return [
             ["data" => "id"],
+            ["data" => "category.name"],
             ["data" => "name"],
-            ["data" => "stock"],
-            ["data" => "total","onAction"=>function($row){
-            return Helper::price($row['total']);
-            }],
+            ["data" => "stock"]
+
         ];
     }
 }

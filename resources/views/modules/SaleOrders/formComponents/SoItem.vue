@@ -11,7 +11,7 @@
         <td><input v-model="itemData.qty" name="qty" type="number" class="form-control" value="0" :readonly="!itemData.item"></td>
         <td><input v-model="itemData.discount" name="discount" type="number" class="form-control" value="0" :readonly="itemData.qty <= 0"></td>
         <td><input v-model="itemData.tax" name="tax" type="number"  class="form-control" value="0" :readonly="itemData.qty <= 0"></td>
-        <td>{{ Math.round(itemData.total) }}</td>
+        <td>{{ $root.price(Math.round(itemData.total)) }}</td>
         <td class="trash-td"><i v-on:click="$emit('onDelete',index)" style="color:red;cursor: pointer" class="fas fa-trash"></i></td>
 
     </tr>
@@ -32,13 +32,11 @@ export default {
         itemSelect(e) {
             if (e) {
                 const {itemIndex} = e;
-                this.itemData.cost = this.items[itemIndex].inventory_so.unit_cost
-                this.itemData.price = this.items[itemIndex].inventory_so.unit_price
+                this.itemData.price = 0
                 this.itemData.stock = this.items[itemIndex].inventory_qty
 
 
             } else {
-                this.itemData.cost = 0
                 this.itemData.price = 0
                 this.itemData.stock = 0
             }
