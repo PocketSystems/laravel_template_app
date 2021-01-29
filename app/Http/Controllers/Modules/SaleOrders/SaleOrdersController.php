@@ -82,8 +82,15 @@ class SaleOrdersController extends ModuleController
         $data =  DB::table($this->getModuleTable())->where('id', $id)->get()->first();
         if(!empty($data)){
             $data = (array)$data;
+            $items = SaleOrderItems::where('sale_order_id',$id)->get()->toArray();
             DB::table($this->getModuleTable())->where('id', $id)->update([$field => ($data[$field] == 1 ? 2 : 1)]);
-            if ($data[$field] == 1) {
+            $field = $data[$field] == 1 ? 2 : 1;
+            if ($field == 1) {
+                foreach ($items as $item) {
+
+                    $inventory = Inventory::where('item_id',$item['item_id'])->get();
+                    $this->inventory_deduction(intval($item['quantity']),$inventory);
+                }
                 $current_balance =  Helper::getBalance($request->input('customer_id'),'customer');
                 $ledger = new Ledger();
                 $ledger->nature_id = $data['customer_id'];
