@@ -59,7 +59,7 @@ class CustomersAccountController extends ModuleController
         $ledger->nature_id = $request->input('customer_id');
         $ledger->type_id = 0;
         $ledger->mode = $request->input('mode');
-        $ledger->amount = '-'.$request->input('amount');
+        $ledger->amount = $request->input('amount');
         $ledger->balance = $request->input('balance');
         $ledger->description = $request->input('description');
         $ledger->date = date('Y-m-d',strtotime($request->input('date')));

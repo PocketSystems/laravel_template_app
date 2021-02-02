@@ -1,6 +1,6 @@
 <template>
     <div class="form-group col-md-4">
-        <label for="inputEmail4" style="width: 100%">Amount <span v-if="balance != null" class="fa-pull-right">Receivable Amount <strong>{{balance-amount}}</strong></span></label>
+        <label for="inputEmail4" style="width: 100%">Amount <span v-if="balance != null" class="fa-pull-right">Payable Amount <strong>{{balance-amount}}</strong></span></label>
         <input  type="number" name="amount" v-model="amount"
                class="form-control" id="inputEmail4"
                placeholder="Please enter amount" v-bind:class="{true:errorclass}">

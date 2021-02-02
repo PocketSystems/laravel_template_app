@@ -144,12 +144,14 @@
 
                             <img src="{{url($company_info['company']['logo'])}}" style="width:100%; max-width:300px;">
                         </td>
-
                         <td>
-                            Invoice #: {{$data['id']}}<br>
-                            Invoice Date: {{date('F d Y',strtotime($data['order_date']))}}<br>
-                            Issue Date: {{date('F d Y')}}
+                            {{ucfirst($company_info['company']['name'])}}<br>
+                            {{ucfirst($company_info['name'])}}<br>
+                            {{ucfirst($company_info['company']['email'])}}<br>
+                            {{ucfirst($company_info['company']['phone'])}}<br>
+                            NTN : {{ucfirst($company_info['company']['ntn'])}}
                         </td>
+
                     </tr>
                 </table>
             </td>
@@ -167,10 +169,9 @@
                         </td>
 
                         <td>
-                            {{ucfirst($company_info['company']['name'])}}<br>
-                            {{ucfirst($company_info['name'])}}<br>
-                            {{ucfirst($company_info['company']['email'])}}<br>
-                            {{ucfirst($company_info['company']['phone'])}}
+                            Invoice #: {{$data['id']}}<br>
+                            Invoice Date: {{date('F d Y',strtotime($data['order_date']))}}<br>
+                            Issue Date: {{date('F d Y')}}
                         </td>
                     </tr>
                 </table>
@@ -228,6 +229,13 @@
 
             <td>
                 @price($data['grand_total'])
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding-top: 20px">
+                <strong>Note</strong><br>
+                <p style="margin-top: 5px">{{ucfirst($company_info['company']['note'])}}
+                </p>
             </td>
         </tr>
     </table>
