@@ -114,8 +114,8 @@ class CustomersAccountController extends ModuleController
               'customers' => $customers,
 
           ];
+        return $this->view('index',(!empty($data)  ? $data :[] ));
 
-        return view('modules.customersAccount.index',(!empty($data)  ? $data :[] ));
 
     }
     public function poQuery($query, $params)
