@@ -39797,7 +39797,7 @@ var render = function() {
         _vm._v("Amount "),
         _vm.balance != null
           ? _c("span", { staticClass: "fa-pull-right" }, [
-              _vm._v("Receivable Amount "),
+              _vm._v("Payable Amount "),
               _c("strong", [_vm._v(_vm._s(_vm.balance - _vm.amount))])
             ])
           : _vm._e()

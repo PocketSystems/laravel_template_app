@@ -75,7 +75,7 @@ class SaleOrdersController extends ModuleController
         $company_info = Auth::user()->toArray();
 
 //        \PDF::saveFromView($this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray()]), $id." - ".date('d-m-Y').'.pdf');
-        return $this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray(),'company_info'=>$company_info,'balance'=>$current_balance['balance']]);
+        return $this->view('invoice', ['data' => $data, 'orders' => $orders->get()->toArray(),'company_info'=>$company_info,'balance'=>$current_balance]);
     }
     public function status(Request $request,$id,$field = "status"): array
     {

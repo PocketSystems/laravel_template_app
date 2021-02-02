@@ -64,6 +64,17 @@
                 <div class="tx-danger">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="inputAddress">NTN</label>
+                <input type="text" name="ntn" value="{{$data['ntn']}}" class="form-control @error('ntn') is-invalid @enderror" id="inputAddress" placeholder="198786-1">
+
+            </div>
+
+            <div class="form-group">
+                <label for="inputAddress">Note</label>
+                <textarea name="note" class="form-control" cols="30" rows="10">{{$data['note']}}</textarea>
+
+            </div>
 
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="reset" class="btn btn-light">Reset</button>

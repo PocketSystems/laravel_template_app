@@ -51,6 +51,17 @@
                 <input type="text" name="address" value="{{ old('address') }}" class="form-control" id="inputAddress"
                        placeholder="1234 Main St">
             </div>
+            <div class="form-group">
+                <label for="inputAddress">NTN</label>
+                <input type="text" name="ntn" value="{{old('ntn')}}" class="form-control @error('ntn') is-invalid @enderror" id="inputAddress" placeholder="198786-1">
+
+            </div>
+
+            <div class="form-group">
+                <label for="inputAddress">Note</label>
+                <textarea name="note" class="form-control" cols="30" rows="10">{{old('note')}}</textarea>
+
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Start Date</label>
