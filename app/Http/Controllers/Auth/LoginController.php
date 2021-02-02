@@ -53,7 +53,7 @@ class LoginController extends Controller
     {
         Validator::extend('user_validator', function ($attribute, $value) {
             $query = User::where('email',$value)->where("status",1)->first();
-            if($query->type === "ADMIN"){
+            if(empty($query) or $query->type === "ADMIN"){
                 return true;
             }
             return $query->company->status === 1;
