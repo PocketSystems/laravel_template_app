@@ -114,7 +114,8 @@ class SuppliersAccountController extends ModuleController
 
         ];
 
-        return view('modules.suppliersAccount.index',(!empty($data)  ? $data :[] ));
+        return $this->view('index',(!empty($data)  ? $data :[] ));
+
 
     }
 

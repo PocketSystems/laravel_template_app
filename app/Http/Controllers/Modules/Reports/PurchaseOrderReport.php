@@ -57,8 +57,8 @@ class PurchaseOrderReport extends ModuleController
         $base = PurchaseOrders::with('supplier')->where('is_archive', 0)->where('company_id',Auth::user()->company_id);
         $query = $this->poQuery($base, $params);
 
-        $sumTotal = $query->sum('grand_cost_total');
-        $sumTotalGraph = json_encode($query->get(['grand_cost_total'])->toArray());
+        $sumTotal = $query->sum('grand_total');
+        $sumTotalGraph = json_encode($query->get(['grand_total'])->toArray());
         $sumItems = $query->sum('count');
         $sumCountGraph = json_encode($query->get(['count'])->toArray());
 
@@ -74,7 +74,7 @@ class PurchaseOrderReport extends ModuleController
             'sumCountGraph' => $sumCountGraph,
             'status' => $status,
             'suppliers' => $suppliers,
-            'grand_cost_total' => $sumTotal,
+            'grand_total' => $sumTotal,
             'count' => $sumItems,
             'cItem' => $cItem,
             'pItem' => $pItem

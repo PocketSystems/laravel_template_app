@@ -37,13 +37,13 @@ class CustomersAccountController extends ModuleController
     {
         $this->injectDatatable();
         $customers = $this->getCustomers();
-        return view('modules.customersAccount.index',['customers'=>$customers]);
+        return $this->view('index',['customers'=>$customers]);
     }
     public function add()
     {
         $customers = $this->getCustomers();
         $mode = $this->getMode();
-        return view('modules.customersAccount.add',['customers'=>$customers,'mode'=>$mode]);
+        return $this->view('add',['customers'=>$customers,'mode'=>$mode]);
     }
     public function create(Request $request)
     {
@@ -114,8 +114,8 @@ class CustomersAccountController extends ModuleController
               'customers' => $customers,
 
           ];
+        return $this->view('index',(!empty($data)  ? $data :[] ));
 
-        return view('modules.customersAccount.index',(!empty($data)  ? $data :[] ));
 
     }
     public function poQuery($query, $params)

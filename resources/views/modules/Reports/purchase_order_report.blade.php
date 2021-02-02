@@ -79,7 +79,7 @@
                     <div class="card-body pd-y-20 pd-x-25">
                         <div class="row row-sm">
                             <div class="col-7">
-                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{$grand_cost_total}}</h3>
+                                <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{$grand_total}}</h3>
                                 <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Total Amount</h6>
                                 <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single impression.</p>
                             </div>
@@ -211,10 +211,10 @@
             let chartEnd = dataFraction/2;
 
             var sumTotal = $.plot('#sumTotal', [{
-                data: {!!$sumTotalGraph!!}.map((data, index) => [index, getRndInteger(data.grand_cost_total/dataFraction,data.grand_cost_total/chartEnd)]),
+                data: {!!$sumTotalGraph!!}.map((data, index) => [index, getRndInteger(data.grand_total/dataFraction,data.grand_total/chartEnd)]),
                 color: '#e5e9f2'
             },{
-                data: {!!$sumTotalGraph!!}.map((data, index) => [index, data.grand_cost_total/dataFraction]),
+                data: {!!$sumTotalGraph!!}.map((data, index) => [index, data.grand_total/dataFraction]),
                 color: '#66a4fb'
             }], flotChartOption1);
 
