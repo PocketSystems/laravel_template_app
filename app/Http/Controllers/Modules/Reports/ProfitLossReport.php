@@ -87,7 +87,7 @@ class ProfitLossReport extends ModuleController
             'total_all' => $total_all,
         ];
 
-        return view('modules.reports.profit_loss_report', $data);
+        return $this->view('profit_loss_report', $data);
 
     }
 
