@@ -34,7 +34,7 @@
                 @if(!empty($data['logo']))
                 <div class="form-group col-md-1 mt-md-3" id="image-box" >
                     <a data-fancybox="gallery" href="{{url($data['logo'] ?: '')}}"><img class="rounded " src="{{url($data['logo'] ?: '')}}" width="50" height="50"></a>&nbsp;&nbsp;
-                   @php $deleteFun = "deleteFile(".$data["id"].",'".route('module.suppliers.deleteFile',[$data["id"],'logo'])."','".csrf_token()."','".$data['logo']."')" @endphp
+                    @php $deleteFun = "deleteFile(".$data["id"].",'".route('module.companies.deleteFile',[$data["id"],'logo'])."','".csrf_token()."','".$data['logo']."','logo')" @endphp
                     <a href="javascript:" onclick="{{$deleteFun}}"><i class="fas fa-trash center-form" style="color: red;" ></i></a>
                 </div>
 
