@@ -15,8 +15,8 @@ class AddNtnNumberCompanyTable extends Migration
     {
         Schema::table('company', function (Blueprint $table) {
             //
-            $table->string('ntn');
-            $table->longText('note');
+            $table->string('ntn')->nullable(true);
+            $table->longText('note')->nullable(true);
         });
     }
 
