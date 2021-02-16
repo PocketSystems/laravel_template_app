@@ -95,6 +95,7 @@ class HomeController extends AuthenticatedController
         $expenseSum = Expenses::where('is_archive', 0)->where('company_id', Auth::user()->company_id);
         $saleSumGraph = json_encode($saleSum->get(['grand_total'])->toArray());
         $purchaseSumGraph = json_encode($purchaseSum->get(['grand_total'])->toArray());
+
         $expSumGraph = json_encode($expenseSum->get(['amount'])->toArray());
 //        dd($saleCountGraph);
         $purchase = $purchaseSum->sum('grand_total');

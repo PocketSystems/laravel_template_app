@@ -219,10 +219,10 @@
          chartEnd = dataFraction/2;
 
         var countTotal = $.plot('#purchaseSum', [{
-            data: {!!$topBox['purchaseSumGraph']!!}.map((data, index) => [index, getRndInteger(data.grand_cost_total/dataFraction,data.grand_cost_total/chartEnd)]),
+            data: {!!$topBox['purchaseSumGraph']!!}.map((data, index) => [index, getRndInteger(data.grand_total/dataFraction,data.grand_total/chartEnd)]),
             color: '#e5e9f2'
         },{
-            data: {!!$topBox['purchaseSumGraph']!!}.map((data, index) => [index, data.grand_cost_total/dataFraction]),
+            data: {!!$topBox['purchaseSumGraph']!!}.map((data, index) => [index, data.grand_total/dataFraction]),
             color: '#f10075'
         }], flotChartOption1);
 
