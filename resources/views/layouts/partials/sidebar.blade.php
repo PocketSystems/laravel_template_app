@@ -104,7 +104,7 @@
             @endadmin
 
             <li class="nav-label mg-t-25">Contact Us</li>
-            <li class="nav-item"><a href="{{route('module.inventory.home')}}" class="nav-link"><i data-feather="phone-call"></i> <span>+92 317 1015636</span></a></li>
+            <li class="nav-item"><a href="tel:+923171015636" class="nav-link"><i data-feather="phone-call"></i> <span>+92 317 1015636</span></a></li>
 
 
         </ul>
