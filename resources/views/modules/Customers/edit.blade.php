@@ -19,7 +19,7 @@
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label for="inputEmail4">Customer Name <span class="tx-danger">*</span></label>
-                    <input type="text" name="name" value="{{$data['name']}}" required class="form-control" id="inputEmail4" placeholder="Please enter supplier name">
+                    <input type="text" name="name" value="{{$data['name']}}" required class="form-control" id="inputEmail4" placeholder="Please enter customer name">
                     @error('name')
                     <div class="tx-danger">{{ $message }}</div>
                     @enderror
