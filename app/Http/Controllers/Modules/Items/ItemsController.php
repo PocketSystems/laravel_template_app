@@ -52,8 +52,8 @@ class ItemsController extends ModuleController
         $items->name = $request->input('name');
         $items->sku = $request->input('sku');
         $items->cost = $request->input('cost');
-        $items->last_updated_cost = $request->input('cost');
-        $items->last_updated_price = $request->input('price');
+        $items->last_updated_cost = (!empty($request->input('cost')) ? $request->input('cost') : 0 );
+        $items->last_updated_price = (!empty($request->input('price')) ? $request->input('price') : 0 );
         $items->last_updated_stock = 0;
         $items->price = $request->input('price');
         $items->description = $request->input('description');
