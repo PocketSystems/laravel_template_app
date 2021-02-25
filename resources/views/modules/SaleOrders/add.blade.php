@@ -47,7 +47,7 @@
                     <select class="form-control  @error('status') is-invalid @enderror" name="status">
                         <option label="Select Status"></option>
                         @foreach ($status as $key => $value)
-                            <option value="{{$key}}" {{old('status') == $key ? 'selected' : ''}}>{{$value}}</option>
+                            <option value="{{$key}}" {{'2' == $key ? 'selected' : ''}}>{{$value}}</option>
                         @endforeach
                     </select>
                     @error('status')
