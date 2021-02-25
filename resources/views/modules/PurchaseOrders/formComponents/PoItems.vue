@@ -14,9 +14,9 @@
                     </a>
                 </div>
             </div>
-            <div>
+            <div >
 
-                <table class="table table-striped">
+                <table class="table table-striped labeled-items-table">
                     <thead>
                     <tr>
                         <th width="50%">Item</th>
@@ -40,8 +40,8 @@
         </div>
         <div class="bottom-panel-td">
             <div class="row">
-                <div class="col-md-1 offset-md-9 "><span style="float:right;" class="bottom-panel-text">Total</span></div>
-                <div class="col-md-2"><span style="float:right;padding-right: 15px;" class="bottom-panel-text"><strong>{{  $root.price(grandTotal) }}</strong></span></div>
+                <div class="col-md-1 offset-md-9"><span style="float:right;" class="bottom-panel-text total-data">Total</span></div>
+                <div class="col-md-2 col-xs-2"><span style="float:right;padding-right: 15px;" class="bottom-panel-text"><strong>{{  $root.price(grandTotal) }}</strong></span></div>
             </div>
         </div>
     </div>
@@ -103,10 +103,14 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+
 .bottom-panel-td{
     background: #eaeaea;padding: 5px
-}.bottom-panel-text{
+}
+
+.bottom-panel-text{
      font-size: 20px;
  }
+
 </style>

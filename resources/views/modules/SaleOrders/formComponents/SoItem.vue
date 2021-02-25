@@ -1,17 +1,17 @@
 <template>
     <tr :data="itemData" >
-        <td>
+        <td data-label="Item">
             <v-select v-model="itemData.item" @input="itemSelect($event)" name="items" class="my-select"
                       :options="items.map((item,itemIndex)=>({label:item.name,code:item.id,itemIndex}))"></v-select>
             <span v-if="itemData.item && !itemData.stock" style="margin-top:5px;color: red">Out of Stock! can't add this item</span>
         </td>
 
-        <td><input v-model="itemData.price" type="number" class="form-control" :readonly="!itemData.item"></td>
-        <td class="stock-td">{{ itemData.stock }}</td>
-        <td><input v-model="itemData.qty" name="qty" type="number" class="form-control" value="0" :readonly="!itemData.item"></td>
-        <td><input v-model="itemData.discount" name="discount" type="number" class="form-control" value="0" :readonly="itemData.qty <= 0"></td>
-        <td><input v-model="itemData.tax" name="tax" type="number"  class="form-control" value="0" :readonly="itemData.qty <= 0"></td>
-        <td>{{ $root.price(Math.round(itemData.total)) }}</td>
+        <td data-label="price"><input v-model="itemData.price" type="number" class="form-control" :readonly="!itemData.item"></td>
+        <td data-label="Stock" class="stock-td">{{ itemData.stock }}</td>
+        <td data-label="Qty"><input v-model="itemData.qty" name="qty" type="number" class="form-control" value="0" :readonly="!itemData.item"></td>
+        <td data-label="Discount"><input v-model="itemData.discount" name="discount" type="number" class="form-control" value="0" :readonly="itemData.qty <= 0"></td>
+        <td data-label="Tax"><input v-model="itemData.tax" name="tax" type="number"  class="form-control" value="0" :readonly="itemData.qty <= 0"></td>
+        <td data-label="Total">{{ $root.price(Math.round(itemData.total)) }}</td>
         <td class="trash-td"><i v-on:click="$emit('onDelete',index)" style="color:red;cursor: pointer" class="fas fa-trash"></i></td>
 
     </tr>
@@ -87,4 +87,6 @@ td {
 .stock-td,.trash-td {
     text-align: center !important;
 }
+
+
 </style>

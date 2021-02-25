@@ -1,14 +1,14 @@
 <template>
     <tr :data="itemData" >
-        <td>
+        <td data-label="Item">
             <v-select v-model="itemData.item" @input="itemSelect($event)" name="items" class="my-select"
                       :options="items.map((item,itemIndex)=>({label:item.name,code:item.id,itemIndex}))"></v-select>
         </td>
-        <td><input  v-model="itemData.cost" name="cost" type="number" class="form-control" :readonly="!itemData.item"></td>
+        <td data-label="Cost"><input  v-model="itemData.cost" name="cost" type="number" class="form-control" :readonly="!itemData.item"></td>
 
-        <td class="stock-td">{{ itemData.stock }}</td>
-        <td><input v-model="itemData.qty" name="qty" type="number" class="form-control" value="0" :readonly="!itemData.item"></td>
-        <td>{{  $root.price(itemData.total) }}</td>
+        <td class="stock-td"  data-label="Stock">{{ itemData.stock }}</td>
+        <td  data-label="Qty"><input v-model="itemData.qty" name="qty" type="number" class="form-control" value="0" :readonly="!itemData.item"></td>
+        <td data-label="Total">{{  $root.price(itemData.total) }}</td>
         <td class="trash-td"><i v-on:click="$emit('onDelete',index)" style="color:red;cursor: pointer" class="fas fa-trash"></i></td>
 
     </tr>
