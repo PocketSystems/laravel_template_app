@@ -126,7 +126,10 @@ class PurchaseOrdersController extends ModuleController
             'status' => 'Status',
 
         ])->validate();
-
+        $items = json_decode($request->input('po'), true);
+        if (empty($items)) {
+            return redirect()->back()->withInput()->with('error', 'Please Select Item!');
+        }
         $purchaseOrder = new PurchaseOrders();
         $purchaseOrder->supplier_id = $request->input('supplier_id');
         $purchaseOrder->order_date = date('Y-m-d', strtotime($request->input('order_date')));
@@ -140,10 +143,7 @@ class PurchaseOrdersController extends ModuleController
         $pId = $purchaseOrder->id;
         $error = 0;
         if (!empty($request->input('po'))) {
-            $items = json_decode($request->input('po'), true);
-            if (empty($items)) {
-                return redirect()->back()->withInput()->with('error', 'Please Select Item!');
-            }
+
             foreach ($items as $item) {
                 if (!empty($item['item'])) {
                     $itemId = $item['item']["code"];
@@ -202,7 +202,7 @@ class PurchaseOrdersController extends ModuleController
                 $ledger->save();
             }
             if ($error == sizeof($items)) {
-                $purchaseOrder->delete();
+                $purchaseOrder->refresh()->delete();
                 return redirect()->back()->withInput()->with('error', 'Please Select Item!');
             }
             if (!empty($request->input('saveClose'))) {

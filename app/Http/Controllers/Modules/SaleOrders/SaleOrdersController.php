@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use PDOException;
 
 class SaleOrdersController extends ModuleController
 {
@@ -124,6 +125,19 @@ class SaleOrdersController extends ModuleController
 
         ])->validate();
 
+      /*  try {
+            DB::beginTransaction();
+            // database queries here
+            DB::commit();
+        }catch (\PDOException $e){
+
+        }*/
+
+        $items = json_decode($request->input('so'), true);
+        if (empty($items)) {
+            return redirect()->back()->withInput()->with('error', 'Please Select Item!');
+        }
+
         $saleOrder = new SaleOrders();
         $saleOrder->customer_id = $request->input('customer_id');
         $saleOrder->order_date = date('Y-m-d', strtotime($request->input('order_date')));
@@ -138,10 +152,6 @@ class SaleOrdersController extends ModuleController
         $pId = $saleOrder->id;
         $error = 0;
         if (!empty($request->input('so'))) {
-            $items = json_decode($request->input('so'), true);
-            if (empty($items)) {
-                return redirect()->back()->withInput()->with('error', 'Please Select Item!');
-            }
             foreach ($items as $item) {
                 if (!empty($item['item']) && !empty($item['qty'])) {
 
@@ -196,7 +206,7 @@ class SaleOrdersController extends ModuleController
                 $ledger->save();
             }
             if ($error == sizeof($items)) {
-                $saleOrder->delete();
+                $saleOrder->refresh()->delete();
                 return redirect()->back()->withInput()->with('error', 'Please Select Item!');
             }
             if (!empty($request->input('saveClose'))) {
