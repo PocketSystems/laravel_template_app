@@ -66,6 +66,7 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/skin.deepblue.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/skin.light.css')}}">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @stack('style')
 
 </head>
