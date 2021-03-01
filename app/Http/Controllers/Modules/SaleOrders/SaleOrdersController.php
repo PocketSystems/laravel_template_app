@@ -80,11 +80,15 @@ class SaleOrdersController extends ModuleController
     }
     public function status(Request $request,$id,$field = "status"): array
     {
+        if(!empty($request->toArray()['description'])){
+            DB::table($this->getModuleTable())->where('id', $id)->update(['description' => $request->toArray()['description']]);
+        }
         $data =  DB::table($this->getModuleTable())->where('id', $id)->get()->first();
         if(!empty($data)){
             $data = (array)$data;
             $items = SaleOrderItems::where('sale_order_id',$id)->get()->toArray();
             DB::table($this->getModuleTable())->where('id', $id)->update([$field => ($data[$field] == 1 ? 2 : 1)]);
+
             $field = $data[$field] == 1 ? 2 : 1;
             if ($field == 1) {
                 foreach ($items as $item) {
@@ -312,7 +316,6 @@ class SaleOrdersController extends ModuleController
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                        <a href="#" class="dropdown-item '.$checkStatus.' href="#" onclick="' . $statusFun . '"><i class="fas fa-check"></i>&nbsp;&nbsp;Confirm</a>
                         <a class="dropdown-item" href="'.route($this->mRoute('viewOrder'), [$row['id']]).'"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a>
                          <a class="dropdown-item" style="cursor: pointer" onclick="' . $invoiceWindow . '"><i class="fas fa-print"></i>&nbsp;&nbsp;Invoice</a>
                         <a class="dropdown-item '.$checkStatus.'" href="#" onclick="' . $deleteFun . '"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>
