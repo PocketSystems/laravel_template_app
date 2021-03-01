@@ -74,10 +74,15 @@ class PurchaseOrdersController extends ModuleController
 
     public function status(Request $request, $id, $field = "status"): array
     {
+        if(!empty($request->toArray()['description'])){
+            DB::table($this->getModuleTable())->where('id', $id)->update(['description' => $request->toArray()['description']]);
+        }
         $data = DB::table($this->getModuleTable())->where('id', $id)->get()->first();
         if (!empty($data)) {
+
             $data = (array)$data;
             DB::table($this->getModuleTable())->where('id', $id)->update([$field => ($data[$field] == 1 ? 2 : 1)]);
+
             $field = $data[$field] == 1 ? 2 : 1;
             $items = PurchaseOrderItems::where('purchase_order_id',$id)->get()->toArray();
             if ($field == 1) {
@@ -126,7 +131,10 @@ class PurchaseOrdersController extends ModuleController
             'status' => 'Status',
 
         ])->validate();
-
+        $items = json_decode($request->input('po'), true);
+        if (empty($items)) {
+            return redirect()->back()->withInput()->with('error', 'Please Select Item!');
+        }
         $purchaseOrder = new PurchaseOrders();
         $purchaseOrder->supplier_id = $request->input('supplier_id');
         $purchaseOrder->order_date = date('Y-m-d', strtotime($request->input('order_date')));
@@ -140,10 +148,7 @@ class PurchaseOrdersController extends ModuleController
         $pId = $purchaseOrder->id;
         $error = 0;
         if (!empty($request->input('po'))) {
-            $items = json_decode($request->input('po'), true);
-            if (empty($items)) {
-                return redirect()->back()->withInput()->with('error', 'Please Select Item!');
-            }
+
             foreach ($items as $item) {
                 if (!empty($item['item'])) {
                     $itemId = $item['item']["code"];
@@ -202,7 +207,7 @@ class PurchaseOrdersController extends ModuleController
                 $ledger->save();
             }
             if ($error == sizeof($items)) {
-                $purchaseOrder->delete();
+                $purchaseOrder->refresh()->delete();
                 return redirect()->back()->withInput()->with('error', 'Please Select Item!');
             }
             if (!empty($request->input('saveClose'))) {
@@ -262,7 +267,6 @@ class PurchaseOrdersController extends ModuleController
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                        <a href="#" class="dropdown-item ' . $checkStatus . ' href="#" onclick="' . $statusFun . '"><i class="fas fa-check"></i>&nbsp;&nbsp;Confirm</a>
                         <a class="dropdown-item" href="' . route($this->mRoute('viewOrder'), [$row['id']]) . '"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a>
                         <a class="dropdown-item" style="cursor: pointer" onclick="' . $invoiceWindow . '"><i class="fas fa-print"></i>&nbsp;&nbsp;Invoice</a>
                         <a class="dropdown-item ' . $checkStatus . '" href="#" onclick="' . $deleteFun . '"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>

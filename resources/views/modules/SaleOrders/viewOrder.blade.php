@@ -2,12 +2,11 @@
 
 @section('content')
 
-    <form action="{{route('module.purchaseOrders.create')}}" method="post" enctype="multipart/form-data" id="purchaseOrderForm">
 
         <div class="panel mb-5">
             <div style="display: flex" class="mb-3">
                 <div style="flex: 1">
-                    <h4 id="section1" class="mg-b-10">Purchase Order  #{{$data['id']}}</h4>
+                    <h4 id="section1" class="mg-b-10">Sale Order  #{{$data['id']}}</h4>
                 </div>
                 <div>
                     <a href="{{route('module.'.$moduleName.'.home')}}" class="btn btn-primary btn-icon">
@@ -68,16 +67,45 @@
             </div>
         </div>
 
+        @if($data['status'] == 2)
+            <br>
+            <div class="row ">
+                <div class="col-md-6  col-xs-12 ">
+                    <form
+                        id="statusForm" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="_method" value="put"/>
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <input type="text" name="description" value="{{ old('description') }}" class="form-control"
+                                       id="description" placeholder="Enter description ...">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Confirm
+                                </button>
 
-        <br>
-        <div class="row ">
-            <div class="col-md-3  col-xs-12 ">
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-{{--            <button type="button" onclick="orderStatus({{$statusLink}})" class="btn btn-success"><i class="fa fa-check-circle"></i>&nbsp;&nbsp;Confirm</button>--}}
             </div>
+        @endif
 
-        </div>
-
-
-    </form>
 @endsection
+@push('scripts')
+    @if($data['status'] == 2)
+        <script>
+            jQuery("#statusForm").submit(function(e){
+                e.preventDefault();
+                orderStatus({{$data['id']}},'{{route('module.'.$moduleName.'.status',[$data['id'],'status'])}}','{{ csrf_token() }}',this,{
+                    description:$('#description').val()
+                },function(done) {
+                    if(done){
+                        window.location = window.location;
+                    }
+                });
+            });
+        </script>
+    @endif
+@endpush

@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use PDOException;
 
 class SaleOrdersController extends ModuleController
 {
@@ -79,11 +80,15 @@ class SaleOrdersController extends ModuleController
     }
     public function status(Request $request,$id,$field = "status"): array
     {
+        if(!empty($request->toArray()['description'])){
+            DB::table($this->getModuleTable())->where('id', $id)->update(['description' => $request->toArray()['description']]);
+        }
         $data =  DB::table($this->getModuleTable())->where('id', $id)->get()->first();
         if(!empty($data)){
             $data = (array)$data;
             $items = SaleOrderItems::where('sale_order_id',$id)->get()->toArray();
             DB::table($this->getModuleTable())->where('id', $id)->update([$field => ($data[$field] == 1 ? 2 : 1)]);
+
             $field = $data[$field] == 1 ? 2 : 1;
             if ($field == 1) {
                 foreach ($items as $item) {
@@ -124,6 +129,19 @@ class SaleOrdersController extends ModuleController
 
         ])->validate();
 
+      /*  try {
+            DB::beginTransaction();
+            // database queries here
+            DB::commit();
+        }catch (\PDOException $e){
+
+        }*/
+
+        $items = json_decode($request->input('so'), true);
+        if (empty($items)) {
+            return redirect()->back()->withInput()->with('error', 'Please Select Item!');
+        }
+
         $saleOrder = new SaleOrders();
         $saleOrder->customer_id = $request->input('customer_id');
         $saleOrder->order_date = date('Y-m-d', strtotime($request->input('order_date')));
@@ -138,10 +156,6 @@ class SaleOrdersController extends ModuleController
         $pId = $saleOrder->id;
         $error = 0;
         if (!empty($request->input('so'))) {
-            $items = json_decode($request->input('so'), true);
-            if (empty($items)) {
-                return redirect()->back()->withInput()->with('error', 'Please Select Item!');
-            }
             foreach ($items as $item) {
                 if (!empty($item['item']) && !empty($item['qty'])) {
 
@@ -196,7 +210,7 @@ class SaleOrdersController extends ModuleController
                 $ledger->save();
             }
             if ($error == sizeof($items)) {
-                $saleOrder->delete();
+                $saleOrder->refresh()->delete();
                 return redirect()->back()->withInput()->with('error', 'Please Select Item!');
             }
             if (!empty($request->input('saveClose'))) {
@@ -302,7 +316,6 @@ class SaleOrdersController extends ModuleController
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                        <a href="#" class="dropdown-item '.$checkStatus.' href="#" onclick="' . $statusFun . '"><i class="fas fa-check"></i>&nbsp;&nbsp;Confirm</a>
                         <a class="dropdown-item" href="'.route($this->mRoute('viewOrder'), [$row['id']]).'"><i class="fas fa-eye"></i>&nbsp;&nbsp;View</a>
                          <a class="dropdown-item" style="cursor: pointer" onclick="' . $invoiceWindow . '"><i class="fas fa-print"></i>&nbsp;&nbsp;Invoice</a>
                         <a class="dropdown-item '.$checkStatus.'" href="#" onclick="' . $deleteFun . '"><i class="fas fa-trash"></i>&nbsp;&nbsp;Delete</a>

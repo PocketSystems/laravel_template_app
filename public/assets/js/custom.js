@@ -141,7 +141,7 @@ function deleteFile(id, link, token, image,key = 'image') {
 }
 
 
-function orderStatus(id, link, token, elem) {
+function orderStatus(id, link, token, elem,params = {},onComplete) {
     $.confirm({
         title: 'Update Status',
         content: 'This dialog will automatically trigger \'cancel\' in 6 seconds if you don\'t respond.',
@@ -155,11 +155,22 @@ function orderStatus(id, link, token, elem) {
                         url: link,
                         data: {
                             "_token": token,
+                            ...params
                         },
                         type: 'PUT',
                         success: function (result) {
+                            if(onComplete){
+                                onComplete(true)
+                            }
                             let tables = $(elem).closest("[data-table]");
-                            window.dt[$(tables[0]).attr("data-table")].ajax.reload();
+                            if(tables){
+                                window.dt[$(tables[0]).attr("data-table")].ajax.reload();
+                            }
+                        },
+                        error: function (e){
+                            if(onComplete){
+                                onComplete(false)
+                            }
                         }
                     });
 

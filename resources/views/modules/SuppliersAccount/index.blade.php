@@ -146,7 +146,7 @@
                 <th width="5%">Date</th>
                 <th width="10%">Trans.Type</th>
                 <th width="10%">Mode</th>
-                <th width="30%">Description</th>
+                <th width="20%">Description</th>
                 <th width="10%">Amount</th>
                 <th width="10%">Balance</th>
             </tr>
