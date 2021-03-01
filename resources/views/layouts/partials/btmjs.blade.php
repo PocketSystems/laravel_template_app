@@ -3,7 +3,7 @@
 <script src="{{asset('assets/js/dashforge.js')}}"></script>
 <script src="{{asset('assets/js/dashforge.aside.js')}}"></script>
 <script src="{{asset('assets/lib/bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/custom.js')}}"></script>
+<script src="{{asset('assets/js/custom.js?v='.uniqid())}}"></script>
 <script src="{{asset('assets/lib/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{asset('assets/lib/feather-icons/feather.min.js')}}"></script>
 <script src="{{asset('assets/lib/prismjs/prism.js')}}"></script>
