@@ -33,9 +33,11 @@ class HomeController extends AuthenticatedController
         $sale_purchase_comp = [];
        foreach ($dates_month as $key => $value){
            $sale_purchase_comp[date('M',strtotime($value))] = [];
-           $sale_purchase_comp[date('M',strtotime($value))]['so'] = SaleOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse($value)->month)->sum('grand_total');
-           $sale_purchase_comp[date('M',strtotime($value))]['po'] = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse($value)->month)->sum('grand_total');
+           $sale_purchase_comp[date('M',strtotime($value))]['so'] = SaleOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse($value)->month)->count();
+           $sale_purchase_comp[date('M',strtotime($value))]['po'] = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse($value)->month)->count();
        }
+
+//       dd($sale_purchase_comp);
 
         $sale_month_pie = SaleOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse(date('Y-m-d'))->month)->sum('grand_total');
         $purchase_month_pie = PurchaseOrders::where('is_archive', 0)->where('status', 1)->where('company_id',Auth::user()->company_id)->whereMonth('order_date',Carbon::parse(date('Y-m-d'))->month)->sum('grand_total');
