@@ -15,7 +15,7 @@
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Today Sale</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
                             <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumToday'])</h3>
-                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['todayComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['todayComp'] ? 'up' : 'down' }}"></i></span> {{$thirdBox['saleSumTodayLast']}} Yesterday</p>
+                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['todayComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['todayComp'] ? 'up' : 'down' }}"></i></span> @price($thirdBox['saleSumTodayLast']) Yesterday</p>
                         </div>
 
                     </div>
@@ -25,7 +25,7 @@
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Week Sales</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
                             <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumWeek'])</h3>
-                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['weekComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['weekComp'] ? 'up' : 'down' }}"></i></span> {{$thirdBox['saleSumWeekLast']}} last week</p>
+                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['weekComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['weekComp'] ? 'up' : 'down' }}"></i></span> @price($thirdBox['saleSumWeekLast']) last week</p>
                         </div>
 
                     </div>
@@ -35,7 +35,7 @@
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">{{date('F')}} Sales</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
                             <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumMonth'])</h3>
-                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['monthComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['monthComp'] ? 'up' : 'down' }}"></i></span> {{$thirdBox['saleSumMonthLast']}} last Month</p>
+                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['monthComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['monthComp'] ? 'up' : 'down' }}"></i></span> @price($thirdBox['saleSumMonthLast']) last Month</p>
                         </div>
 
                     </div>
@@ -45,7 +45,7 @@
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">{{date('Y')}} Sales</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
                             <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumYear'])</h3>
-                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['yearComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['yearComp'] ? 'up' : 'down' }}"></i></span> {{$thirdBox['saleSumYearLast']}} last Year</p>
+                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['yearComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['yearComp'] ? 'up' : 'down' }}"></i></span> @price($thirdBox['saleSumYearLast']) last Year</p>
                         </div>
 
                     </div>
@@ -121,7 +121,7 @@
                                 <div class="col-7">
                                     <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($topBox['saleSum'])</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Total Sales</h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single impression.</p>
+                                    <p class="tx-11 tx-color-03 mg-b-0">Total Sales you generate by systems</p>
                                 </div>
                                 <div class="col-5">
                                     <div class="chart-ten">
@@ -139,7 +139,7 @@
                                 <div class="col-7">
                                     <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($topBox['purchaseSum'])</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-pink mg-b-5">Total Purchase</h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single impression.</p>
+                                    <p class="tx-11 tx-color-03 mg-b-0">Total purchases you generate by systems</p>
                                 </div>
                                 <div class="col-5">
                                     <div class="chart-ten">
@@ -157,7 +157,8 @@
                                 <div class="col-7">
                                     <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($topBox['expenseSum'])</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Total Expense</h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">No. of clicks to ad that consist of a single impression.</p>
+                                    <p class="tx-11 tx-color-03 mg-b-0">Total Expense you generate by systems</p>
+
                                 </div>
                                 <div class="col-5">
                                     <div class="chart-ten">
@@ -239,8 +240,8 @@
 
         let soData = {!!$secondBox['sale_purchase_comp']!!};
         var ctxLabel = Object.keys(soData).map((key, index) => key);
-        var ctxData1 =  Object.keys(soData).map((date, index) => soData[date].so);
-        var ctxData2 =  Object.keys(soData).map((date, index) => soData[date].po);
+        var ctxData1 =  Object.keys(soData).map((date, index) => soData[date].so*10);
+        var ctxData2 =  Object.keys(soData).map((date, index) => soData[date].po*10);
         var ctxColor1 = '#001737';
         var ctxColor2 = '#66a4fb';
 

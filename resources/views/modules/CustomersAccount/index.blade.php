@@ -9,9 +9,18 @@
                 <h4 id="section1" class="mg-b-10">Customer Ledger</h4>
             </div>
             <div>
+
+                @isSubscribed
                 <a href="{{route('module.'.$moduleName.'.add')}}" class="btn btn-success btn-icon">
                     <i data-feather="plus"></i> Add Payment
                 </a>
+                @endisSubscribed
+                @isNotSubscribed
+
+                <a href="#" data-toggle="modal" data-target="#subscriptionExpiredPopup" class="btn btn-success btn-icon">
+                    <i data-feather="plus"></i> Add Payment
+                </a>
+                @endisNotSubscribed
             </div>
         </div>
         <form action="{{route('module.'.$moduleName.'.home.search')}}" method="post">

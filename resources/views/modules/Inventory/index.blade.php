@@ -9,11 +9,7 @@
                     <div style="flex: 1">
                         <h4 id="section1" class="mg-b-10">Inventory</h4>
                     </div>
-                    <div>
-                        <a href="{{route('module.'.$moduleName.'.add')}}" class="btn btn-primary btn-icon">
-                            <i data-feather="plus"></i>
-                        </a>
-                    </div>
+
                 </div>
                 <table data-table="mainGrid" data-url="{{route('module.'.$moduleName.'.datatable')}}" data-cols='{!! base64_encode($dataTableColumns) !!}' class="table table-hover">
                     <thead>

@@ -52,5 +52,27 @@ class BladeServiceProvider extends ServiceProvider
 
             return $condition;
         });
+
+
+        Blade::if('isSubscribed', function () {
+            $conditon = false;
+            // check if the user is authenticated
+            if (Auth::check()) {
+                $condition = Auth::user()->type != "ADMIN" && !Auth::user()->isExpired;
+            }
+
+            return $condition;
+        });
+
+
+        Blade::if('isNotSubscribed', function () {
+            $conditon = false;
+            // check if the user is authenticated
+            if (Auth::check()) {
+                $condition = Auth::user()->type != "ADMIN" && Auth::user()->isExpired;
+            }
+
+            return $condition;
+        });
     }
 }

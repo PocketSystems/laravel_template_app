@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,14 +50,18 @@ class LoginController extends Controller
         return redirect()->route('dashboard');
     }
 
+    protected function _checkUser($value){
+        $query = User::where('email',$value)->where("status",1)->first();
+        if(empty($query) or $query->type === "ADMIN"){
+            return true;
+        }
+        return $query->company->status === 1;
+    }
+
     protected function validateLogin(Request $request)
     {
         Validator::extend('user_validator', function ($attribute, $value) {
-            $query = User::where('email',$value)->where("status",1)->first();
-            if(empty($query) or $query->type === "ADMIN"){
-                return true;
-            }
-            return $query->company->status === 1;
+            return $this->_checkUser($value);
         });
 
 

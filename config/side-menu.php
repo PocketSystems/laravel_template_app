@@ -50,13 +50,15 @@ return [
                 "title" => "Suppliers Account"
             ], [
                 "child" => "module.suppliersAccount.add",
-                "title" => "Add Supplier Payment"
+                "title" => "Add Supplier Payment",
+                'subscription'=>1
             ], [
                 "child" => "module.customersAccount.home",
                 "title" => "Customers Account"
             ], [
                 "child" => "module.customersAccount.add",
-                "title" => "Add Customer Payment"
+                "title" => "Add Customer Payment",
+                'subscription'=>1
             ],
         ]
     ], [
@@ -72,7 +74,8 @@ return [
                 "title" => "History"
             ], [
                 "child" => "module.purchaseOrders.add",
-                "title" => "Add Purchase Order"
+                "title" => "Add Purchase Order",
+                'subscription'=>1
             ],
         ]
     ], [
@@ -84,7 +87,8 @@ return [
                 "title" => "History"
             ], [
                 "child" => "module.saleOrders.add",
-                "title" => "Add Sale Order"
+                "title" => "Add Sale Order",
+                'subscription'=>1
             ],
         ]
     ], [
@@ -111,16 +115,21 @@ return [
         "child" => [
             [
                 "child" => "module.PurchaseOrderReport.home",
-                "title" => "Purchase Order Report"
+                "title" => "Purchase Order Report",
+                'subscription'=>1
             ], [
                 "child" => "module.SaleOrderReport.home",
-                "title" => "Sale Order Report"
+                "title" => "Sale Order Report",
+                'subscription'=>1
             ], [
                 "child" => "module.ExpenseReport.home",
-                "title" => "Expense Report"
+                "title" => "Expense Report",
+                'subscription'=>1
             ], [
                 "child" => "module.ProfitLossReport.home",
-                "title" => "Profit & Loss Report"
+                "title" => "Profit & Loss Report",
+                'subscription'=>1
+
             ],
         ]
     ]
