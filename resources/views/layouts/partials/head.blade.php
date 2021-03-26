@@ -65,8 +65,11 @@
     <link href="{{asset('assets/lib/datatable-button/css/mixins.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('assets/css/skin.deepblue.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/skin.light.css')}}">
+{{--
+    <link rel="stylesheet" href="{{asset('assets/css/skin.dark.css')}}">
+--}}
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     @stack('style')
 
 </head>
+
