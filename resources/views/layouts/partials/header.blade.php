@@ -7,7 +7,7 @@
         @isSubscribed
         <div class="badge-warning " style="padding: 10px 15px 10px 15px;">
             <strong>
-            Expire in {{\Illuminate\Support\Facades\Auth::user()->subscriptionLeft}} Days
+            Expire in {{\Illuminate\Support\Facades\Auth::user()->subscriptionLeft+1}} Days
             </strong>
         </div>
         @endisSubscribed
