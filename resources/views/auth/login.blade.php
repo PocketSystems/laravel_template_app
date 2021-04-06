@@ -7,12 +7,12 @@
         <div class="media align-items-stretch justify-content-center ht-100p pos-relative">
 
             <div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">
+
                 <div class="wd-100p">
-                    <h3 class="tx-color-01 mg-b-5">Sign In</h3>
-                    <p class="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
+                    <h3 style="font-size: 30px;color: #051441;font-weight: bolder" href="{{route('dashboard')}}" class="aside-logo">Pocket <span>Accounts</span></h3>
+                    <p class="tx-color-03 tx-16 mg-b-30">Welcome back! Please signin to continue.</p>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
                     <div class="form-group">
                         <label>Email address</label>
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
