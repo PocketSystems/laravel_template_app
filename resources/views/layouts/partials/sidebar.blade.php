@@ -115,11 +115,7 @@
                         data-feather="user-check"></i> <span>Profile</span></a></li>
 
             @admin
-            <li class="nav-label mg-t-25">Administrator</li>
-            <li class="nav-item"><a href="{{route('module.companies.home')}}" class="nav-link"><i
-                        data-feather="home"></i> <span>Companies</span></a></li>
-            <li class="nav-item"><a href="{{route('module.users.home')}}" class="nav-link"><i data-feather="home"></i>
-                    <span>Users</span></a></li>
+
             @endadmin
 
             <li class="nav-label mg-t-25">Contact Us</li>

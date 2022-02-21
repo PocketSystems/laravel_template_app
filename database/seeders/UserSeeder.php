@@ -31,9 +31,10 @@ class UserSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'company_id' => $company_id,
-            'name' => 'usama',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('12345678'),
+            'name' => 'yasir',
+            'email' => 'yasir@gmail.com',
+            'phone' => '123456789',
+            'password' => Hash::make('password'),
         ]);
     }
 }

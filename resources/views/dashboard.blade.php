@@ -14,8 +14,8 @@
                     <div class="card card-body">
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Today Sale</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumToday'])</h3>
-                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['todayComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['todayComp'] ? 'up' : 'down' }}"></i></span> @price($thirdBox['saleSumTodayLast']) Yesterday</p>
+                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1"></h3>
+                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium"> <i class="icon ion-md-arrow-"></i></span> Yesterday</p>
                         </div>
 
                     </div>
@@ -24,8 +24,8 @@
                     <div class="card card-body">
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Week Sales</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumWeek'])</h3>
-                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['weekComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['weekComp'] ? 'up' : 'down' }}"></i></span> @price($thirdBox['saleSumWeekLast']) last week</p>
+                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">1234</h3>
+                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium "> <i class="icon ion-md-arrow-"></i></span> last week</p>
                         </div>
 
                     </div>
@@ -34,8 +34,8 @@
                     <div class="card card-body">
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">{{date('F')}} Sales</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumMonth'])</h3>
-                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['monthComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['monthComp'] ? 'up' : 'down' }}"></i></span> @price($thirdBox['saleSumMonthLast']) last Month</p>
+                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">1234</h3>
+                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium "> <i class="icon ion-md-arrow-"></i></span>  last Month</p>
                         </div>
 
                     </div>
@@ -44,8 +44,8 @@
                     <div class="card card-body">
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">{{date('Y')}} Sales</h6>
                         <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">@price($thirdBox['saleSumYear'])</h3>
-                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium {{$thirdBox['yearComp'] ? 'tx-success' : 'tx-danger' }}"> <i class="icon ion-md-arrow-{{$thirdBox['yearComp'] ? 'up' : 'down' }}"></i></span> @price($thirdBox['saleSumYearLast']) last Year</p>
+                            <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">1234</h3>
+                            <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium "> <i class="icon ion-md-arrow-"></i></span>last Year</p>
                         </div>
 
                     </div>
@@ -90,21 +90,21 @@
                                     <p class="tx-10 tx-uppercase tx-medium tx-color-03 tx-spacing-1 tx-nowrap mg-b-5">Sales</p>
                                     <div class="d-flex align-items-center">
                                         <div class="wd-10 ht-10 rounded-circle bg-primary mg-r-5"></div>
-                                        <h5 class="tx-normal tx-rubik mg-b-0">@price($secondBox['sale_month_pie'])</h5>
+                                        <h5 class="tx-normal tx-rubik mg-b-0"></h5>
                                     </div>
                                 </div><!-- col -->
                                 <div class="col-4">
                                     <p class="tx-10 tx-uppercase tx-medium tx-color-03 tx-spacing-1 mg-b-5">Purchase</p>
                                     <div class="d-flex align-items-center">
                                         <div class="wd-10 ht-10 rounded-circle bg-pink mg-r-5"></div>
-                                        <h5 class="tx-normal tx-rubik mg-b-0">@price($secondBox['purchase_month_pie'])</h5>
+                                        <h5 class="tx-normal tx-rubik mg-b-0">1234</h5>
                                     </div>
                                 </div><!-- col -->
                                 <div class="col-4">
                                     <p class="tx-10 tx-uppercase tx-medium tx-color-03 tx-spacing-1 mg-b-5">Expense</p>
                                     <div class="d-flex align-items-center">
                                         <div class="wd-10 ht-10 rounded-circle bg-teal mg-r-5"></div>
-                                        <h5 class="tx-normal tx-rubik mg-b-0">@price($secondBox['exp_month_pie'])</h5>
+                                        <h5 class="tx-normal tx-rubik mg-b-0">exp month</h5>
                                     </div>
                                 </div><!-- col -->
 
@@ -119,7 +119,7 @@
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($topBox['saleSum'])</h3>
+                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">134</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Total Sales</h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">Total Sales you generate by systems</p>
                                 </div>
@@ -137,7 +137,7 @@
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($topBox['purchaseSum'])</h3>
+                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">purchase sum</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-pink mg-b-5">Total Purchase</h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">Total purchases you generate by systems</p>
                                 </div>
@@ -155,7 +155,7 @@
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">@price($topBox['expenseSum'])</h3>
+                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">expanse sum</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Total Expense</h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">Total Expense you generate by systems</p>
 
@@ -208,37 +208,16 @@
         let dataFraction = 100;
         let chartEnd = dataFraction/2;
 
-        var sumTotal = $.plot('#saleSum', [{
-            data: {!!$topBox['saleSumGraph']!!}.map((data, index) => [index, getRndInteger(data.grand_total/dataFraction,data.grand_total/chartEnd)]),
-            color: '#e5e9f2'
-        },{
-            data: {!!$topBox['saleSumGraph']!!}.map((data, index) => [index, data.grand_total/dataFraction]),
-            color: '#66a4fb'
-        }], flotChartOption1);
+
 
          dataFraction = 10;
          chartEnd = dataFraction/2;
 
-        var countTotal = $.plot('#purchaseSum', [{
-            data: {!!$topBox['purchaseSumGraph']!!}.map((data, index) => [index, getRndInteger(data.grand_total/dataFraction,data.grand_total/chartEnd)]),
-            color: '#e5e9f2'
-        },{
-            data: {!!$topBox['purchaseSumGraph']!!}.map((data, index) => [index, data.grand_total/dataFraction]),
-            color: '#f10075'
-        }], flotChartOption1);
+
 
          dataFraction = 20;
          chartEnd = dataFraction/2;
 
-        var countTotal = $.plot('#expSum', [{
-            data: {!!$topBox['expSumGraph']!!}.map((data, index) => [index, getRndInteger(data.amount/dataFraction,data.amount/chartEnd)]),
-            color: '#e5e9f2'
-        },{
-            data: {!!$topBox['expSumGraph']!!}.map((data, index) => [index, data.amount/dataFraction]),
-            color: '#00cccc'
-        }], flotChartOption1);
-
-        let soData = {!!$secondBox['sale_purchase_comp']!!};
         var ctxLabel = Object.keys(soData).map((key, index) => key);
         var ctxData1 =  Object.keys(soData).map((date, index) => soData[date].so*10);
         var ctxData2 =  Object.keys(soData).map((date, index) => soData[date].po*10);
@@ -304,8 +283,7 @@
         var datapie = {
             labels: ['Purchase','Sales','Expense'],
             datasets: [{
-                data: [{{$secondBox['purchase_month_pie']}},{{$secondBox['sale_month_pie']}}, {{$secondBox['exp_month_pie']}}],
-                backgroundColor: ['#f77eb9', '#7ebcff','#7ee5e5']
+
             }]
         };
         var optionpie = {
